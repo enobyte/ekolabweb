@@ -11,13 +11,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         bottomSheetTheme:
             BottomSheetThemeData(backgroundColor: Colors.black.withOpacity(0)),
       ),
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Login(),
+        body: MainMenu(),
       ),
       onGenerateRoute: _getRoute,
     );

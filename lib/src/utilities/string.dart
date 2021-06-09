@@ -1,0 +1,1 @@
+final String icProvider = "icons/ic_provider.png";
