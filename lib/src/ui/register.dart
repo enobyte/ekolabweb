@@ -1,4 +1,5 @@
 import 'package:ekolabweb/src/widget/button_widget.dart';
+import 'package:ekolabweb/src/widget/labeled_radio.dart';
 import 'package:ekolabweb/src/widget/text_field.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -173,48 +174,5 @@ class _RegisterState extends State<Register> {
             )),
       ],
     ));
-  }
-}
-
-class LabeledRadio extends StatelessWidget {
-  const LabeledRadio({
-    Key? key,
-    required this.label,
-    required this.padding,
-    required this.groupValue,
-    required this.value,
-    required this.onChanged,
-  }) : super(key: key);
-
-  final String label;
-  final EdgeInsets padding;
-  final String groupValue;
-  final String value;
-  final Function onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        if (value != groupValue) {
-          onChanged(value);
-        }
-      },
-      child: Padding(
-        padding: padding,
-        child: Row(
-          children: <Widget>[
-            Radio<String>(
-              groupValue: groupValue,
-              value: value,
-              onChanged: (String? newValue) {
-                onChanged(newValue);
-              },
-            ),
-            Expanded(child: Text(label)),
-          ],
-        ),
-      ),
-    );
   }
 }
