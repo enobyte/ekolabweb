@@ -2,6 +2,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ekolabweb/src/ui/main/home_service/waralaba_list.dart';
 import 'package:ekolabweb/src/ui/main/profile.dart';
+import 'package:ekolabweb/src/ui/main/space/main_space.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
@@ -30,8 +31,6 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  int _current = 0;
-
   @override
   void initState() {
     super.initState();
@@ -44,7 +43,7 @@ class _MainMenuState extends State<MainMenu> {
       appBar: AppBar(
         leading: Icon(Icons.ac_unit),
         backgroundColor: Colors.red,
-        title: TextWidget(txt: "Dashboard"),
+        title: TextWidget(txt: "E-KOLAB"),
         centerTitle: false,
         actions: [
           Padding(
@@ -81,8 +80,27 @@ class _MainMenuState extends State<MainMenu> {
               ],
             ),
           ),
-          IconButton(
-              onPressed: () => {}, icon: Icon(Icons.keyboard_arrow_down)),
+          PopupMenuButton<String>(
+            itemBuilder: (context) {
+              return ["MySpace", "Logout"]
+                  .map((e) => PopupMenuItem<String>(
+                        value: e,
+                        child: TextWidget(
+                          txt: e,
+                        ),
+                      ))
+                  .toList();
+            },
+            onSelected: (value) {
+              switch (value) {
+                case "MySpace":
+                  routeToWidget(context, MainSpace());
+              }
+            },
+            icon: Icon(Icons.keyboard_arrow_down),
+          )
+          // IconButton(
+          //     onPressed: () => _paddingPopup(), icon: Icon(Icons.keyboard_arrow_down)),
         ],
       ),
       body: SingleChildScrollView(
@@ -97,9 +115,7 @@ class _MainMenuState extends State<MainMenu> {
                   enlargeCenterPage: true,
                   aspectRatio: 4,
                   onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
+                    setState(() {});
                   }),
             ),
             ServiceProductList(),

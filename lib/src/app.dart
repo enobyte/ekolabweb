@@ -1,13 +1,7 @@
-import 'dart:io';
-
 import 'package:ekolabweb/src/ui/login.dart';
 import 'package:ekolabweb/src/ui/main/main_menu.dart';
 import 'package:ekolabweb/src/ui/register.dart';
 import 'package:flutter/material.dart';
-
-import 'ui/main/product_service.dart';
-import 'ui/main/profile.dart';
-import 'ui/splash_screen.dart';
 
 class App extends StatelessWidget {
   @override

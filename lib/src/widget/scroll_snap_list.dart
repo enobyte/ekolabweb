@@ -57,7 +57,9 @@ class _ScrollSnapListState extends State<ScrollSnapList>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       ClipRRect(
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8.0),
+                            topRight: Radius.circular(8.0)),
                         child: Image.network(
                           widget.listData[position]["image"],
                           fit: BoxFit.fitHeight,
@@ -81,7 +83,7 @@ class _ScrollSnapListState extends State<ScrollSnapList>
                             ),
                             Align(
                               child: ButtonWidget(
-                                txt: TextWidget(txt: "Ajukan"),
+                                txt: TextWidget(txt: "Detail"),
                                 height: 32.0,
                                 width: MediaQuery.of(context).size.width,
                                 btnColor: Colors.redAccent,
