@@ -1,4 +1,8 @@
+import 'package:ekolabweb/src/bloc/user_bloc.dart';
 import 'package:ekolabweb/src/model/service_list_model.dart';
+import 'package:ekolabweb/src/model/user_model.dart';
+import 'package:ekolabweb/src/ui/main/space/list_product.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/scroll_snap_list.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +20,6 @@ class _KerjasamaListState extends State<KerjasamaList>
   late AnimationController animationController;
   late CurvedAnimation curvedAnimation;
   var cardIndex = 0;
-
-  var cardsList = [
-    ServiceList("Personal", Icons.account_circle, 9, 0.83),
-    ServiceList("Work", Icons.work, 12, 0.24),
-    ServiceList("Home", Icons.home, 7, 0.32),
-    ServiceList("Home2", Icons.home, 7, 0.32),
-    ServiceList("Home3", Icons.home, 7, 0.32),
-    ServiceList("Home4", Icons.home, 7, 0.32),
-  ];
 
   var currentColor = Color.fromRGBO(231, 129, 109, 1.0);
 
@@ -63,28 +58,23 @@ class _KerjasamaListState extends State<KerjasamaList>
                       alignment: PlaceholderAlignment.middle)
                 ],
               ))),
-          ScrollSnapList([
-            {
-              "name": "Produk Kecantikan",
-              "image":
-                  "https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80"
-            },
-            {
-              "name": "Produk Kesehatan",
-              "image":
-                  "https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80"
-            },
-            {
-              "name": "Produk Kebugaran",
-              "image":
-                  "https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80"
-            },
-            {
-              "name": "Waralaba Keimanan",
-              "image":
-                  "https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80"
-            }
-          ]),
+          StreamBuilder<UserMultipleModel>(
+              stream: bloc.doGetAllUser,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<UserDataModel?> listData = snapshot.data!.data!
+                      .where((element) => element!.kind == 4)
+                      .toList();
+                  return ScrollSnapList(
+                    listData.map((e) => e!.toJson()).toList(),
+                    (id) => routeToWidget(context, ListProduct(false)),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }),
         ],
       ),
     );

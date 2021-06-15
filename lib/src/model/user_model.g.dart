@@ -13,7 +13,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
     json['status'] as bool?,
     json['data'] == null
         ? null
-        : _UserDataModel.fromJson(json['data'] as Map<String, dynamic>),
+        : UserDataModel.fromJson(json['data'] as Map<String, dynamic>),
   );
 }
 
@@ -24,15 +24,36 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'data': instance.data,
     };
 
-_UserDataModel _$_UserDataModelFromJson(Map<String, dynamic> json) {
-  return _UserDataModel(
+UserMultipleModel _$UserMultipleModelFromJson(Map<String, dynamic> json) {
+  return UserMultipleModel(
+    json['code'] as int?,
+    json['message'] as String?,
+    json['status'] as bool?,
+    (json['data'] as List<dynamic>?)
+        ?.map((e) => e == null
+            ? null
+            : UserDataModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  );
+}
+
+Map<String, dynamic> _$UserMultipleModelToJson(UserMultipleModel instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'message': instance.message,
+      'status': instance.status,
+      'data': instance.data,
+    };
+
+UserDataModel _$UserDataModelFromJson(Map<String, dynamic> json) {
+  return UserDataModel(
     json['id'] as String?,
     json['kind'] as int?,
     json['data'] as Map<String, dynamic>?,
   );
 }
 
-Map<String, dynamic> _$_UserDataModelToJson(_UserDataModel instance) =>
+Map<String, dynamic> _$UserDataModelToJson(UserDataModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'kind': instance.kind,

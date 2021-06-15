@@ -1,8 +1,13 @@
 // ignore: import_of_legacy_library_into_null_safe
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ekolabweb/src/bloc/user_bloc.dart';
+import 'package:ekolabweb/src/model/user_model.dart';
+import 'package:ekolabweb/src/ui/main/home_service/licence_list.dart';
 import 'package:ekolabweb/src/ui/main/home_service/waralaba_list.dart';
 import 'package:ekolabweb/src/ui/main/profile.dart';
-import 'package:ekolabweb/src/ui/main/space/main_space.dart';
+import 'package:ekolabweb/src/ui/main/space/list_product.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
@@ -32,9 +37,13 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
+  String email = "";
+  String name = "";
+
   @override
   void initState() {
     super.initState();
+    _getData();
   }
 
   @override
@@ -69,8 +78,8 @@ class _MainMenuState extends State<MainMenu> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      TextWidget(txt: "Eno"),
-                      TextWidget(txt: "enoraden@gmail.com")
+                      TextWidget(txt: name),
+                      TextWidget(txt: email)
                     ],
                   ),
                 ),
@@ -95,7 +104,7 @@ class _MainMenuState extends State<MainMenu> {
             onSelected: (value) {
               switch (value) {
                 case "MySpace":
-                  routeToWidget(context, MainSpace());
+                  routeToWidget(context, ListProduct(true));
                   break;
                 case "Logout":
                   _doLogout(context);
@@ -123,10 +132,45 @@ class _MainMenuState extends State<MainMenu> {
                     setState(() {});
                   }),
             ),
-            ServiceProductList(),
-            WaralabaList(),
-            KonsinyasiList(),
-            KerjasamaList()
+            StreamBuilder<UserMultipleModel>(
+                stream: bloc.doGetAllUser,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        snapshot.data!.data!
+                                .any((element) => element!.kind == 3)
+                            ? ServiceProductList()
+                            : SizedBox(),
+                        snapshot.data!.data!
+                                .any((element) => element!.kind == 1)
+                            ? WaralabaList()
+                            : SizedBox(),
+                        snapshot.data!.data!
+                                .any((element) => element!.kind == 2)
+                            ? KonsinyasiList()
+                            : SizedBox(),
+                        snapshot.data!.data!
+                                .any((element) => element!.kind == 4)
+                            ? KerjasamaList()
+                            : SizedBox(),
+                        snapshot.data!.data!
+                                .any((element) => element!.kind == 6)
+                            ? LicenceList()
+                            : SizedBox(),
+                      ],
+                    );
+                  } else {
+                    return Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height / 3),
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                })
+
             // Expanded(
             //   child: ServiceProduct(),
             // )
@@ -182,5 +226,16 @@ class _MainMenuState extends State<MainMenu> {
   _doLogout(context) {
     SharedPreferencesHelper.clearAllPreference();
     Navigator.pushNamedAndRemoveUntil(context, '/login_menu', (_) => false);
+  }
+
+  _getData() async {
+    final userPref = await SharedPreferencesHelper.getStringPref(
+        SharedPreferencesHelper.user);
+    final userData = UserModel.fromJson(json.decode(userPref));
+    setState(() {
+      email = userData.data!.data!["email"];
+      name = userData.data!.data!["name"];
+    });
+    bloc.fetchAllUser({"id": userData.data!.id});
   }
 }

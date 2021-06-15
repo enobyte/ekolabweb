@@ -3,6 +3,8 @@ import 'package:ekolabweb/src/ui/main/main_menu.dart';
 import 'package:ekolabweb/src/ui/register.dart';
 import 'package:flutter/material.dart';
 
+import 'ui/splash_screen.dart';
+
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class App extends StatelessWidget {
           fontFamily: 'Regular'),
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Login(),
+        body: SplashScreen(),
       ),
       onGenerateRoute: _getRoute,
     );

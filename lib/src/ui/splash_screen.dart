@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,7 +23,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _navigationPage() async {
-    Navigator.of(context).pushReplacementNamed("/login_menu");
+    final isLogin =
+        await SharedPreferencesHelper.checkKey(SharedPreferencesHelper.user);
+    if (isLogin) {
+      Navigator.of(context).pushReplacementNamed("/main_menu");
+    } else {
+      Navigator.of(context).pushReplacementNamed("/login_menu");
+    }
   }
 
   @override

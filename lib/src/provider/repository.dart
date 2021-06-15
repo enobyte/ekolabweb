@@ -10,4 +10,7 @@ class Repository {
 
   Future<UserModel> actRegister(Map<String, dynamic> body) =>
       apiProvider.registerUser(body);
+
+  Future<UserMultipleModel> actGetAllUser(Map<String, dynamic> body) =>
+      apiProvider.getAllUser(body);
 }

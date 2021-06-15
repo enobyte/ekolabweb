@@ -7,7 +7,7 @@ class UserModel {
   int? code;
   String? message;
   bool? status;
-  _UserDataModel? data;
+  UserDataModel? data;
 
   UserModel(this.code, this.message, this.status, this.data);
 
@@ -22,15 +22,34 @@ class UserModel {
 }
 
 @JsonSerializable()
-class _UserDataModel {
+class UserMultipleModel {
+  int? code;
+  String? message;
+  bool? status;
+  List<UserDataModel?>? data;
+
+  UserMultipleModel(this.code, this.message, this.status, this.data);
+
+  factory UserMultipleModel.fromJson(Map<String, dynamic> json) =>
+      _$UserMultipleModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserMultipleModelToJson(this);
+
+  UserMultipleModel.withError(String error)
+      : message = error,
+        status = false;
+}
+
+@JsonSerializable()
+class UserDataModel {
   String? id;
   int? kind;
   Map<String, dynamic>? data;
 
-  factory _UserDataModel.fromJson(Map<String, dynamic> json) =>
-      _$_UserDataModelFromJson(json);
+  factory UserDataModel.fromJson(Map<String, dynamic> json) =>
+      _$UserDataModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$_UserDataModelToJson(this);
+  Map<String, dynamic> toJson() => _$UserDataModelToJson(this);
 
-  _UserDataModel(this.id, this.kind, this.data);
+  UserDataModel(this.id, this.kind, this.data);
 }

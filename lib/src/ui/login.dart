@@ -19,6 +19,12 @@ class _LoginState extends State<Login> {
   final bloc = UserBloc();
 
   @override
+  void dispose() {
+    bloc.disposeLogin();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     bloc.doLogin.listen((event) {

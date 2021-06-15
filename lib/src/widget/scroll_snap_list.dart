@@ -5,13 +5,14 @@ import 'button_widget.dart';
 
 class ScrollSnapList extends StatefulWidget {
   final List<dynamic> listData;
+  final Function(String) id;
 
   @override
   State<StatefulWidget> createState() {
     return _ScrollSnapListState();
   }
 
-  ScrollSnapList(this.listData);
+  ScrollSnapList(this.listData, this.id);
 }
 
 class _ScrollSnapListState extends State<ScrollSnapList>
@@ -46,84 +47,59 @@ class _ScrollSnapListState extends State<ScrollSnapList>
         controller: scrollController,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, position) {
-          return GestureDetector(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 4,
-                child: Container(
-                  width: 250.0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8.0),
-                            topRight: Radius.circular(8.0)),
-                        child: Image.network(
-                          widget.listData[position]["image"],
-                          fit: BoxFit.fitHeight,
-                          height: 250,
-                        ),
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 4,
+              child: Container(
+                width: 250.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          topRight: Radius.circular(8.0)),
+                      child: Image.network(
+                        widget.listData[position]["data"]["image"],
+                        fit: BoxFit.fitHeight,
+                        height: 250,
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 8.0),
-                              child: TextWidget(
-                                txt: widget.listData[position]["name"],
-                                txtSize: 16.0,
-                                maxLine: 2,
-                                align: TextAlign.justify,
-                              ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 8.0),
+                            child: TextWidget(
+                              txt: widget.listData[position]["data"]["name"],
+                              txtSize: 16.0,
+                              maxLine: 2,
+                              align: TextAlign.justify,
                             ),
-                            Align(
-                              child: ButtonWidget(
-                                txt: TextWidget(txt: "Detail"),
-                                height: 32.0,
-                                width: MediaQuery.of(context).size.width,
-                                btnColor: Colors.redAccent,
-                                onClick: () => {},
-                                borderRedius: 4,
-                              ),
+                          ),
+                          Align(
+                            child: ButtonWidget(
+                              txt: TextWidget(txt: "Detail"),
+                              height: 32.0,
+                              width: MediaQuery.of(context).size.width,
+                              btnColor: Colors.redAccent,
+                              onClick: () => widget.id(widget.listData[position]["id"]),
+                              borderRedius: 4,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
               ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
             ),
-            onHorizontalDragEnd: (details) {
-              animationController = AnimationController(
-                  vsync: this, duration: Duration(milliseconds: 500));
-              curvedAnimation = CurvedAnimation(
-                  parent: animationController, curve: Curves.fastOutSlowIn);
-
-              if (details.velocity.pixelsPerSecond.dx > 0) {
-                if (cardIndex > 0) {
-                  cardIndex--;
-                }
-              } else {
-                if (cardIndex < widget.listData.length) {
-                  cardIndex++;
-                }
-              }
-              setState(() {
-                scrollController?.animateTo((cardIndex) * 256.0,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.fastOutSlowIn);
-              });
-
-              animationController.forward();
-            },
           );
         },
       ),

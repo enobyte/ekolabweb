@@ -75,4 +75,14 @@ class ApiProvider {
       return UserModel.withError(_handleError(err));
     }
   }
+
+  Future<UserMultipleModel> getAllUser(Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("get_user", data: json.encode(body));
+      return UserMultipleModel.fromJson(response.data);
+    } catch (err, snap) {
+      print(snap.toString());
+      return UserMultipleModel.withError(_handleError(err));
+    }
+  }
 }
