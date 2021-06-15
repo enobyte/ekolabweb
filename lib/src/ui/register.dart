@@ -1,3 +1,5 @@
+import 'package:ekolabweb/src/bloc/user_bloc.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/labeled_radio.dart';
 import 'package:ekolabweb/src/widget/text_field.dart';
@@ -15,8 +17,21 @@ class _RegisterState extends State<Register> {
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
-  var category = ["pewaralaba", "ukmumk", "konsinyasi", "investor"];
+  var category = ["1", "2", "3", "4", "5", "6"];
   String _isRadioSelected = "";
+  final _bloc = UserBloc();
+
+  @override
+  void initState() {
+    super.initState();
+    _bloc.doRegister.listen((event) {
+      if (event.status ?? false) {
+        Navigator.of(context).pop();
+      } else {
+        showErrorMessage(context, "Register", event.message);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +109,21 @@ class _RegisterState extends State<Register> {
                                 },
                               ),
                               LabeledRadio(
-                                label: 'UKM/UMK',
+                                label: 'Konsinyasi',
                                 padding: EdgeInsets.zero,
                                 value: category[1],
+                                groupValue: _isRadioSelected,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _isRadioSelected = newValue;
+                                  });
+                                },
+                              ),
+                              LabeledRadio(
+                                label: 'UKM/UMK',
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 0.0),
+                                value: category[2],
                                 groupValue: _isRadioSelected,
                                 onChanged: (String newValue) {
                                   setState(() {
@@ -113,10 +140,10 @@ class _RegisterState extends State<Register> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               LabeledRadio(
-                                label: 'Konsinyasi',
+                                label: 'Investor',
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
-                                value: category[2],
+                                value: category[3],
                                 groupValue: _isRadioSelected,
                                 onChanged: (String newValue) {
                                   setState(() {
@@ -125,10 +152,22 @@ class _RegisterState extends State<Register> {
                                 },
                               ),
                               LabeledRadio(
-                                label: 'Investor',
+                                label: 'Admin IWAPI',
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
-                                value: category[3],
+                                value: category[4],
+                                groupValue: _isRadioSelected,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _isRadioSelected = newValue;
+                                  });
+                                },
+                              ),
+                              LabeledRadio(
+                                label: 'Perijinan',
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 0.0),
+                                value: category[5],
                                 groupValue: _isRadioSelected,
                                 onChanged: (String newValue) {
                                   setState(() {
@@ -148,7 +187,7 @@ class _RegisterState extends State<Register> {
                         height: 40.0,
                         width: MediaQuery.of(context).size.width,
                         btnColor: Colors.redAccent,
-                        onClick: () => {},
+                        onClick: () => _actionRegister(),
                         borderRedius: 4,
                       ),
                     ),
@@ -174,5 +213,17 @@ class _RegisterState extends State<Register> {
             )),
       ],
     ));
+  }
+
+  _actionRegister() {
+    _bloc.fetchRegister({
+      "kind": int.parse(_isRadioSelected),
+      "data": {
+        "email": _emailController.text,
+        "name": _nameController.text,
+        "active": true,
+        "password": _passwordController.text
+      }
+    });
   }
 }

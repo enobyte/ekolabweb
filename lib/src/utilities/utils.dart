@@ -1,4 +1,5 @@
 import 'package:ekolabweb/src/bloc/bloc-provider.dart';
+import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 Future<dynamic> routeToWidget(BuildContext context, Widget widget) {
@@ -10,5 +11,54 @@ Future<dynamic> routeToWidget(BuildContext context, Widget widget) {
         child: widget,
       );
     }),
+  );
+}
+
+showErrorMessage(BuildContext context, String title, String? message,
+    {bool isDismiss = true}) {
+  return showModalBottomSheet(
+    context: context,
+    elevation: 4,
+    isDismissible: isDismiss,
+    backgroundColor: Colors.white,
+    builder: (context) => Container(
+      height: MediaQuery.of(context).size.height / 5,
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 30, top: 15, right: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextWidget(
+              txt: title,
+              fontFamily: 'Bold',
+              txtSize: 21,
+              align: TextAlign.start,
+              color: Colors.black54,
+            ),
+            TextWidget(
+              txt: message ?? "Unknown Error",
+              txtSize: 14,
+              align: TextAlign.start,
+              color: Colors.black54,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: IconButton(
+                    icon: Icon(Icons.cancel_outlined),
+                    color: Colors.black45,
+                    iconSize: 30,
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
   );
 }

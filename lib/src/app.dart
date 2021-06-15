@@ -14,7 +14,7 @@ class App extends StatelessWidget {
           fontFamily: 'Regular'),
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: MainMenu(),
+        body: Login(),
       ),
       onGenerateRoute: _getRoute,
     );

@@ -1,3 +1,6 @@
+import 'package:ekolabweb/src/bloc/user_bloc.dart';
+import 'package:ekolabweb/src/ui/main/main_menu.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/text_field.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
@@ -13,10 +16,18 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _userController = TextEditingController();
   final _passwordController = TextEditingController();
+  final bloc = UserBloc();
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    bloc.doLogin.listen((event) {
+      if (event.status ?? false) {
+        routeToWidget(context, MainMenu());
+      } else {
+        showErrorMessage(context, "Login", event.message);
+      }
+    });
   }
 
   @override
@@ -68,7 +79,7 @@ class _LoginState extends State<Login> {
                         height: 40.0,
                         width: MediaQuery.of(context).size.width,
                         btnColor: Colors.redAccent,
-                        onClick: () => {},
+                        onClick: () => _actionLogin(),
                         borderRedius: 4,
                       ),
                     ),
@@ -94,5 +105,10 @@ class _LoginState extends State<Login> {
             )),
       ],
     ));
+  }
+
+  _actionLogin() {
+    bloc.fetchLogin(
+        {"email": _userController.text, "password": _passwordController.text});
   }
 }

@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ekolabweb/src/ui/main/home_service/waralaba_list.dart';
 import 'package:ekolabweb/src/ui/main/profile.dart';
 import 'package:ekolabweb/src/ui/main/space/main_space.dart';
+import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
@@ -95,6 +96,10 @@ class _MainMenuState extends State<MainMenu> {
               switch (value) {
                 case "MySpace":
                   routeToWidget(context, MainSpace());
+                  break;
+                case "Logout":
+                  _doLogout(context);
+                  break;
               }
             },
             icon: Icon(Icons.keyboard_arrow_down),
@@ -173,4 +178,9 @@ class _MainMenuState extends State<MainMenu> {
             ),
           ))
       .toList();
+
+  _doLogout(context) {
+    SharedPreferencesHelper.clearAllPreference();
+    Navigator.pushNamedAndRemoveUntil(context, '/login_menu', (_) => false);
+  }
 }
