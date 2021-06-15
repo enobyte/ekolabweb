@@ -46,7 +46,7 @@ class _ServiceProductListState extends State<ServiceProductList>
               padding: const EdgeInsets.only(left: 120),
               child: RichText(
                   text: TextSpan(
-                text: "🎭  Produk dan Jasa",
+                text: "🎭  UKM/UMK",
                 style: TextStyle(fontSize: 21),
                 children: [
                   WidgetSpan(
