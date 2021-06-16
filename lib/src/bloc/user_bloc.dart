@@ -8,10 +8,13 @@ import 'package:rxdart/rxdart.dart';
 class UserBloc {
   final _repository = Repository();
   final _doLogin = PublishSubject<UserModel>();
+  final _updateUser = PublishSubject<UserModel>();
   final _doRegister = PublishSubject<UserModel>();
   final _doGetAllUser = BehaviorSubject<UserMultipleModel>();
 
   Stream<UserModel> get doLogin => _doLogin.stream;
+
+  Stream<UserModel> get updateUser => _updateUser.stream;
 
   Stream<UserModel> get doRegister => _doRegister.stream;
 
@@ -36,9 +39,19 @@ class UserBloc {
     _doGetAllUser.sink.add(model);
   }
 
+  updateProfile(Map<String, dynamic> body) async {
+    UserModel model = await _repository.updateUser(body);
+    if (model.status ?? false) {
+      await SharedPreferencesHelper.setStringPref(
+          SharedPreferencesHelper.user, json.encode(model.toJson()));
+    }
+    _updateUser.sink.add(model);
+  }
+
   dispose() {
     _doRegister.close();
     _doGetAllUser.close();
+    _updateUser.close();
   }
 
   disposeLogin() {

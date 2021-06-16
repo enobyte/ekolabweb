@@ -1,5 +1,4 @@
 import 'package:ekolabweb/src/bloc/user_bloc.dart';
-import 'package:ekolabweb/src/model/service_list_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/ui/main/space/list_product.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';

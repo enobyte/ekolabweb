@@ -1,17 +1,37 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
+import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 
 class ApiProvider {
   var _dio = Dio();
+  var _dioFile = Dio();
 
   ApiProvider() {
     _dio.options.baseUrl = "http://localhost:8000/api/";
     _dio.options.connectTimeout = 5000; //5s
     _dio.options.receiveTimeout = 3000;
 
+    _dioFile.options.baseUrl = "http://localhost:8000/api/";
+    _dioFile.options.connectTimeout = 5000; //5s
+    _dioFile.options.receiveTimeout = 3000;
+    _dioFile.options.contentType = Headers.formUrlEncodedContentType;
+
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+      print('REQUEST[${options.method}] => PATH: ${options.path}');
+      return handler.next(options); //continue
+    }, onResponse: (response, handler) {
+      print(
+          'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+      return handler.next(response); // continue
+    }, onError: (DioError e, handler) {
+      print(
+          'ERROR[${e.response?.statusCode}] => PATH: ${e.requestOptions.path}');
+      return handler.next(e); //continue
+    }));
+
+    _dioFile.interceptors
+        .add(InterceptorsWrapper(onRequest: (options, handler) {
       print('REQUEST[${options.method}] => PATH: ${options.path}');
       return handler.next(options); //continue
     }, onResponse: (response, handler) {
@@ -83,6 +103,32 @@ class ApiProvider {
     } catch (err, snap) {
       print(snap.toString());
       return UserMultipleModel.withError(_handleError(err));
+    }
+  }
+
+  Future<FileModel> uploadGeneralFile(FormData formData) async {
+    try {
+      final response = await _dioFile.post(
+        'upload_file',
+        data: formData,
+        onSendProgress: (int sent, int total) {
+          print("progress >>> " +
+              ((sent / total) * 100).floor().toString() +
+              "%");
+        },
+      );
+      return FileModel.fromJson(response.data);
+    } catch (error, stack) {
+      return FileModel.withError(_handleError(error));
+    }
+  }
+
+  Future<UserModel> updateUser(Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("update_user", data: json.encode(body));
+      return UserModel.fromJson(response.data);
+    } catch (err, snap) {
+      return UserModel.withError(_handleError(err));
     }
   }
 }

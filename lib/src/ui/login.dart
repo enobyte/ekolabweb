@@ -25,8 +25,8 @@ class _LoginState extends State<Login> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
     bloc.doLogin.listen((event) {
       if (event.status ?? false) {
         routeToWidget(context, MainMenu());

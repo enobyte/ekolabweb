@@ -1,3 +1,11 @@
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:ekolabweb/src/bloc/uploadfile_bloc.dart';
+import 'package:ekolabweb/src/bloc/user_bloc.dart' as user;
+import 'package:ekolabweb/src/model/file_model.dart';
+import 'package:ekolabweb/src/model/user_model.dart';
+import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/drop_down_title.dart';
 import 'package:ekolabweb/src/widget/labeled_radio.dart';
@@ -5,6 +13,7 @@ import 'package:ekolabweb/src/widget/text_field_title.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -21,7 +30,20 @@ class _ProfileState extends State<Profile> {
   final _nameLawDepartment = TextEditingController();
   final _phoneController = TextEditingController();
   final _uploadPhotoController = TextEditingController();
+  String _businessCategory = "";
   String _isRadioSelected = "";
+
+  PickedFile? _image;
+  final picker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+    user.bloc.updateUser.listen((event) {
+      showErrorMessage(context, "Profile", event.message);
+    });
+  }
 
   @override
   void dispose() {
@@ -46,8 +68,9 @@ class _ProfileState extends State<Profile> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(top: 18, left: 16, right: 16),
+          margin: EdgeInsets.only(top: 21, left: 16, right: 16),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Container(
@@ -86,18 +109,19 @@ class _ProfileState extends State<Profile> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       DropDownTitle(
-                        onChange: (value) => {},
+                        onChange: (value) =>
+                            setState(() => _businessCategory = value!),
                         hint: "Kategori Usaha",
-                        data: ["Manufactur", "IT", "Otomotif"],
+                        data: ["Usaha Kecil", "Usaha Menengah", "Usaha Besar"],
+                        chooseValue: _businessCategory,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 46, bottom: 46),
+                        padding: const EdgeInsets.only(top: 50, bottom: 40),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -137,32 +161,35 @@ class _ProfileState extends State<Profile> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 21),
-                        child: TextFieldTitleWidget(
-                          _nameLawDepartment,
-                          hint: "Nama Badan Hukum",
-                        ),
-                      ),
                       TextFieldTitleWidget(
-                        _uploadPhotoController,
-                        hint: "Foto",
-                        readOnly: true,
-                        prefixIcon: IconButton(
-                            onPressed: () => {}, icon: Icon(Icons.add_a_photo)),
+                        _nameLawDepartment,
+                        hint: "Nama Badan Hukum",
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 21, bottom: 55),
+                        child: TextFieldTitleWidget(
+                          _uploadPhotoController,
+                          hint: "Foto",
+                          readOnly: true,
+                          prefixIcon: IconButton(
+                              onPressed: () => _getImage(),
+                              icon: Icon(Icons.add_a_photo)),
+                        ),
                       ),
                       Row(
                         children: [
                           Expanded(
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 55, right: 16),
+                              padding: const EdgeInsets.only(right: 16),
                               child: ButtonWidget(
-                                txt: TextWidget(txt: "Batal"),
+                                txt: TextWidget(
+                                  txt: "Batal",
+                                  color: Colors.red,
+                                ),
                                 height: 40.0,
                                 isFlatBtn: true,
                                 width: 0,
-                                btnColor: Colors.blue,
+                                btnColor: Colors.red,
                                 onClick: () => {},
                                 borderRedius: 4,
                               ),
@@ -170,13 +197,13 @@ class _ProfileState extends State<Profile> {
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 55, left: 16),
+                              padding: const EdgeInsets.only(left: 16),
                               child: ButtonWidget(
                                 txt: TextWidget(txt: "Simpan"),
                                 height: 40.0,
                                 width: 0,
                                 btnColor: Colors.blue,
-                                onClick: () => {},
+                                onClick: () => _saveData(),
                                 borderRedius: 4,
                               ),
                             ),
@@ -192,5 +219,71 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+
+  Future _getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _uploadPhotoController.text = pickedFile.path;
+        _image = PickedFile(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  _getData() async {
+    final userPref = await SharedPreferencesHelper.getStringPref(
+        SharedPreferencesHelper.user);
+    final userData = UserModel.fromJson(json.decode(userPref));
+    setState(() {
+      _nameController.text = userData.data!.data!["name"];
+      _addressController.text = userData.data!.data!["address"];
+      _cityController.text = userData.data!.data!["city"];
+      _addrCompanyController.text = userData.data!.data!["address_corp"];
+      _phoneController.text = userData.data!.data!["phone"];
+      _businessCategory = userData.data!.data!["buss_category"];
+      _isRadioSelected = userData.data!.data!["under_law"];
+      _nameLawDepartment.text = userData.data!.data!["name_law"];
+    });
+  }
+
+  _saveData() async {
+    FileModel? file;
+
+    if (_image != null) {
+      final bytes = await _image!.readAsBytes();
+      final reqFile = FormData.fromMap({
+        "image": MultipartFile.fromBytes(bytes,
+            filename: '${DateTime.now().millisecondsSinceEpoch}.png')
+      });
+      file = await bloc.fetchPostGeneralFile(reqFile);
+    }
+
+    final userPref = await SharedPreferencesHelper.getStringPref(
+        SharedPreferencesHelper.user);
+    final userData = UserModel.fromJson(json.decode(userPref));
+
+    var newData = {
+      "id": userData.data!.id,
+      "data": {
+        "name": _nameController.text,
+        "email": userData.data!.data!["email"],
+        "active": userData.data!.data!["active"],
+        "password": userData.data!.data!["password"],
+        "image":
+            file!.status! ? file.data!["url"] : userData.data!.data!["image"],
+        "address": _addressController.text,
+        "address_corp": _addrCompanyController.text,
+        "city": _cityController.text,
+        "phone": _phoneController.text,
+        "buss_category": _businessCategory,
+        "under_law": _isRadioSelected,
+        "name_law": _nameLawDepartment.text
+      }
+    };
+    user.bloc.updateProfile(newData);
   }
 }
