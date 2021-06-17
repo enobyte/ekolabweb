@@ -67,7 +67,7 @@ class _KonsinyasiListState extends State<KonsinyasiList>
                       .toList();
                   return ScrollSnapList(
                       listData.map((e) => e!.toJson()).toList(),
-                      (id) => routeToWidget(context, ListProduct(false)));
+                      (id) => routeToWidget(context, ListProduct(false, id)));
                 } else {
                   return Center(
                     child: CircularProgressIndicator(),

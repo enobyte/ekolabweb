@@ -8,6 +8,7 @@ import 'package:ekolabweb/src/ui/main/home_service/licence_list.dart';
 import 'package:ekolabweb/src/ui/main/home_service/waralaba_list.dart';
 import 'package:ekolabweb/src/ui/main/profile.dart';
 import 'package:ekolabweb/src/ui/main/space/list_product.dart';
+import 'package:ekolabweb/src/ui/main/submission/notification_sub.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
@@ -39,6 +40,7 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   String email = "";
   String name = "";
+  String idUser = "";
 
   @override
   void initState() {
@@ -50,6 +52,16 @@ class _MainMenuState extends State<MainMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: FloatingActionButton(
+          onPressed: () => idUser.isNotEmpty
+              ? routeToWidget(context, NotificationSubmission(idUser))
+              : null,
+          child: Icon(Icons.notification_important_rounded),
+          backgroundColor: Colors.red,
+        ),
+      ),
       appBar: AppBar(
         leading: Icon(Icons.ac_unit),
         backgroundColor: Colors.red,
@@ -77,10 +89,7 @@ class _MainMenuState extends State<MainMenu> {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      TextWidget(txt: name),
-                      TextWidget(txt: email)
-                    ],
+                    children: [TextWidget(txt: name), TextWidget(txt: email)],
                   ),
                 ),
                 InkWell(
@@ -92,7 +101,7 @@ class _MainMenuState extends State<MainMenu> {
           ),
           PopupMenuButton<String>(
             itemBuilder: (context) {
-              return ["MySpace", "Logout"]
+              return ["Produk Saya", "Keluar"]
                   .map((e) => PopupMenuItem<String>(
                         value: e,
                         child: TextWidget(
@@ -103,10 +112,10 @@ class _MainMenuState extends State<MainMenu> {
             },
             onSelected: (value) {
               switch (value) {
-                case "MySpace":
-                  routeToWidget(context, ListProduct(true));
+                case "Produk Saya":
+                  routeToWidget(context, ListProduct(true, "null"));
                   break;
-                case "Logout":
+                case "Keluar":
                   _doLogout(context);
                   break;
               }
@@ -235,6 +244,7 @@ class _MainMenuState extends State<MainMenu> {
     setState(() {
       email = userData.data!.data!["email"];
       name = userData.data!.data!["name"];
+      idUser = userData.data!.id!;
     });
     bloc.fetchAllUser({"id": userData.data!.id});
   }

@@ -265,7 +265,6 @@ class _ProfileState extends State<Profile> {
     final userPref = await SharedPreferencesHelper.getStringPref(
         SharedPreferencesHelper.user);
     final userData = UserModel.fromJson(json.decode(userPref));
-
     var newData = {
       "id": userData.data!.id,
       "data": {
@@ -273,8 +272,9 @@ class _ProfileState extends State<Profile> {
         "email": userData.data!.data!["email"],
         "active": userData.data!.data!["active"],
         "password": userData.data!.data!["password"],
-        "image":
-            file!.status! ? file.data!["url"] : userData.data!.data!["image"],
+        "image": _image != null && file != null
+            ? file.data!["url"]
+            : userData.data!.data!["image"],
         "address": _addressController.text,
         "address_corp": _addrCompanyController.text,
         "city": _cityController.text,

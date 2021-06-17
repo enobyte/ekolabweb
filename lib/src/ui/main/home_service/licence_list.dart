@@ -65,7 +65,7 @@ class _LicenceListState extends State<LicenceList>
                       .where((element) => element!.kind == 6)
                       .toList();
                   return ScrollSnapList(
-                      listData.map((e) => e!.toJson()).toList(), (id) => routeToWidget(context, ListProduct(false)));
+                      listData.map((e) => e!.toJson()).toList(), (id) => routeToWidget(context, ListProduct(false, id)));
                 } else {
                   return Center(
                     child: CircularProgressIndicator(),
