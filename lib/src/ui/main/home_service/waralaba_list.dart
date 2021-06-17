@@ -25,7 +25,7 @@ class _WaralabaListState extends State<WaralabaList> {
               padding: const EdgeInsets.only(left: 120),
               child: RichText(
                   text: TextSpan(
-                text: "🛍 Waralaba",
+                text: "🛍 Pewaralaba",
                 style: TextStyle(fontSize: 21),
                 children: [
                   WidgetSpan(

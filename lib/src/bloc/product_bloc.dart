@@ -7,13 +7,14 @@ class ProductBloc {
   final _getProduct = BehaviorSubject<ProductModel>();
   final _createProduct = PublishSubject<ProductModel>();
   final _submissionProduct = PublishSubject<ProductModel>();
-  final _getSubmissionProduct = PublishSubject<ProductModel>();
+  final _getSubmissionProduct = BehaviorSubject<ProductModel>();
 
   Stream<ProductModel> get getProduct => _getProduct.stream;
 
   Stream<ProductModel> get createProduct => _createProduct.stream;
 
   Stream<ProductModel> get submissionProduct => _submissionProduct.stream;
+
   Stream<ProductModel> get getSubmissionProduct => _getSubmissionProduct.stream;
 
   getProductList(Map<String, dynamic> body) async {

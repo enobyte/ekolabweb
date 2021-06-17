@@ -47,7 +47,7 @@ class _KonsinyasiListState extends State<KonsinyasiList>
               padding: const EdgeInsets.only(left: 120),
               child: RichText(
                   text: TextSpan(
-                text: "🤝 Konsinyasi",
+                text: "🤝 Konsinyor",
                 style: TextStyle(fontSize: 21),
                 children: [
                   WidgetSpan(

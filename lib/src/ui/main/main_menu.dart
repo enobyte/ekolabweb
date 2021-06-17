@@ -59,12 +59,12 @@ class _MainMenuState extends State<MainMenu> {
               ? routeToWidget(context, NotificationSubmission(idUser))
               : null,
           child: Icon(Icons.notification_important_rounded),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blue[700],
         ),
       ),
       appBar: AppBar(
-        leading: Icon(Icons.ac_unit),
-        backgroundColor: Colors.red,
+        leading: Image.asset(logo),
+        backgroundColor: Colors.blue[700],
         title: TextWidget(txt: "E-KOLAB"),
         centerTitle: false,
         actions: [

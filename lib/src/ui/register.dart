@@ -70,16 +70,16 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
                     TextFieldWidget(
-                      _passwordController,
-                      obscureText: true,
-                      hint: "password",
+                      _emailController,
+                      hint: "email",
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 25, bottom: 15),
                       child: TextFieldWidget(
-                        _emailController,
-                        hint: "email",
-                        keyboardType: TextInputType.emailAddress,
+                        _passwordController,
+                        obscureText: true,
+                        hint: "password",
                       ),
                     ),
                     Row(
@@ -140,7 +140,7 @@ class _RegisterState extends State<Register> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               LabeledRadio(
-                                label: 'Investor',
+                                label: 'Kerjasama',
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
                                 value: category[3],
@@ -222,7 +222,8 @@ class _RegisterState extends State<Register> {
         "email": _emailController.text,
         "name": _nameController.text,
         "active": true,
-        "password": _passwordController.text
+        "password": _passwordController.text,
+        "image":"https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80"
       }
     });
   }

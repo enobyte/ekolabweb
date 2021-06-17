@@ -35,6 +35,16 @@ class _ProductServiceState extends State<ProductService> {
   final picker = ImagePicker();
 
   @override
+  void initState() {
+    super.initState();
+    bloc.createProduct.listen((event) {
+      if (event.status!) {
+        Navigator.of(context).pop();
+      }
+    });
+  }
+
+  @override
   void dispose() {
     _nameProductController.dispose();
     _descriptionController.dispose();
@@ -99,12 +109,16 @@ class _ProductServiceState extends State<ProductService> {
                             onChanged: (RangeValues values) {
                               setState(() {
                                 print(
-                                    'price ${_priceRangeValues.start.round()}, ${_priceRangeValues.end.round()}');
+                                    'price ${_priceRangeValues.start
+                                        .round()}, ${_priceRangeValues.end
+                                        .round()}');
                                 _priceRangeValues = values;
                                 minPrice = values.start.round();
                                 maxPrice = values.end.round();
                                 _costController.text =
-                                    '${_priceRangeValues.start.round()}k s/d ${_priceRangeValues.end.round()}k';
+                                '${_priceRangeValues.start
+                                    .round()}k s/d ${_priceRangeValues.end
+                                    .round()}k';
                               });
                             },
                           ),
@@ -131,7 +145,7 @@ class _ProductServiceState extends State<ProductService> {
               Padding(
                 padding: const EdgeInsets.only(top: 21, bottom: 21),
                 child:
-                    TextFieldTitleWidget(_notedController, hint: "Keterangan"),
+                TextFieldTitleWidget(_notedController, hint: "Keterangan"),
               ),
               TextFieldTitleWidget(
                 _uploadPhotoController,
@@ -199,7 +213,9 @@ class _ProductServiceState extends State<ProductService> {
     final bytes = await _image!.readAsBytes();
     final reqFile = FormData.fromMap({
       "image": MultipartFile.fromBytes(bytes,
-          filename: '${DateTime.now().millisecondsSinceEpoch}.png')
+          filename: '${DateTime
+              .now()
+              .millisecondsSinceEpoch}.png')
     });
     file = await uploadFile.bloc.fetchPostGeneralFile(reqFile);
     if (file.data != null) {
@@ -214,7 +230,7 @@ class _ProductServiceState extends State<ProductService> {
         "name": _nameProductController.text,
         "description": _descriptionController.text,
         "price":
-            '${_priceRangeValues.start.round()}-${_priceRangeValues.end.round()}',
+        '${_priceRangeValues.start.round()}-${_priceRangeValues.end.round()}',
         "category": _productCategory,
         "note": _notedController.text,
         "image": imageUrl

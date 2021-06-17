@@ -46,7 +46,7 @@ class _LicenceListState extends State<LicenceList>
               padding: const EdgeInsets.only(left: 120),
               child: RichText(
                   text: TextSpan(
-                text: "‍📉 Perijinan",
+                text: "‍📉 Perizinan",
                 style: TextStyle(fontSize: 21),
                 children: [
                   WidgetSpan(

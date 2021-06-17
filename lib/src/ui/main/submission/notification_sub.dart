@@ -27,7 +27,7 @@ class NotificationSubmissionState extends State<NotificationSubmission> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue[700],
         title: TextWidget(
           txt: "Notifikasi",
         ),
