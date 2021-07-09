@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:ekolabweb/src/bloc/uploadfile_bloc.dart' as uploadFile;
 import 'package:ekolabweb/src/model/file_model.dart';
+import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/drop_down_title.dart';
 import 'package:ekolabweb/src/widget/text_field_title.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 
 class ProductService extends StatefulWidget {
   final String idUser;
@@ -25,12 +27,14 @@ class _ProductServiceState extends State<ProductService> {
   final _descriptionController = TextEditingController();
   final _costController = TextEditingController();
   final _notedController = TextEditingController();
+  final _othersController = TextEditingController();
   final _uploadPhotoController = TextEditingController();
 
   RangeValues _priceRangeValues = RangeValues(100, 1000);
   int minPrice = 0;
   int maxPrice = 0;
-  String? _productCategory;
+  String? _productCategory = "";
+  String? _priceCategory = "";
   PickedFile? _image;
   final picker = ImagePicker();
 
@@ -61,7 +65,7 @@ class _ProductServiceState extends State<ProductService> {
         title: TextWidget(
           txt: "Produk dan Jasa",
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: colorBase,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -88,7 +92,7 @@ class _ProductServiceState extends State<ProductService> {
                       ),
                     ),
                     Flexible(
-                      flex: 8,
+                      flex: 6,
                       child: Container(
                         padding: EdgeInsets.only(bottom: 8),
                         child: SliderTheme(
@@ -109,27 +113,36 @@ class _ProductServiceState extends State<ProductService> {
                             onChanged: (RangeValues values) {
                               setState(() {
                                 print(
-                                    'price ${_priceRangeValues.start
-                                        .round()}, ${_priceRangeValues.end
-                                        .round()}');
+                                    'price ${_priceRangeValues.start.round()}, ${_priceRangeValues.end.round()}');
                                 _priceRangeValues = values;
                                 minPrice = values.start.round();
                                 maxPrice = values.end.round();
                                 _costController.text =
-                                '${_priceRangeValues.start
-                                    .round()}k s/d ${_priceRangeValues.end
-                                    .round()}k';
+                                    '${_priceRangeValues.start.round()}k s/d ${_priceRangeValues.end.round()}k';
                               });
                             },
                           ),
                         ),
                       ),
                     ),
+                    Flexible(
+                      flex: 2,
+                      child: DropDownTitle(
+                        onChange: (value) =>
+                            setState(() => _priceCategory = value),
+                        hint: "Kategori Harga",
+                        data: ["SATUAN", "LUSINAN", "LAINNYA"],
+                        chooseValue: _priceCategory,
+                      ),
+                    )
                   ],
                 ),
               ),
               DropDownTitle(
-                onChange: (value) => setState(() => _productCategory = value!),
+                onChange: (value) => setState(() {
+                  _productCategory = value;
+                  _othersController.clear();
+                }),
                 hint: "Kategori Produk",
                 data: [
                   "Kesehatan",
@@ -142,10 +155,17 @@ class _ProductServiceState extends State<ProductService> {
                 ],
                 chooseValue: _productCategory,
               ),
+              _productCategory!.equalIgnoreCase("lainnya")
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 21),
+                      child: TextFieldTitleWidget(_othersController,
+                          hint: "Kategori Lainnya"),
+                    )
+                  : SizedBox(),
               Padding(
                 padding: const EdgeInsets.only(top: 21, bottom: 21),
                 child:
-                TextFieldTitleWidget(_notedController, hint: "Keterangan"),
+                    TextFieldTitleWidget(_notedController, hint: "Keterangan"),
               ),
               TextFieldTitleWidget(
                 _uploadPhotoController,
@@ -168,7 +188,7 @@ class _ProductServiceState extends State<ProductService> {
                         isFlatBtn: true,
                         width: 200,
                         btnColor: Colors.blue,
-                        onClick: () => {},
+                        onClick: () => Navigator.of(context).pop(),
                         borderRedius: 8,
                       ),
                     ),
@@ -213,9 +233,7 @@ class _ProductServiceState extends State<ProductService> {
     final bytes = await _image!.readAsBytes();
     final reqFile = FormData.fromMap({
       "image": MultipartFile.fromBytes(bytes,
-          filename: '${DateTime
-              .now()
-              .millisecondsSinceEpoch}.png')
+          filename: '${DateTime.now().millisecondsSinceEpoch}.png')
     });
     file = await uploadFile.bloc.fetchPostGeneralFile(reqFile);
     if (file.data != null) {
@@ -230,9 +248,12 @@ class _ProductServiceState extends State<ProductService> {
         "name": _nameProductController.text,
         "description": _descriptionController.text,
         "price":
-        '${_priceRangeValues.start.round()}-${_priceRangeValues.end.round()}',
-        "category": _productCategory,
+            '${_priceRangeValues.start.round()}-${_priceRangeValues.end.round()}',
+        "category": _othersController.text.isNotEmpty
+            ? _othersController.text
+            : _productCategory,
         "note": _notedController.text,
+        "category_price": _priceCategory,
         "image": imageUrl
       }
     };

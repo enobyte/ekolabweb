@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:ekolabweb/src/bloc/bloc-provider.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -61,4 +63,10 @@ showErrorMessage(BuildContext context, String title, String? message,
       ),
     ),
   );
+}
+
+extension IgnoreCase on String {
+  bool equalIgnoreCase(String right) {
+    return this.toLowerCase() == right.toLowerCase();
+  }
 }

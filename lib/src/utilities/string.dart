@@ -1,7 +1,12 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 final String icProvider = "icons/ic_provider.png";
 final String imgNoData = "images/nodata.png";
 final String myProduct = "images/myproduct.png";
 final String logo = "images/logo.png";
+
+final Color? colorBase = Colors.blue[700];
 
 String dataKind(int kind) {
   String value = "";

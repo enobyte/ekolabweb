@@ -4,6 +4,7 @@ import 'package:ekolabweb/src/ui/register.dart';
 import 'package:flutter/material.dart';
 
 import 'ui/splash_screen.dart';
+import 'utilities/string.dart';
 
 class App extends StatelessWidget {
   @override
@@ -12,7 +13,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           bottomSheetTheme: BottomSheetThemeData(
-              backgroundColor: Colors.black.withOpacity(0)),
+              backgroundColor: colorBase),
           fontFamily: 'Regular'),
       home: Scaffold(
         backgroundColor: Colors.white,

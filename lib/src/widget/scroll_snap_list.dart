@@ -1,3 +1,4 @@
+import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -86,7 +87,7 @@ class _ScrollSnapListState extends State<ScrollSnapList>
                               txt: TextWidget(txt: "Detail"),
                               height: 32.0,
                               width: MediaQuery.of(context).size.width,
-                              btnColor: Colors.redAccent,
+                              btnColor: colorBase!,
                               onClick: () => widget.id(widget.listData[position]["id"]),
                               borderRedius: 4,
                             ),

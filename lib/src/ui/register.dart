@@ -17,7 +17,7 @@ class _RegisterState extends State<Register> {
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
-  var category = ["1", "2", "3", "4", "5", "6"];
+  var category = ["1", "2", "3", "4", "5", "6", "7"];
   String _isRadioSelected = "";
   final _bloc = UserBloc();
 
@@ -109,7 +109,7 @@ class _RegisterState extends State<Register> {
                                 },
                               ),
                               LabeledRadio(
-                                label: 'Konsinyasi',
+                                label: 'Konsinyor',
                                 padding: EdgeInsets.zero,
                                 value: category[1],
                                 groupValue: _isRadioSelected,
@@ -131,6 +131,18 @@ class _RegisterState extends State<Register> {
                                   });
                                 },
                               ),
+                              LabeledRadio(
+                                label: 'Jejaring Organisasi',
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 0.0),
+                                value: category[6],
+                                groupValue: _isRadioSelected,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _isRadioSelected = newValue;
+                                  });
+                                },
+                              ),
                             ],
                           ),
                         ),
@@ -140,7 +152,7 @@ class _RegisterState extends State<Register> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               LabeledRadio(
-                                label: 'Kerjasama',
+                                label: 'Investor',
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
                                 value: category[3],
@@ -223,7 +235,8 @@ class _RegisterState extends State<Register> {
         "name": _nameController.text,
         "active": true,
         "password": _passwordController.text,
-        "image":"https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80"
+        "image":
+            "https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80"
       }
     });
   }

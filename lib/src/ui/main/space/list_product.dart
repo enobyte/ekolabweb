@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
-import 'package:ekolabweb/src/ui/main/space/waralaba.dart';
+import 'package:ekolabweb/src/ui/main/space/invest_service.dart';
+import 'package:ekolabweb/src/ui/main/space/licence_service.dart';
+import 'package:ekolabweb/src/ui/main/space/network_organization_service.dart';
+import 'package:ekolabweb/src/ui/main/space/waralaba_service.dart';
 import 'package:ekolabweb/src/ui/main/submission/ukm_submission.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
@@ -12,6 +15,7 @@ import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'konsinyor_service.dart';
 import 'product_service.dart';
 
 class ListProduct extends StatefulWidget {
@@ -45,7 +49,7 @@ class _ListProductState extends State<ListProduct> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: colorBase,
         title: TextWidget(
           txt: "List Product",
         ),
@@ -54,7 +58,7 @@ class _ListProductState extends State<ListProduct> {
           ? FloatingActionButton(
               onPressed: () => _navigationUser(),
               child: Icon(Icons.add),
-              backgroundColor: Colors.red,
+              backgroundColor: colorBase,
             )
           : SizedBox(),
       body: StreamBuilder<ProductModel>(
@@ -62,70 +66,65 @@ class _ListProductState extends State<ListProduct> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.data!.isNotEmpty) {
-                return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                  ),
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      height: 200,
-                      child: Card(
-                        margin: EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5.0)),
-                              child: Image.asset(
-                                myProduct,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(4.0),
-                              child: TextWidget(
-                                txt: snapshot.data!.data![index]["data"]
-                                    ["name"],
-                                maxLine: 2,
-                                txtSize: 18,
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.bottomRight,
-                              padding: EdgeInsets.all(4.0),
-                              child: Row(
+                return Wrap(
+                  children: snapshot.data!.data!
+                      .map((e) => Container(
+                            height: 300,
+                            width: 300,
+                            child: Card(
+                              margin: EdgeInsets.all(16.0),
+                              child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  TextWidget(
-                                    txt: "🤝 0",
-                                    txtSize: 16,
+                                  ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0)),
+                                    child: Image.asset(
+                                      myProduct,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  widget.isUser
-                                      ? SizedBox()
-                                      : ButtonWidget(
-                                          txt: TextWidget(txt: "Ajukan"),
-                                          height: 40.0,
-                                          width: 100,
-                                          btnColor: Colors.redAccent,
-                                          onClick: () => _showMessage(
-                                              snapshot.data!.data![index]["id"],
-                                              snapshot.data!.data![index]
-                                                  ["kind"]),
-                                          borderRedius: 4,
+                                  Container(
+                                    padding: EdgeInsets.all(4.0),
+                                    child: TextWidget(
+                                      txt: e["data"]["name"],
+                                      maxLine: 2,
+                                      txtSize: 18,
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.bottomRight,
+                                    padding: EdgeInsets.all(4.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextWidget(
+                                          txt: "🤝 0",
+                                          txtSize: 16,
                                         ),
+                                        widget.isUser
+                                            ? SizedBox()
+                                            : ButtonWidget(
+                                                txt: TextWidget(txt: "Ajukan"),
+                                                height: 40.0,
+                                                width: 100,
+                                                btnColor: colorBase!,
+                                                onClick: () => _showMessage(
+                                                    e["id"], e["kind"]),
+                                                borderRedius: 4,
+                                              ),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                  itemCount: snapshot.data!.data!.length,
+                            ),
+                          ))
+                      .toList(),
                 );
               } else {
                 return Center(child: Image.asset(imgNoData));
@@ -153,10 +152,22 @@ class _ListProductState extends State<ListProduct> {
   _navigationUser() {
     switch (kindUser) {
       case 1:
-        routeToWidget(context, Waralaba());
+        routeToWidget(context, WaralabaService(idUserLogin));
+        break;
+      case 2:
+        routeToWidget(context, KonsinyorService(idUserLogin));
         break;
       case 3:
         routeToWidget(context, ProductService(idUserLogin));
+        break;
+      case 4:
+        routeToWidget(context, InvestService(idUserLogin));
+        break;
+      case 6:
+        routeToWidget(context, LicenceService(idUserLogin));
+        break;
+      case 7:
+        routeToWidget(context, NetWorkOrganizationService(idUserLogin));
         break;
       default:
         showErrorMessage(context, "Product", "User Not Authorize");

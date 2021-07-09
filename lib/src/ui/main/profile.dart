@@ -5,6 +5,7 @@ import 'package:ekolabweb/src/bloc/user_bloc.dart' as user;
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
+import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/drop_down_title.dart';
@@ -61,7 +62,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: colorBase,
         title: TextWidget(
           txt: "Profile",
         ),

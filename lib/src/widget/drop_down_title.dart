@@ -9,10 +9,12 @@ class DropDownTitle extends StatefulWidget {
   final chooseValue;
 
   DropDownTitle(
-      {required this.onChange,
+      {Key? key,
+      required this.onChange,
       required this.hint,
       required this.data,
-      required this.chooseValue});
+      required this.chooseValue})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -22,16 +24,6 @@ class DropDownTitle extends StatefulWidget {
 
 class _DropDownTitleState extends State<DropDownTitle> {
   String? chooseValue;
-
-  @override
-  void didUpdateWidget(covariant DropDownTitle oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (this.chooseValue != widget.chooseValue) {
-      setState(() {
-        this.chooseValue = widget.chooseValue;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

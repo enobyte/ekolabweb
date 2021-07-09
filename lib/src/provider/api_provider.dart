@@ -23,7 +23,7 @@ class ApiProvider {
       return handler.next(options); //continue
     }, onResponse: (response, handler) {
       print(
-          'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+          'RESPONSE: ${response.data} => PATH: ${response.requestOptions.path}');
       return handler.next(response); // continue
     }, onError: (DioError e, handler) {
       print(
