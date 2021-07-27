@@ -7,7 +7,12 @@ import 'package:ekolabweb/src/ui/main/space/invest_service.dart';
 import 'package:ekolabweb/src/ui/main/space/licence_service.dart';
 import 'package:ekolabweb/src/ui/main/space/network_organization_service.dart';
 import 'package:ekolabweb/src/ui/main/space/waralaba_service.dart';
+import 'package:ekolabweb/src/ui/main/submission/jejaring_submission.dart';
+import 'package:ekolabweb/src/ui/main/submission/kerjasama_submission.dart';
+import 'package:ekolabweb/src/ui/main/submission/konsinyasi_submission.dart';
+import 'package:ekolabweb/src/ui/main/submission/perijinan_submission.dart';
 import 'package:ekolabweb/src/ui/main/submission/ukm_submission.dart';
+import 'package:ekolabweb/src/ui/main/submission/waralaba_submission.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
@@ -113,8 +118,8 @@ class _ListProductState extends State<ListProduct> {
                                                 height: 40.0,
                                                 width: 100,
                                                 btnColor: colorBase!,
-                                                onClick: () => _showMessage(
-                                                    e["id"], e["kind"]),
+                                                onClick: () =>
+                                                    _actionSubmission(e),
                                                 borderRedius: 4,
                                               ),
                                       ],
@@ -175,14 +180,78 @@ class _ListProductState extends State<ListProduct> {
     }
   }
 
+  _actionSubmission(Map<String, dynamic> data) {
+    switch (data["kind"]) {
+      case 1:
+        routeToWidget(
+            context,
+            WaralabaSub(
+              data["id"],
+              idUserLogin,
+              dataKind(kindUser),
+              nameUserLogin,
+              data["data"]["description"],
+              data["data"]["term"],
+            ));
+        break;
+      case 2:
+        routeToWidget(
+            context,
+            KonsinyasiSubmission(
+              data["id"],
+              idUserLogin,
+              dataKind(kindUser),
+              nameUserLogin,
+              data["data"]["description"],
+            ));
+        break;
+      case 3:
+        _showMessage(data["id"], data["kind"]);
+        break;
+      case 4:
+        routeToWidget(
+            context,
+            KerjaSamaSubmission(
+              data["id"],
+              idUserLogin,
+              dataKind(kindUser),
+              nameUserLogin,
+              data["data"]["description"],
+            ));
+        break;
+      case 6:
+        routeToWidget(
+            context,
+            PerijinanSubmission(
+              data["id"],
+              idUserLogin,
+              dataKind(kindUser),
+              nameUserLogin,
+              data["data"]["description"],
+              data["data"]["term"],
+            ));
+        break;
+      case 7:
+        routeToWidget(
+            context,
+            JejaringSubmission(
+              data["id"],
+              idUserLogin,
+              dataKind(kindUser),
+              nameUserLogin,
+              data["data"]["description"],
+              data["data"]["term"],
+            ));
+        break;
+    }
+  }
+
   _showMessage(String idProduct, int kindProduct) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return kindProduct == 1
-              ? Container()
-              : UkmSubmission(
-                  idProduct, idUserLogin, dataKind(kindUser), nameUserLogin);
+          return UkmSubmission(
+              idProduct, idUserLogin, dataKind(kindUser), nameUserLogin);
         });
   }
 }

@@ -41,7 +41,7 @@ class _ScrollSnapListState extends State<ScrollSnapList>
     return Container(
       height: 350.0,
       child: ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        //physics: NeverScrollableScrollPhysics(),
         itemCount: widget.listData.length,
         padding: EdgeInsets.only(right: 120, left: 120),
         shrinkWrap: true,

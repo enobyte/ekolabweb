@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 
 import 'home_service/kerjasama_list.dart';
 import 'home_service/konsinyasi_list.dart';
+import 'home_service/network_list.dart';
 import 'home_service/service_product_list.dart';
 
 final List<String> imgList = [
@@ -166,6 +167,10 @@ class _MainMenuState extends State<MainMenu> {
                         snapshot.data!.data!
                                 .any((element) => element!.kind == 6)
                             ? LicenceList()
+                            : SizedBox(),
+                        snapshot.data!.data!
+                                .any((element) => element!.kind == 7)
+                            ? NetworkList()
                             : SizedBox(),
                       ],
                     );

@@ -71,7 +71,7 @@ class UkmSubmissionState extends State<UkmSubmission> {
                           "id_user_sub": widget.idUserSub,
                           "kind": widget.kindUserSub,
                           "name_user_sub": widget.nameUserSub,
-                          "comment": submissionComment.text
+                          "submission": {"note": submissionComment.text}
                         }
                       });
                       Navigator.of(context).pop();

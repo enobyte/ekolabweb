@@ -71,7 +71,7 @@ class NotificationSubmissionState extends State<NotificationSubmission> {
                                   ),
                                   TextWidget(
                                       txt: snapshot.data!.data![index]["data"]
-                                          ["comment"])
+                                          ["submission"]["note"])
                                 ],
                               ),
                               Padding(
