@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
+import 'package:ekolabweb/src/model/submission_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 
 class ApiProvider {
@@ -162,13 +163,13 @@ class ApiProvider {
     }
   }
 
-  Future<ProductModel> getSubmissionProduct(Map<String, dynamic> body) async {
+  Future<SubmissionModel> getSubmissionProduct(Map<String, dynamic> body) async {
     try {
       final response =
       await _dio.post("get_sub_req", data: json.encode(body));
-      return ProductModel.fromJson(response.data);
+      return SubmissionModel.fromJson(response.data);
     } catch (err, snap) {
-      return ProductModel.withError(_handleError(err));
+      return SubmissionModel.withError(_handleError(err));
     }
   }
 }

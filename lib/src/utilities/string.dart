@@ -15,19 +15,22 @@ String dataKind(int kind) {
       value = "Pewaralaba";
       break;
     case 2:
-      value = "Konsinyasi";
+      value = "Konsinyor";
       break;
     case 3:
       value = "UKM/UMK";
       break;
     case 4:
-      value = "Kerjasama";
+      value = "Investor";
       break;
     case 5:
       value = "Admin IWAPI";
       break;
     case 6:
       value = "Perijinan";
+      break;
+    case 7:
+      value = "Jejaring Organisasi";
       break;
   }
   return value;

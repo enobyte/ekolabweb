@@ -42,6 +42,7 @@ class _MainMenuState extends State<MainMenu> {
   String email = "";
   String name = "";
   String idUser = "";
+  int kindUser = 0;
 
   @override
   void initState() {
@@ -57,8 +58,9 @@ class _MainMenuState extends State<MainMenu> {
         padding: const EdgeInsets.all(32.0),
         child: FloatingActionButton(
           onPressed: () => idUser.isNotEmpty
-              ? routeToWidget(context, NotificationSubmission(idUser))
-              : null,
+              ? routeToWidget(
+                  context, NotificationSubmission(idUser, kindUser))
+              : Container(),
           child: Icon(Icons.notification_important_rounded),
           backgroundColor: Colors.blue[700],
         ),
@@ -250,7 +252,8 @@ class _MainMenuState extends State<MainMenu> {
       email = userData.data!.data!["email"];
       name = userData.data!.data!["name"];
       idUser = userData.data!.id!;
+      kindUser = userData.data!.kind!;
     });
-    bloc.fetchAllUser({"id": userData.data!.id});
+    bloc.fetchAllUser({"id": idUser});
   }
 }

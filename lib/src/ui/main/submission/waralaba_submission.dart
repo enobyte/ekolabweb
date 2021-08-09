@@ -14,7 +14,7 @@ import 'package:ekolabweb/src/bloc/uploadfile_bloc.dart' as uploadFile;
 class WaralabaSub extends StatefulWidget {
   final String idProduct;
   final String idUserSub;
-  final String kindUserSub;
+  final int kindUserSub;
   final String nameUserSub;
   final String existDesc;
   final String existTerm;

@@ -1,4 +1,5 @@
 import 'package:ekolabweb/src/model/product_model.dart';
+import 'package:ekolabweb/src/model/submission_model.dart';
 import 'package:ekolabweb/src/provider/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -7,7 +8,7 @@ class ProductBloc {
   final _getProduct = BehaviorSubject<ProductModel>();
   final _createProduct = PublishSubject<ProductModel>();
   final _submissionProduct = PublishSubject<ProductModel>();
-  final _getSubmissionProduct = BehaviorSubject<ProductModel>();
+  final _getSubmissionProduct = BehaviorSubject<SubmissionModel>();
 
   Stream<ProductModel> get getProduct => _getProduct.stream;
 
@@ -15,7 +16,7 @@ class ProductBloc {
 
   Stream<ProductModel> get submissionProduct => _submissionProduct.stream;
 
-  Stream<ProductModel> get getSubmissionProduct => _getSubmissionProduct.stream;
+  Stream<SubmissionModel> get getSubmissionProduct => _getSubmissionProduct.stream;
 
   getProductList(Map<String, dynamic> body) async {
     ProductModel model = await _repository.getProduct(body);
@@ -36,7 +37,7 @@ class ProductBloc {
   }
 
   getSubmissionRequest(Map<String, dynamic> body) async {
-    ProductModel model = await _repository.getSubmissionProduct(body);
+    SubmissionModel model = await _repository.getSubmissionProduct(body);
     _getSubmissionProduct.sink.add(model);
   }
 

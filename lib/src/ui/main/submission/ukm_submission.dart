@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class UkmSubmission extends StatefulWidget {
   final String idProduct;
   final String idUserSub;
-  final String kindUserSub;
+  final int kindUserSub;
   final String nameUserSub;
 
   @override

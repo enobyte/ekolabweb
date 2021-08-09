@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
+import 'package:ekolabweb/src/model/submission_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 
 import 'api_provider.dart';
@@ -32,6 +33,6 @@ class Repository {
   Future<ProductModel> submissionProduct(Map<String, dynamic> body) =>
       apiProvider.submissionProduct(body);
 
-  Future<ProductModel> getSubmissionProduct(Map<String, dynamic> body) =>
+  Future<SubmissionModel> getSubmissionProduct(Map<String, dynamic> body) =>
       apiProvider.getSubmissionProduct(body);
 }

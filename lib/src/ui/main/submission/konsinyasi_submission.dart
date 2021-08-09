@@ -15,7 +15,7 @@ import 'package:ekolabweb/src/bloc/product_bloc.dart';
 class KonsinyasiSubmission extends StatefulWidget {
   final String idProduct;
   final String idUserSub;
-  final String kindUserSub;
+  final int kindUserSub;
   final String nameUserSub;
   final String existDesc;
 

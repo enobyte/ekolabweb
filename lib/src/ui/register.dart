@@ -1,4 +1,5 @@
 import 'package:ekolabweb/src/bloc/user_bloc.dart';
+import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/labeled_radio.dart';
@@ -98,7 +99,7 @@ class _RegisterState extends State<Register> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <LabeledRadio>[
                               LabeledRadio(
-                                label: 'Pewaralaba',
+                                label: dataKind(int.parse(category[0])),
                                 padding: EdgeInsets.zero,
                                 value: category[0],
                                 groupValue: _isRadioSelected,
@@ -109,7 +110,7 @@ class _RegisterState extends State<Register> {
                                 },
                               ),
                               LabeledRadio(
-                                label: 'Konsinyor',
+                                label: dataKind(int.parse(category[1])),
                                 padding: EdgeInsets.zero,
                                 value: category[1],
                                 groupValue: _isRadioSelected,
@@ -120,7 +121,7 @@ class _RegisterState extends State<Register> {
                                 },
                               ),
                               LabeledRadio(
-                                label: 'UKM/UMK',
+                                label: dataKind(int.parse(category[2])),
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
                                 value: category[2],
@@ -132,7 +133,7 @@ class _RegisterState extends State<Register> {
                                 },
                               ),
                               LabeledRadio(
-                                label: 'Jejaring Organisasi',
+                                label: dataKind(int.parse(category[6])),
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
                                 value: category[6],
@@ -152,7 +153,7 @@ class _RegisterState extends State<Register> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               LabeledRadio(
-                                label: 'Investor',
+                                label: dataKind(int.parse(category[3])),
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
                                 value: category[3],
@@ -164,7 +165,7 @@ class _RegisterState extends State<Register> {
                                 },
                               ),
                               LabeledRadio(
-                                label: 'Admin IWAPI',
+                                label: dataKind(int.parse(category[4])),
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
                                 value: category[4],
@@ -176,7 +177,7 @@ class _RegisterState extends State<Register> {
                                 },
                               ),
                               LabeledRadio(
-                                label: 'Perijinan',
+                                label: dataKind(int.parse(category[5])),
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 0.0),
                                 value: category[5],

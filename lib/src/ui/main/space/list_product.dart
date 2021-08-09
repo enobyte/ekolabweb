@@ -188,7 +188,7 @@ class _ListProductState extends State<ListProduct> {
             WaralabaSub(
               data["id"],
               idUserLogin,
-              dataKind(kindUser),
+              kindUser,
               nameUserLogin,
               data["data"]["description"],
               data["data"]["term"],
@@ -200,7 +200,7 @@ class _ListProductState extends State<ListProduct> {
             KonsinyasiSubmission(
               data["id"],
               idUserLogin,
-              dataKind(kindUser),
+              kindUser,
               nameUserLogin,
               data["data"]["description"],
             ));
@@ -214,7 +214,7 @@ class _ListProductState extends State<ListProduct> {
             KerjaSamaSubmission(
               data["id"],
               idUserLogin,
-              dataKind(kindUser),
+              kindUser,
               nameUserLogin,
               data["data"]["description"],
             ));
@@ -225,7 +225,7 @@ class _ListProductState extends State<ListProduct> {
             PerijinanSubmission(
               data["id"],
               idUserLogin,
-              dataKind(kindUser),
+              kindUser,
               nameUserLogin,
               data["data"]["description"],
               data["data"]["term"],
@@ -237,7 +237,7 @@ class _ListProductState extends State<ListProduct> {
             JejaringSubmission(
               data["id"],
               idUserLogin,
-              dataKind(kindUser),
+              kindUser,
               nameUserLogin,
               data["data"]["description"],
               data["data"]["term"],
@@ -251,7 +251,7 @@ class _ListProductState extends State<ListProduct> {
         context: context,
         builder: (BuildContext context) {
           return UkmSubmission(
-              idProduct, idUserLogin, dataKind(kindUser), nameUserLogin);
+              idProduct, idUserLogin, kindUser, nameUserLogin);
         });
   }
 }
