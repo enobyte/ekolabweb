@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
 import 'package:ekolabweb/src/model/submission_model.dart';
+import 'package:ekolabweb/src/model/submisson_proc_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 
 class ApiProvider {
@@ -156,20 +157,40 @@ class ApiProvider {
   Future<ProductModel> submissionProduct(Map<String, dynamic> body) async {
     try {
       final response =
-      await _dio.post("submission_req", data: json.encode(body));
+          await _dio.post("submission_req", data: json.encode(body));
       return ProductModel.fromJson(response.data);
     } catch (err, snap) {
       return ProductModel.withError(_handleError(err));
     }
   }
 
-  Future<SubmissionModel> getSubmissionProduct(Map<String, dynamic> body) async {
+  Future<ProductModel> submissionProcess(Map<String, dynamic> body) async {
     try {
       final response =
-      await _dio.post("get_sub_req", data: json.encode(body));
+          await _dio.post("submission_proc", data: json.encode(body));
+      return ProductModel.fromJson(response.data);
+    } catch (err, snap) {
+      return ProductModel.withError(_handleError(err));
+    }
+  }
+
+  Future<SubmissionModel> getSubmissionProduct(
+      Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("get_sub_req", data: json.encode(body));
       return SubmissionModel.fromJson(response.data);
     } catch (err, snap) {
       return SubmissionModel.withError(_handleError(err));
+    }
+  }
+
+  Future<SubmissionProcModel> getSubmissionProcess(
+      Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("get_sub_proc", data: json.encode(body));
+      return SubmissionProcModel.fromJson(response.data);
+    } catch (err, snap) {
+      return SubmissionProcModel.withError(_handleError(err));
     }
   }
 }

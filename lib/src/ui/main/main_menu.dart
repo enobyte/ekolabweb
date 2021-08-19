@@ -8,7 +8,7 @@ import 'package:ekolabweb/src/ui/main/home_service/licence_list.dart';
 import 'package:ekolabweb/src/ui/main/home_service/waralaba_list.dart';
 import 'package:ekolabweb/src/ui/main/profile.dart';
 import 'package:ekolabweb/src/ui/main/space/list_product.dart';
-import 'package:ekolabweb/src/ui/main/submission/notification_sub.dart';
+import 'package:ekolabweb/src/ui/main/notification/notification_sub.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';

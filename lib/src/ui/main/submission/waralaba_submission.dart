@@ -220,7 +220,7 @@ class _WaralabaSub extends State<WaralabaSub> {
           "term": _termController.text,
           "implement_date": selectedDate.toString(),
           "doc": ""
-        }
+        },
       }
     });
   }

@@ -217,7 +217,7 @@ class _KerjaSamaSubmissionState extends State<KerjaSamaSubmission> {
           "term": _termController.text,
           "implement_date": selectedDate.toString(),
           "doc": ""
-        }
+        },
       }
     });
   }

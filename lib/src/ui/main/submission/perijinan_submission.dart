@@ -220,7 +220,7 @@ class _PerijinanSubmission extends State<PerijinanSubmission> {
           "term": _termController.text,
           "implement_date": selectedDate.toString(),
           "doc": ""
-        }
+        },
       }
     });
   }

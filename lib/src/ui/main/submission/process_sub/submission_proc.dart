@@ -1,23 +1,26 @@
+import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:ekolabweb/src/model/submission_model.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/labeled_radio.dart';
 import 'package:ekolabweb/src/widget/text_field_title.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
-class WaralabaProcess extends StatefulWidget {
+class SubmissionProcess extends StatefulWidget {
   final SubmissionModel data;
   final int idxSub;
+  final String idUserSub;
 
   @override
   State<StatefulWidget> createState() {
-    return _WaralabaProcessState();
+    return _SubmissionProcessState();
   }
 
-  WaralabaProcess(this.data, this.idxSub);
+  SubmissionProcess(this.data, this.idxSub, this.idUserSub);
 }
 
-class _WaralabaProcessState extends State<WaralabaProcess> {
+class _SubmissionProcessState extends State<SubmissionProcess> {
   final _nameResponder = TextEditingController();
   final _addressResponder = TextEditingController();
   final _noteResponder = TextEditingController();
@@ -29,6 +32,15 @@ class _WaralabaProcessState extends State<WaralabaProcess> {
   void initState() {
     super.initState();
     _nameResponder.text = widget.data.data![widget.idxSub]["user"]["name"];
+    _addressResponder.text =
+        widget.data.data![widget.idxSub]["user"]["address"];
+    _noteResponder.text =
+        widget.data.data![widget.idxSub]["data"]["submission"]["note"];
+    _docResponder.text =
+        widget.data.data![widget.idxSub]["data"]["submission"]["doc"];
+    bloc.submissionProc.listen((event) {
+      showErrorMessage(context, "Proses Pengajuan", event.message);
+    });
   }
 
   @override
@@ -150,7 +162,8 @@ class _WaralabaProcessState extends State<WaralabaProcess> {
                             height: 40.0,
                             width: 200,
                             btnColor: Colors.blue,
-                            onClick: () => {},
+                            onClick: () => _submitProcess(
+                                widget.data.data![widget.idxSub]["id_product"]),
                             //_uploadImage(),
                             borderRedius: 8,
                           ),
@@ -165,5 +178,13 @@ class _WaralabaProcessState extends State<WaralabaProcess> {
         ),
       ),
     );
+  }
+
+  _submitProcess(String idProduct) {
+    bloc.submissionProcess({
+      "id_product": idProduct,
+      "id_user" : widget.idUserSub,
+      "data": {"status": _isRadioSelected, "id_user_sub": widget.idUserSub}
+    });
   }
 }
