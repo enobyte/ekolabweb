@@ -1,4 +1,5 @@
 import 'package:ekolabweb/src/bloc/user_bloc.dart';
+import 'package:ekolabweb/src/ui/main/admin/main_admin.dart';
 import 'package:ekolabweb/src/ui/main/main_menu.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
@@ -29,7 +30,11 @@ class _LoginState extends State<Login> {
     super.initState();
     bloc.doLogin.listen((event) {
       if (event.status ?? false) {
-        routeToWidget(context, MainMenu());
+        if (event.data!.kind != 5) {
+          routeToWidget(context, MainMenu());
+        } else {
+          routeToWidget(context, MainAdmin());
+        }
       } else {
         showErrorMessage(context, "Login", event.message);
       }

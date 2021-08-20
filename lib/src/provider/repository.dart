@@ -19,6 +19,9 @@ class Repository {
   Future<UserMultipleModel> actGetAllUser(Map<String, dynamic> body) =>
       apiProvider.getAllUser(body);
 
+  Future<UserMultipleModel> actGetUserByKind(Map<String, dynamic> body) =>
+      apiProvider.getUserByKind(body);
+
   Future<FileModel> actUploadFile(FormData formData) =>
       apiProvider.uploadGeneralFile(formData);
 
@@ -39,6 +42,9 @@ class Repository {
 
   Future<SubmissionModel> getSubmissionProduct(Map<String, dynamic> body) =>
       apiProvider.getSubmissionProduct(body);
+
+  Future<SubmissionModel> getAllSubmissionProduct() =>
+      apiProvider.getAllSubmissionProduct();
 
   Future<SubmissionProcModel> getSubmissionProcess(Map<String, dynamic> body) =>
       apiProvider.getSubmissionProcess(body);

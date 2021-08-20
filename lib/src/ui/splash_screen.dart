@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +28,14 @@ class _SplashScreenState extends State<SplashScreen> {
     final isLogin =
         await SharedPreferencesHelper.checkKey(SharedPreferencesHelper.user);
     if (isLogin) {
-      Navigator.of(context).pushReplacementNamed("/main_menu");
+      final userPref = await SharedPreferencesHelper.getStringPref(
+          SharedPreferencesHelper.user);
+      final userData = UserModel.fromJson(json.decode(userPref));
+      if (userData.data!.kind != 5) {
+        Navigator.of(context).pushReplacementNamed("/main_menu");
+      } else {
+        Navigator.of(context).pushReplacementNamed("/main_admin");
+      }
     } else {
       Navigator.of(context).pushReplacementNamed("/login_menu");
     }

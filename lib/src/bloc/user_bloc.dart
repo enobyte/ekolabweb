@@ -39,6 +39,11 @@ class UserBloc {
     _doGetAllUser.sink.add(model);
   }
 
+  Future<UserMultipleModel> fetchUserByKind(Map<String, dynamic> body) async {
+    UserMultipleModel model = await _repository.actGetUserByKind(body);
+    return model;
+  }
+
   updateProfile(Map<String, dynamic> body) async {
     UserModel model = await _repository.updateUser(body);
     if (model.status ?? false) {

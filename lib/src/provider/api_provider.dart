@@ -109,6 +109,17 @@ class ApiProvider {
     }
   }
 
+  Future<UserMultipleModel> getUserByKind(Map<String, dynamic> body) async {
+    try {
+      final response =
+          await _dio.post("get_user_by_kind", data: json.encode(body));
+      return UserMultipleModel.fromJson(response.data);
+    } catch (err, snap) {
+      print(snap.toString());
+      return UserMultipleModel.withError(_handleError(err));
+    }
+  }
+
   Future<FileModel> uploadGeneralFile(FormData formData) async {
     try {
       final response = await _dioFile.post(
@@ -178,6 +189,15 @@ class ApiProvider {
       Map<String, dynamic> body) async {
     try {
       final response = await _dio.post("get_sub_req", data: json.encode(body));
+      return SubmissionModel.fromJson(response.data);
+    } catch (err, snap) {
+      return SubmissionModel.withError(_handleError(err));
+    }
+  }
+
+  Future<SubmissionModel> getAllSubmissionProduct() async {
+    try {
+      final response = await _dio.post("get_sub_alll");
       return SubmissionModel.fromJson(response.data);
     } catch (err, snap) {
       return SubmissionModel.withError(_handleError(err));

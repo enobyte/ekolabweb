@@ -11,6 +11,7 @@ class ProductBloc {
   final _submissionProduct = PublishSubject<ProductModel>();
   final _submissionProc = PublishSubject<ProductModel>();
   final _getSubmissionProduct = BehaviorSubject<SubmissionModel>();
+  final _getAllSubmissionProduct = BehaviorSubject<SubmissionModel>();
   final _getSubmissionProcess = BehaviorSubject<SubmissionProcModel>();
 
   Stream<ProductModel> get getProduct => _getProduct.stream;
@@ -23,6 +24,9 @@ class ProductBloc {
 
   Stream<SubmissionModel> get getSubmissionProduct =>
       _getSubmissionProduct.stream;
+
+  Stream<SubmissionModel> get getAllSubmissionProduct =>
+      _getAllSubmissionProduct.stream;
 
   Stream<SubmissionProcModel> get getSubmissionProcess =>
       _getSubmissionProcess.stream;
@@ -55,6 +59,11 @@ class ProductBloc {
     _getSubmissionProduct.sink.add(model);
   }
 
+  getAllSubmissionRequest() async {
+    SubmissionModel model = await _repository.getAllSubmissionProduct();
+    _getAllSubmissionProduct.sink.add(model);
+  }
+
   getSubmissionProc(Map<String, dynamic> body) async {
     SubmissionProcModel model = await _repository.getSubmissionProcess(body);
     _getSubmissionProcess.sink.add(model);
@@ -67,6 +76,7 @@ class ProductBloc {
     _getSubmissionProduct.close();
     _submissionProc.close();
     _getSubmissionProcess.close();
+    _getAllSubmissionProduct.close();
   }
 }
 
