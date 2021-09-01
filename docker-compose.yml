@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+
+  ekolab_web:
+    container_name: ekolab_web
+    image: ekolab_web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+    ports:
+      - '80:80'
