@@ -44284,11 +44284,11 @@ $1:function(a){return a==null?null:B.aD5(t.a.a(a))},
 $S:463}
 T.Y9.prototype={
 a1m:function(){var s,r=this.a
-r.glP(r).ph$="http://localhost:8080/api/"
+r.glP(r).ph$="http://ekolab.id:8080/api/"
 r.glP(r).pi$=5000
 r.glP(r).d=3000
 s=this.b
-s.glP(s).ph$="http://localhost:8000/api/"
+s.glP(s).ph$="http://ekolab.id:8000/api/"
 s.glP(s).pi$=5000
 s.glP(s).d=3000
 s.glP(s).sFb(0,"application/x-www-form-urlencoded")
