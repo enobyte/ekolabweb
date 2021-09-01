@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
+import 'package:ekolabweb/src/model/standard_map_model.dart';
+import 'package:ekolabweb/src/model/standard_maplist_model.dart';
 import 'package:ekolabweb/src/model/submission_model.dart';
 import 'package:ekolabweb/src/model/submisson_proc_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
@@ -31,6 +33,9 @@ class Repository {
   Future<ProductModel> getProduct(Map<String, dynamic> body) =>
       apiProvider.getProduct(body);
 
+  Future<ProductModel> getProductByName(Map<String, dynamic> body) =>
+      apiProvider.getProductByName(body);
+
   Future<ProductModel> createProduct(Map<String, dynamic> body) =>
       apiProvider.createProduct(body);
 
@@ -48,4 +53,13 @@ class Repository {
 
   Future<SubmissionProcModel> getSubmissionProcess(Map<String, dynamic> body) =>
       apiProvider.getSubmissionProcess(body);
+
+  Future<StandardMapListModels> getChating(Map<String, dynamic> body) =>
+      apiProvider.getChating(body);
+
+  Future<StandardMapListModels> getChatingList(Map<String, dynamic> body) =>
+      apiProvider.getChatingList(body);
+
+  Future<StandardMapListModels> saveChating(Map<String, dynamic> body) =>
+      apiProvider.saveChating(body);
 }

@@ -230,9 +230,12 @@ class NotificationSubmissionState extends State<NotificationSubmission> {
         context: context,
         builder: (BuildContext context) {
           return DetailResponseNotif(
+              snapshot.data![index]["id_product"],
               snapshot.data![index]["product"]["name"],
               snapshot.data![index]["product"]["description"],
-              snapshot.data![index]["response"]["status"]);
+              snapshot.data![index]["response"]["status"],
+              widget.idUser,
+              snapshot.data![index]["owner_product"]);
         });
   }
 }

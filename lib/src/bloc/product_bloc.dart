@@ -7,6 +7,7 @@ import 'package:rxdart/rxdart.dart';
 class ProductBloc {
   final _repository = Repository();
   final _getProduct = BehaviorSubject<ProductModel>();
+  final _getByNameProduct = PublishSubject<ProductModel>();
   final _createProduct = PublishSubject<ProductModel>();
   final _submissionProduct = PublishSubject<ProductModel>();
   final _submissionProc = PublishSubject<ProductModel>();
@@ -15,6 +16,8 @@ class ProductBloc {
   final _getSubmissionProcess = BehaviorSubject<SubmissionProcModel>();
 
   Stream<ProductModel> get getProduct => _getProduct.stream;
+
+  Stream<ProductModel> get getProductByName => _getByNameProduct.stream;
 
   Stream<ProductModel> get createProduct => _createProduct.stream;
 
@@ -34,6 +37,11 @@ class ProductBloc {
   getProductList(Map<String, dynamic> body) async {
     ProductModel model = await _repository.getProduct(body);
     _getProduct.sink.add(model);
+  }
+
+  getProductByNameList(Map<String, dynamic> body) async {
+    ProductModel model = await _repository.getProductByName(body);
+    _getByNameProduct.sink.add(model);
   }
 
   createProductList(Map<String, dynamic> body) async {
@@ -77,6 +85,7 @@ class ProductBloc {
     _submissionProc.close();
     _getSubmissionProcess.close();
     _getAllSubmissionProduct.close();
+    _getByNameProduct.close();
   }
 }
 

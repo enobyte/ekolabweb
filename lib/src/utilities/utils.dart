@@ -1,8 +1,10 @@
 import 'dart:core';
+import 'dart:math';
 
 import 'package:ekolabweb/src/bloc/bloc-provider.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 Future<dynamic> routeToWidget(BuildContext context, Widget widget) {
   return Navigator.push(
@@ -69,4 +71,19 @@ extension IgnoreCase on String {
   bool equalIgnoreCase(String right) {
     return this.toLowerCase() == right.toLowerCase();
   }
+}
+
+String formatDefaultDate(String value, String format) {
+  var datetime = DateTime.parse(value);
+  return DateFormat(format).format(datetime);
+}
+
+Future<String> randomString(int length) async {
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+  Random rnd = new Random(new DateTime.now().millisecondsSinceEpoch);
+  String result = "";
+  for (var i = 0; i < length; i++) {
+    result += chars[rnd.nextInt(chars.length)];
+  }
+  return result.toUpperCase();
 }

@@ -1,22 +1,46 @@
+import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
+
+import '../message/chating.dart';
 
 class DetailResponseNotif extends StatelessWidget {
-  final String nameProduct, description, status;
+  final String idProduct, nameProduct, description, status, idUser, idResponder;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _nameProductView(),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
             child: _descProductView(),
           ),
-          _statusProductView()
+          _statusProductView(),
+          status.equalIgnoreCase("diterima") ||
+                  status.equalIgnoreCase("diskusi")
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: ButtonWidget(
+                    txt: TextWidget(
+                      txt: "Komunikasi",
+                    ),
+                    height: 25,
+                    width: 0,
+                    btnColor: Colors.green,
+                    onClick: () {
+                      Navigator.of(context).pop();
+                      routeToWidget(
+                          context, ChatingForm(idUser, idResponder, idProduct));
+                    },
+                    borderRedius: 20,
+                  ),
+                )
+              : SizedBox(),
         ],
       ),
     );
@@ -79,5 +103,6 @@ class DetailResponseNotif extends StatelessWidget {
     );
   }
 
-  DetailResponseNotif(this.nameProduct, this.description, this.status);
+  DetailResponseNotif(this.idProduct, this.nameProduct, this.description,
+      this.status, this.idUser, this.idResponder);
 }

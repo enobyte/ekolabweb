@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
+import 'package:ekolabweb/src/model/standard_map_model.dart';
+import 'package:ekolabweb/src/model/standard_maplist_model.dart';
 import 'package:ekolabweb/src/model/submission_model.dart';
 import 'package:ekolabweb/src/model/submisson_proc_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
@@ -11,7 +13,7 @@ class ApiProvider {
   var _dioFile = Dio();
 
   ApiProvider() {
-    _dio.options.baseUrl = "http://localhost:8000/api/";
+    _dio.options.baseUrl = "http://localhost:8080/api/";
     _dio.options.connectTimeout = 5000; //5s
     _dio.options.receiveTimeout = 3000;
 
@@ -21,7 +23,7 @@ class ApiProvider {
     _dioFile.options.contentType = Headers.formUrlEncodedContentType;
 
     _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
-      print('REQUEST[${options.method}] => PATH: ${options.path}');
+      print('REQUEST[${options.method}] => BODY: ${options.data}');
       return handler.next(options); //continue
     }, onResponse: (response, handler) {
       print(
@@ -155,6 +157,15 @@ class ApiProvider {
     }
   }
 
+  Future<ProductModel> getProductByName(Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("get_product_by_name", data: json.encode(body));
+      return ProductModel.fromJson(response.data);
+    } catch (err, snap) {
+      return ProductModel.withError(_handleError(err));
+    }
+  }
+
   Future<ProductModel> createProduct(Map<String, dynamic> body) async {
     try {
       final response =
@@ -211,6 +222,33 @@ class ApiProvider {
       return SubmissionProcModel.fromJson(response.data);
     } catch (err, snap) {
       return SubmissionProcModel.withError(_handleError(err));
+    }
+  }
+
+  Future<StandardMapListModels> getChating(Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("get_chating", data: json.encode(body));
+      return StandardMapListModels.fromJson(response.data);
+    } catch (err, snap) {
+      return StandardMapListModels.withError(_handleError(err));
+    }
+  }
+
+  Future<StandardMapListModels> getChatingList(Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("get_chating_list", data: json.encode(body));
+      return StandardMapListModels.fromJson(response.data);
+    } catch (err, snap) {
+      return StandardMapListModels.withError(_handleError(err));
+    }
+  }
+
+  Future<StandardMapListModels> saveChating(Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("save_chating", data: json.encode(body));
+      return StandardMapListModels.fromJson(response.data);
+    } catch (err, snap) {
+      return StandardMapListModels.withError(_handleError(err));
     }
   }
 }

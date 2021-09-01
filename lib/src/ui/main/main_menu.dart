@@ -6,7 +6,9 @@ import 'package:ekolabweb/src/bloc/user_bloc.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/ui/main/home_service/licence_list.dart';
 import 'package:ekolabweb/src/ui/main/home_service/waralaba_list.dart';
+import 'package:ekolabweb/src/ui/main/message/listchating.dart';
 import 'package:ekolabweb/src/ui/main/profile.dart';
+import 'package:ekolabweb/src/ui/main/search_main.dart';
 import 'package:ekolabweb/src/ui/main/space/list_product.dart';
 import 'package:ekolabweb/src/ui/main/notification/notification_sub.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
@@ -58,8 +60,7 @@ class _MainMenuState extends State<MainMenu> {
         padding: const EdgeInsets.all(32.0),
         child: FloatingActionButton(
           onPressed: () => idUser.isNotEmpty
-              ? routeToWidget(
-                  context, NotificationSubmission(idUser, kindUser))
+              ? routeToWidget(context, NotificationSubmission(idUser, kindUser))
               : Container(),
           child: Icon(Icons.notification_important_rounded),
           backgroundColor: Colors.blue[700],
@@ -80,7 +81,7 @@ class _MainMenuState extends State<MainMenu> {
               height: 0,
               width: 100,
               btnColor: Colors.green,
-              onClick: () => {},
+              onClick: () => routeToWidget(context, ListChatingForm(idUser)),
               borderRedius: 20,
             ),
           ),
@@ -104,7 +105,7 @@ class _MainMenuState extends State<MainMenu> {
           ),
           PopupMenuButton<String>(
             itemBuilder: (context) {
-              return ["Produk Saya", "Keluar"]
+              return ["Produk Saya", "Pencarian", "Keluar"]
                   .map((e) => PopupMenuItem<String>(
                         value: e,
                         child: TextWidget(
@@ -117,6 +118,10 @@ class _MainMenuState extends State<MainMenu> {
               switch (value) {
                 case "Produk Saya":
                   routeToWidget(context, ListProduct(true, "null"));
+                  break;
+                case "Pencarian":
+                  showSearch(
+                      context: context, delegate: SearchMain(idUser));
                   break;
                 case "Keluar":
                   _doLogout(context);
@@ -132,7 +137,7 @@ class _MainMenuState extends State<MainMenu> {
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CarouselSlider(
               items: imageSliders,
@@ -144,6 +149,19 @@ class _MainMenuState extends State<MainMenu> {
                     setState(() {});
                   }),
             ),
+            // Align(
+            //   alignment: AlignmentDirectional.centerEnd,
+            //   child: IconButton(
+            //       padding: EdgeInsets.only(top: 10, right: 10),
+            //       onPressed: () => {
+            //             showSearch(
+            //                 context: context, delegate: SearchMain(idUser))
+            //           },
+            //       icon: Icon(
+            //         Icons.search,
+            //         color: Colors.black87,
+            //       )),
+            // ),
             StreamBuilder<UserMultipleModel>(
                 stream: bloc.doGetAllUser,
                 builder: (context, snapshot) {
