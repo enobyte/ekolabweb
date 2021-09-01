@@ -87,8 +87,10 @@ class _ListProductState extends State<ListProduct> {
                                   ClipRRect(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5.0)),
-                                    child: Image.asset(
-                                      myProduct,
+                                    child: Image.network(
+                                      e["data"]["image"] != null
+                                          ? e["data"]["image"]
+                                          : "http://ekolab.id/file/myproduct_398872551.png",
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -250,8 +252,7 @@ class _ListProductState extends State<ListProduct> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return UkmSubmission(
-              idProduct, idUserLogin, kindUser, nameUserLogin);
+          return UkmSubmission(idProduct, idUserLogin, kindUser, nameUserLogin);
         });
   }
 }

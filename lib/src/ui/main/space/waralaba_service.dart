@@ -304,8 +304,8 @@ class WaralabaServiceState extends State<WaralabaService> {
         "description": _descriptionController.text,
         "location": _locationController.text,
         "term": _termController.text,
-        "image": "",
-        "doc": "",
+        "image": imageUrl,
+        "doc": docUrl,
         "price": listInvestPrice.map((e) => e.toJson()).toList()
       }
     };

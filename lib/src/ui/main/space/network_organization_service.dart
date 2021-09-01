@@ -184,7 +184,7 @@ class _NetWorkOrganizationServiceState
         "term": _termController.text,
         "location": _locationController.text,
         "date": "${selectedDate.toLocal()}".split(' ')[0],
-        "doc": ""
+        "doc": docUrl
       }
     };
     bloc.createProductList(req);

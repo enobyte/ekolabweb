@@ -181,7 +181,7 @@ class _LicenceServiceState extends State<LicenceService> {
         "term": _termController.text,
         "location": _locationController.text,
         "profit_sharing": _profitSharingController.text,
-        "doc": ""
+        "doc": docUrl
       }
     };
     bloc.createProductList(req);

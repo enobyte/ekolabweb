@@ -181,8 +181,8 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
         "description": _descriptionController.text,
         "price": _priceController.text,
         "start_end": _startendController.text,
-        "image": "",
-        "doc": ""
+        "image": imageUrl,
+        "doc": docUrl
       }
     };
     bloc.createProductList(req);

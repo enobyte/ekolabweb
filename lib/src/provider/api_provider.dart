@@ -17,7 +17,7 @@ class ApiProvider {
     _dio.options.connectTimeout = 5000; //5s
     _dio.options.receiveTimeout = 3000;
 
-    _dioFile.options.baseUrl = "http://ekolab.id:8000/api/";
+    _dioFile.options.baseUrl = "http://ekolab.id:8080/api/";
     _dioFile.options.connectTimeout = 5000; //5s
     _dioFile.options.receiveTimeout = 3000;
     _dioFile.options.contentType = Headers.formUrlEncodedContentType;
