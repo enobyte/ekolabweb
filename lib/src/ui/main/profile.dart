@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/bloc/uploadfile_bloc.dart';
 import 'package:ekolabweb/src/bloc/user_bloc.dart' as user;
@@ -36,6 +37,7 @@ class _ProfileState extends State<Profile> {
 
   PickedFile? _image;
   final picker = ImagePicker();
+  Uint8List? _prevImage;
 
   @override
   void initState() {
@@ -168,14 +170,46 @@ class _ProfileState extends State<Profile> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 55),
-                        child: TextFieldTitleWidget(
-                          _uploadPhotoController,
-                          hint: "Foto",
-                          readOnly: true,
-                          prefixIcon: IconButton(
-                              onPressed: () => _getImage(),
-                              icon: Icon(Icons.add_a_photo)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: TextWidget(txt: "Foto"),
+                            ),
+                            SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: _prevImage != null
+                                  ? GestureDetector(
+                                      child: Image.memory(
+                                        _prevImage!,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      onTap: () => _getImage(),
+                                    )
+                                  : Container(
+                                      height: 100,
+                                      width: 100,
+                                      color: Colors.black12,
+                                      child: Center(
+                                        child: IconButton(
+                                          onPressed: () => _getImage(),
+                                          icon: Icon(Icons.add),
+                                        ),
+                                      ),
+                                    ),
+                            )
+                          ],
                         ),
+                        // child: TextFieldTitleWidget(
+                        //   _uploadPhotoController,
+                        //   hint: "Foto",
+                        //   readOnly: true,
+                        //   prefixIcon: IconButton(
+                        //       onPressed: () => _getImage(),
+                        //       icon: Icon(Icons.add_a_photo)),
+                        // ),
                       ),
                       Row(
                         children: [
@@ -191,7 +225,7 @@ class _ProfileState extends State<Profile> {
                                 isFlatBtn: true,
                                 width: 0,
                                 btnColor: Colors.red,
-                                onClick: () => {},
+                                onClick: () => Navigator.of(context).pop(),
                                 borderRedius: 4,
                               ),
                             ),
@@ -224,10 +258,9 @@ class _ProfileState extends State<Profile> {
 
   Future _getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
+    _prevImage = await pickedFile!.readAsBytes();
     setState(() {
-      if (pickedFile != null) {
-        _uploadPhotoController.text = pickedFile.path;
+      if (_prevImage != null) {
         _image = PickedFile(pickedFile.path);
       } else {
         print('No image selected.');

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/drop_down_title.dart';
 import 'package:ekolabweb/src/widget/text_field_title.dart';
@@ -38,6 +39,18 @@ class _InvestServiceState extends State<InvestService> {
   final valueInvest = TextEditingController();
   String? _productCategory;
   DateTime selectedDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    bloc.createProduct.listen((event) {
+      if (event.status!) {
+        Navigator.of(context).pop();
+      }
+    }, onError: (msg) {
+      showErrorMessage(context, "Product", msg);
+    });
+  }
 
   @override
   void dispose() {

@@ -48,8 +48,10 @@ class ProductBloc {
     ProductModel model = await _repository.createProduct(body);
     if (model.status!) {
       getProductList(body);
+      _createProduct.sink.add(model);
+    } else {
+      _createProduct.sink.addError(model.message!);
     }
-    _createProduct.sink.add(model);
   }
 
   submissionRequest(Map<String, dynamic> body) async {

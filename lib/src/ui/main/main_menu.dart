@@ -43,6 +43,7 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   String email = "";
   String name = "";
+  String image = "";
   String idUser = "";
   int kindUser = 0;
 
@@ -97,7 +98,7 @@ class _MainMenuState extends State<MainMenu> {
                   ),
                 ),
                 InkWell(
-                  child: ImageCircle(false, icProvider, 50),
+                  child: ImageCircle(true, image, 50),
                   onTap: () => routeToWidget(context, Profile()),
                 ),
               ],
@@ -269,6 +270,7 @@ class _MainMenuState extends State<MainMenu> {
     setState(() {
       email = userData.data!.data!["email"];
       name = userData.data!.data!["name"];
+      image = userData.data!.data!["image"];
       idUser = userData.data!.id!;
       kindUser = userData.data!.kind!;
     });

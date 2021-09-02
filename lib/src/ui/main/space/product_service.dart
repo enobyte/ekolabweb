@@ -45,6 +45,8 @@ class _ProductServiceState extends State<ProductService> {
       if (event.status!) {
         Navigator.of(context).pop();
       }
+    }, onError: (msg) {
+      showErrorMessage(context, "Product", msg);
     });
   }
 
