@@ -252,14 +252,12 @@ class _LicenceServiceState extends State<LicenceService> {
       });
 
       fileDoc = await uploadFile.bloc.fetchPostGeneralFile(reqFileDoc);
-
-      if (fileDoc.data != null) {
-        _attemptSave(fileDoc.data!["url"]);
-      }
     }
+
+    _attemptSave(fileDoc?.data?["url"]);
   }
 
-  _attemptSave(String docUrl) async {
+  _attemptSave(String? docUrl) async {
     final req = {
       "id": widget.productModel != null ? _idProduct : "",
       "id_user": widget.idUser,
@@ -269,7 +267,7 @@ class _LicenceServiceState extends State<LicenceService> {
         "term": _termController.text,
         "location": _locationController.text,
         "profit_sharing": _profitSharingController.text,
-        "doc": docUrl
+        "doc": docUrl ?? widget.productModel!["data"]["doc"] ?? ""
       }
     };
     bloc.createProductList(req);
