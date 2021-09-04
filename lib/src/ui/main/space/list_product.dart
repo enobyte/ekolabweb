@@ -194,7 +194,7 @@ class _ListProductState extends State<ListProduct> {
         routeToWidget(context, InvestService(idUserLogin));
         break;
       case 6:
-        routeToWidget(context, LicenceService(idUserLogin));
+        routeToWidget(context, LicenceService(idUserLogin, null, true));
         break;
       case 7:
         routeToWidget(context, NetWorkOrganizationService(idUserLogin));
@@ -222,7 +222,8 @@ class _ListProductState extends State<ListProduct> {
         routeToWidget(context, InvestService(idUserLogin));
         break;
       case 6:
-        routeToWidget(context, LicenceService(idUserLogin));
+        routeToWidget(context,
+            LicenceService(idUserLogin, _productModel!.data![index], isUser));
         break;
       case 7:
         routeToWidget(context, NetWorkOrganizationService(idUserLogin));

@@ -223,7 +223,7 @@ class _PerijinanSubmission extends State<PerijinanSubmission> {
           "doc": docUrl
         },
         "create_at":
-        formatDefaultDate(DateTime.now().toString(), "yyyy-MM-DD hh:mm:ss")
+            formatDefaultDate(DateTime.now().toString(), "yyyy-MM-DD hh:mm:ss")
       }
     });
   }
