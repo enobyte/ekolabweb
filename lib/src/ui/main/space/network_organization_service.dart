@@ -17,13 +17,15 @@ import 'package:mime/mime.dart';
 
 class NetWorkOrganizationService extends StatefulWidget {
   final String idUser;
+  final Map<String, dynamic>? productModel;
+  final bool isUser;
 
   @override
   State<StatefulWidget> createState() {
     return _NetWorkOrganizationServiceState();
   }
 
-  NetWorkOrganizationService(this.idUser);
+  NetWorkOrganizationService(this.idUser, this.productModel, this.isUser);
 }
 
 class _NetWorkOrganizationServiceState
@@ -32,19 +34,28 @@ class _NetWorkOrganizationServiceState
   final _locationController = TextEditingController();
   final _dateController = TextEditingController();
   final _termController = TextEditingController();
-  final _uploadPhotoController = TextEditingController();
   final _uploadDocController = TextEditingController();
 
-  late Uint8List? uploadedDoc;
+  Uint8List? uploadedDoc;
   String? extensionDoc;
   final titleInvest = TextEditingController();
   final valueInvest = TextEditingController();
   String? _productCategory;
   DateTime selectedDate = DateTime.now();
+  String _idProduct = "";
+  String _docTitle = "";
 
   @override
   void initState() {
     super.initState();
+    if (widget.productModel != null) {
+      _idProduct = widget.productModel!["id"];
+      _productCategory = widget.productModel!["data"]["name"];
+      _descriptionController.text = widget.productModel!["data"]["description"];
+      _locationController.text = widget.productModel!["data"]["location"];
+      _termController.text = widget.productModel!["data"]["term"];
+      _dateController.text = widget.productModel!["data"]["date"];
+    }
     bloc.createProduct.listen((event) {
       if (event.status!) {
         Navigator.of(context).pop();
@@ -59,7 +70,6 @@ class _NetWorkOrganizationServiceState
     _descriptionController.dispose();
     _locationController.dispose();
     _termController.dispose();
-    _uploadPhotoController.dispose();
     _uploadDocController.dispose();
     super.dispose();
   }
@@ -81,28 +91,38 @@ class _NetWorkOrganizationServiceState
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      DropDownTitle(
-                        onChange: (value) =>
-                            setState(() => _productCategory = value!),
-                        hint: "Kategori",
-                        data: [
-                          "PELATIHAN",
-                          "URUSAH IJIN",
-                          "ARISAN",
-                          "BIKER",
-                          "EO"
-                        ],
-                        chooseValue: _productCategory,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 21, bottom: 21),
-                        child: TextFieldTitleWidget(_descriptionController,
-                            hint: "Deskripsi"),
-                      ),
-                      TextFieldTitleWidget(_termController, hint: "Syarat"),
-                    ],
+                  child: AbsorbPointer(
+                    absorbing: widget.isUser ? false : true,
+                    child: Column(
+                      children: [
+                        DropDownTitle(
+                          onChange: (value) =>
+                              setState(() => _productCategory = value!),
+                          hint: "Kategori",
+                          data: [
+                            "PELATIHAN",
+                            "URUSAH IJIN",
+                            "ARISAN",
+                            "BIKER",
+                            "EO"
+                          ],
+                          chooseValue: _productCategory,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 21, bottom: 21),
+                          child: TextFieldTitleWidget(
+                            _descriptionController,
+                            hint: "Deskripsi",
+                            readOnly: widget.isUser ? false : true,
+                          ),
+                        ),
+                        TextFieldTitleWidget(
+                          _termController,
+                          hint: "Syarat",
+                          readOnly: widget.isUser ? false : true,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -112,56 +132,113 @@ class _NetWorkOrganizationServiceState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextFieldTitleWidget(_locationController, hint: "Lokasi"),
+                      TextFieldTitleWidget(
+                        _locationController,
+                        hint: "Lokasi",
+                        readOnly: widget.isUser ? false : true,
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(_dateController,
                             hint: "Tanggal Pelaksanaan",
                             readOnly: true,
                             prefixIcon: IconButton(
-                                onPressed: () => _selectDate(context),
+                                onPressed: () =>
+                                    widget.isUser ? _selectDate(context) : null,
                                 icon: Icon(Icons.date_range_rounded))),
                       ),
-                      TextFieldTitleWidget(
-                        _uploadDocController,
-                        hint: "Dokumen",
-                        readOnly: true,
-                        prefixIcon: IconButton(
-                            onPressed: () => _startFilePicker(),
-                            icon: Icon(Icons.note_add_rounded)),
-                      ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 32),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                        padding: const EdgeInsets.only(top: 21, bottom: 21),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Flexible(
-                              child: ButtonWidget(
-                                txt: TextWidget(txt: "Batal"),
-                                height: 40.0,
-                                isFlatBtn: true,
-                                width: 200,
-                                btnColor: Colors.blue,
-                                onClick: () => Navigator.of(context).pop(),
-                                borderRedius: 8,
-                              ),
+                            Row(
+                              children: [
+                                TextWidget(txt: "Dokumen"),
+                                IconButton(
+                                    onPressed: () => widget.isUser
+                                        ? _startFilePicker()
+                                        : null,
+                                    icon: Icon(
+                                      Icons.note_add_rounded,
+                                      color: colorBase,
+                                    )),
+                              ],
                             ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Flexible(
-                              child: ButtonWidget(
-                                txt: TextWidget(txt: "Simpan"),
-                                height: 40.0,
-                                width: 200,
-                                btnColor: Colors.blue,
-                                onClick: () => _uploadImage(),
-                                borderRedius: 8,
-                              ),
-                            ),
+                            widget.productModel != null
+                                ? widget.productModel!["data"]["doc"]
+                                        .toString()
+                                        .isNotEmpty
+                                    ? GestureDetector(
+                                        onTap: () => window.open(
+                                            widget.productModel!["data"]["doc"],
+                                            "_blank"),
+                                        child: Card(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: TextWidget(
+                                              txt: _docTitle.isNotEmpty
+                                                  ? _docTitle
+                                                  : widget.productModel!["data"]
+                                                          ["doc"]
+                                                      .toString()
+                                                      .split("/")
+                                                      .last,
+                                              align: TextAlign.start,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox()
+                                : _docTitle.isNotEmpty
+                                    ? Card(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: TextWidget(
+                                            txt: _docTitle,
+                                            align: TextAlign.start,
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox()
                           ],
                         ),
-                      )
+                      ),
+                      widget.isUser
+                          ? Padding(
+                              padding: const EdgeInsets.only(top: 32),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Flexible(
+                                    child: ButtonWidget(
+                                      txt: TextWidget(txt: "Batal"),
+                                      height: 40.0,
+                                      isFlatBtn: true,
+                                      width: 200,
+                                      btnColor: Colors.blue,
+                                      onClick: () =>
+                                          Navigator.of(context).pop(),
+                                      borderRedius: 8,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Flexible(
+                                    child: ButtonWidget(
+                                      txt: TextWidget(txt: "Simpan"),
+                                      height: 40.0,
+                                      width: 200,
+                                      btnColor: Colors.blue,
+                                      onClick: () => _uploadImage(),
+                                      borderRedius: 8,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : SizedBox()
                     ],
                   ),
                 ),
@@ -176,20 +253,22 @@ class _NetWorkOrganizationServiceState
   _uploadImage() async {
     FileModel? fileDoc;
 
-    final reqFileDoc = FormData.fromMap({
-      "image": MultipartFile.fromBytes(uploadedDoc!.toList(),
-          filename: '${DateTime.now().millisecondsSinceEpoch}.' + extensionDoc!)
-    });
+    if (uploadedDoc != null) {
+      final reqFileDoc = FormData.fromMap({
+        "image": MultipartFile.fromBytes(uploadedDoc!.toList(),
+            filename:
+                '${DateTime.now().millisecondsSinceEpoch}.' + extensionDoc!)
+      });
 
-    fileDoc = await uploadFile.bloc.fetchPostGeneralFile(reqFileDoc);
-
-    if (fileDoc.data != null) {
-      _attemptSave(fileDoc.data!["url"]);
+      fileDoc = await uploadFile.bloc.fetchPostGeneralFile(reqFileDoc);
     }
+
+    _attemptSave(fileDoc?.data?["url"]);
   }
 
-  _attemptSave(String docUrl) async {
+  _attemptSave(String? docUrl) async {
     final req = {
+      "id": widget.productModel != null ? _idProduct : "",
       "id_user": widget.idUser,
       "data": {
         "name": _productCategory,
@@ -197,7 +276,7 @@ class _NetWorkOrganizationServiceState
         "term": _termController.text,
         "location": _locationController.text,
         "date": "${selectedDate.toLocal()}".split(' ')[0],
-        "doc": docUrl
+        "doc": docUrl ?? widget.productModel!["data"]["doc"] ?? ""
       }
     };
     bloc.createProductList(req);
@@ -217,6 +296,7 @@ class _NetWorkOrganizationServiceState
           setState(() {
             uploadedDoc = reader.result as Uint8List;
             final mime = lookupMimeType('', headerBytes: uploadedDoc);
+            _docTitle = file.name;
             extensionDoc = mime?.split("/")[1];
           });
         });

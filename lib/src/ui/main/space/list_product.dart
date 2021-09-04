@@ -197,7 +197,8 @@ class _ListProductState extends State<ListProduct> {
         routeToWidget(context, LicenceService(idUserLogin, null, true));
         break;
       case 7:
-        routeToWidget(context, NetWorkOrganizationService(idUserLogin));
+        routeToWidget(
+            context, NetWorkOrganizationService(idUserLogin, null, true));
         break;
       default:
         showErrorMessage(context, "Product", "User Not Authorize");
@@ -228,7 +229,10 @@ class _ListProductState extends State<ListProduct> {
             LicenceService(idUserLogin, _productModel!.data![index], isUser));
         break;
       case 7:
-        routeToWidget(context, NetWorkOrganizationService(idUserLogin));
+        routeToWidget(
+            context,
+            NetWorkOrganizationService(
+                idUserLogin, _productModel!.data![index], isUser));
         break;
       default:
         showErrorMessage(context, "Product", "User Not Authorize");
