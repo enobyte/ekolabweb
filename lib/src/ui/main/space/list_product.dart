@@ -185,7 +185,7 @@ class _ListProductState extends State<ListProduct> {
         routeToWidget(context, WaralabaService(idUserLogin, null, true));
         break;
       case 2:
-        routeToWidget(context, KonsinyorService(idUserLogin));
+        routeToWidget(context, KonsinyorService(idUserLogin, null, true));
         break;
       case 3:
         routeToWidget(context, ProductService(idUserLogin, null, true));
@@ -212,7 +212,8 @@ class _ListProductState extends State<ListProduct> {
             WaralabaService(idUserLogin, _productModel!.data![index], isUser));
         break;
       case 2:
-        routeToWidget(context, KonsinyorService(idUserLogin));
+        routeToWidget(context,
+            KonsinyorService(idUserLogin, _productModel!.data![index], isUser));
         break;
       case 3:
         routeToWidget(context,
