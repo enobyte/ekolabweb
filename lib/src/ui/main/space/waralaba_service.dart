@@ -475,7 +475,7 @@ class WaralabaServiceState extends State<WaralabaService> {
 
   _attemptSave(String? imageUrl, String? docUrl) async {
     final req = {
-      "id": widget.productModel != null ? widget.productModel!["id"] : "",
+      "id": widget.productModel != null ? _idProduct : "",
       "id_user": widget.idUser,
       "data": {
         "name": _nameController.text,

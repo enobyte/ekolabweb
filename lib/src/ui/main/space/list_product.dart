@@ -188,7 +188,7 @@ class _ListProductState extends State<ListProduct> {
         routeToWidget(context, KonsinyorService(idUserLogin));
         break;
       case 3:
-        routeToWidget(context, ProductService(idUserLogin));
+        routeToWidget(context, ProductService(idUserLogin, null, true));
         break;
       case 4:
         routeToWidget(context, InvestService(idUserLogin));
@@ -206,7 +206,6 @@ class _ListProductState extends State<ListProduct> {
   }
 
   _navDetailProduct(int index, bool isUser, int intKindConsumer) {
-    print("===>" + intKindConsumer.toString());
     switch (!isUser ? intKindConsumer : kindUser) {
       case 1:
         routeToWidget(context,
@@ -216,7 +215,8 @@ class _ListProductState extends State<ListProduct> {
         routeToWidget(context, KonsinyorService(idUserLogin));
         break;
       case 3:
-        routeToWidget(context, ProductService(idUserLogin));
+        routeToWidget(context,
+            ProductService(idUserLogin, _productModel!.data![index], isUser));
         break;
       case 4:
         routeToWidget(context, InvestService(idUserLogin));

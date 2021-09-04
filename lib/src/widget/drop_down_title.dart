@@ -18,12 +18,24 @@ class DropDownTitle extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _DropDownTitleState();
+    return _DropDownTitleState(chooseValue);
   }
 }
 
 class _DropDownTitleState extends State<DropDownTitle> {
   String? chooseValue;
+
+  _DropDownTitleState(this.chooseValue);
+
+  @override
+  void didUpdateWidget(DropDownTitle oldWidget) {
+    if (this.chooseValue != widget.chooseValue) {
+      setState(() {
+        this.chooseValue = widget.chooseValue;
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
