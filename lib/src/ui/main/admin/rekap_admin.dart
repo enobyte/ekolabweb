@@ -135,42 +135,6 @@ class _RekapAdminState extends State<RekapAdmin> {
         ),
         cellAlignment: pw.Alignment.centerRight,
         cellAlignments: {0: pw.Alignment.centerLeft},
-        // pw.Column(
-        //   children: data.data!
-        //       .map((e) => pw.Row(children: [
-        //     pw.Text(e?.data?["name"],
-        //         style: pw.TextStyle(fontSize: 11)),
-        //     pw.Text(e?.data?["email"],
-        //         style: pw.TextStyle(fontSize: 11)),
-        //     pw.Text(e?.data?["address"],
-        //         style: pw.TextStyle(fontSize: 11)),
-        //     pw.Text(e?.data?["phone"],
-        //         style: pw.TextStyle(fontSize: 11)),
-        //   ], mainAxisAlignment: pw.MainAxisAlignment.spaceBetween))
-        //       .toList(),
-        // )
-        //     pw.Row(
-        //   children: [
-        //     pw.Text("NAMA"),
-        //     pw.Text("EMAIL"),
-        //     pw.Text("ALAMAT"),
-        //     pw.Text("NO.TELPON"),
-        //     pw.Column(
-        //       children: data.data!
-        //           .map((e) => pw.Row(children: [
-        //                 pw.Text(e?.data?["name"],
-        //                     style: pw.TextStyle(fontSize: 11)),
-        //                 pw.Text(e?.data?["email"],
-        //                     style: pw.TextStyle(fontSize: 11)),
-        //                 pw.Text(e?.data?["address"],
-        //                     style: pw.TextStyle(fontSize: 11)),
-        //                 pw.Text(e?.data?["phone"],
-        //                     style: pw.TextStyle(fontSize: 11)),
-        //               ], mainAxisAlignment: pw.MainAxisAlignment.spaceBetween))
-        //           .toList(),
-        //     )
-        //   ],
-        // ),
       ),
     ));
     await savePDF(alias);

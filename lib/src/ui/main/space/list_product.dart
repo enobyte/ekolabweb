@@ -39,6 +39,7 @@ class _ListProductState extends State<ListProduct> {
   int kindUser = 0;
   String idUserLogin = "";
   String nameUserLogin = "";
+  ProductModel? _productModel;
 
   @override
   void initState() {
@@ -71,66 +72,88 @@ class _ListProductState extends State<ListProduct> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.data!.isNotEmpty) {
+                _productModel = snapshot.data;
                 return Wrap(
                   children: snapshot.data!.data!
-                      .map((e) => Container(
-                            height: 300,
-                            width: 300,
-                            child: Card(
-                              margin: EdgeInsets.all(16.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5.0)),
-                                    child: Image.network(
-                                      e["data"]["image"] != null
-                                          ? e["data"]["image"]
-                                          : "http://ekolab.id/file/myproduct_398872551.png",
-                                      fit: BoxFit.cover,
+                      .asMap()
+                      .map((i, e) => MapEntry(
+                          i,
+                          GestureDetector(
+                            onTap: () => !widget.isUser
+                                ? _navDetailProduct(i, false, e["kind"])
+                                : null,
+                            child: Container(
+                              width: 300,
+                              child: Card(
+                                margin: EdgeInsets.all(16.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      child: Image.network(
+                                        e["data"]["image"] != null
+                                            ? e["data"]["image"]
+                                            : "http://ekolab.id/file/myproduct_398872551.png",
+                                        fit: BoxFit.cover,
+                                        height: 300,
+                                        width: 300,
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(4.0),
-                                    child: TextWidget(
-                                      txt: e["data"]["name"],
-                                      maxLine: 2,
-                                      txtSize: 18,
+                                    Container(
+                                      padding: EdgeInsets.all(4.0),
+                                      child: TextWidget(
+                                        txt: e["data"]["name"],
+                                        maxLine: 2,
+                                        txtSize: 18,
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.bottomRight,
-                                    padding: EdgeInsets.all(4.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        TextWidget(
-                                          txt: "🤝 0",
-                                          txtSize: 16,
-                                        ),
-                                        widget.isUser
-                                            ? SizedBox()
-                                            : ButtonWidget(
-                                                txt: TextWidget(txt: "Ajukan"),
-                                                height: 40.0,
-                                                width: 100,
-                                                btnColor: colorBase!,
-                                                onClick: () =>
-                                                    _actionSubmission(e),
-                                                borderRedius: 4,
-                                              ),
-                                      ],
-                                    ),
-                                  )
-                                ],
+                                    Container(
+                                      alignment: Alignment.bottomRight,
+                                      padding: EdgeInsets.all(4.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextWidget(
+                                            txt: "🤝 0",
+                                            txtSize: 16,
+                                          ),
+                                          widget.isUser
+                                              ? ButtonWidget(
+                                                  txt:
+                                                      TextWidget(txt: "Detail"),
+                                                  height: 40.0,
+                                                  width: 100,
+                                                  btnColor: colorBase!,
+                                                  onClick: () =>
+                                                      _navDetailProduct(
+                                                          i, true, 0),
+                                                  borderRedius: 4,
+                                                )
+                                              : ButtonWidget(
+                                                  txt:
+                                                      TextWidget(txt: "Ajukan"),
+                                                  height: 40.0,
+                                                  width: 100,
+                                                  btnColor: colorBase!,
+                                                  onClick: () =>
+                                                      _actionSubmission(e),
+                                                  borderRedius: 4,
+                                                ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                          ))
+                          )))
+                      .values
                       .toList(),
                 );
               } else {
@@ -159,7 +182,35 @@ class _ListProductState extends State<ListProduct> {
   _navigationUser() {
     switch (kindUser) {
       case 1:
-        routeToWidget(context, WaralabaService(idUserLogin));
+        routeToWidget(context, WaralabaService(idUserLogin, null, true));
+        break;
+      case 2:
+        routeToWidget(context, KonsinyorService(idUserLogin));
+        break;
+      case 3:
+        routeToWidget(context, ProductService(idUserLogin));
+        break;
+      case 4:
+        routeToWidget(context, InvestService(idUserLogin));
+        break;
+      case 6:
+        routeToWidget(context, LicenceService(idUserLogin));
+        break;
+      case 7:
+        routeToWidget(context, NetWorkOrganizationService(idUserLogin));
+        break;
+      default:
+        showErrorMessage(context, "Product", "User Not Authorize");
+        break;
+    }
+  }
+
+  _navDetailProduct(int index, bool isUser, int intKindConsumer) {
+    print("===>" + intKindConsumer.toString());
+    switch (!isUser ? intKindConsumer : kindUser) {
+      case 1:
+        routeToWidget(context,
+            WaralabaService(idUserLogin, _productModel!.data![index], isUser));
         break;
       case 2:
         routeToWidget(context, KonsinyorService(idUserLogin));

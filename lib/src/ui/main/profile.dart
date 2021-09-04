@@ -202,14 +202,6 @@ class _ProfileState extends State<Profile> {
                             )
                           ],
                         ),
-                        // child: TextFieldTitleWidget(
-                        //   _uploadPhotoController,
-                        //   hint: "Foto",
-                        //   readOnly: true,
-                        //   prefixIcon: IconButton(
-                        //       onPressed: () => _getImage(),
-                        //       icon: Icon(Icons.add_a_photo)),
-                        // ),
                       ),
                       Row(
                         children: [

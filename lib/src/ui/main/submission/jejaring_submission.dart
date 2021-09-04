@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/text_field_title.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
@@ -219,8 +220,10 @@ class _JejaringSubmissionState extends State<JejaringSubmission> {
           "note": _noteController.text,
           "term": _termController.text,
           "implement_date": selectedDate.toString(),
-          "doc": ""
-        }
+          "doc": docUrl
+        },
+        "create_at":
+            formatDefaultDate(DateTime.now().toString(), "yyyy-MM-DD hh:mm:ss")
       }
     });
   }

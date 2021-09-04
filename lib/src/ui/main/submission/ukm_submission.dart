@@ -1,4 +1,5 @@
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/text_field.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
@@ -72,7 +73,9 @@ class UkmSubmissionState extends State<UkmSubmission> {
                           "kind": widget.kindUserSub,
                           "name_user_sub": widget.nameUserSub,
                           "submission": {"note": submissionComment.text}
-                        }
+                        },
+                        "create_at": formatDefaultDate(
+                            DateTime.now().toString(), "yyyy-MM-DD hh:mm:ss")
                       });
                       Navigator.of(context).pop();
                     },
