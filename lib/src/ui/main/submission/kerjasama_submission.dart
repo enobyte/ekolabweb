@@ -102,7 +102,7 @@ class _KerjaSamaSubmissionState extends State<KerjaSamaSubmission> {
                     padding: const EdgeInsets.only(top: 21, bottom: 55),
                     child: TextFieldTitleWidget(
                       _uploadDocController,
-                      hint: "Document Pendukung",
+                      hint: "Dokumen Pendukung",
                       readOnly: true,
                       prefixIcon: IconButton(
                           onPressed: () => _startFilePicker("doc"),

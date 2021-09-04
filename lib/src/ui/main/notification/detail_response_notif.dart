@@ -6,7 +6,16 @@ import 'package:ekolabweb/src/utilities/utils.dart';
 import '../message/chating.dart';
 
 class DetailResponseNotif extends StatelessWidget {
-  final String idProduct, nameProduct, description, status, idUser, idResponder;
+  final String idProduct,
+      nameProduct,
+      description,
+      status,
+      idUser,
+      idResponder,
+      reasonReject;
+
+  DetailResponseNotif(this.idProduct, this.nameProduct, this.description,
+      this.status, this.idUser, this.idResponder, this.reasonReject);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +30,12 @@ class DetailResponseNotif extends StatelessWidget {
             child: _descProductView(),
           ),
           _statusProductView(),
+          status.equalIgnoreCase("ditolak")
+              ? Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: _reasonRejectProductView(),
+                )
+              : SizedBox(),
           status.equalIgnoreCase("diterima") ||
                   status.equalIgnoreCase("diskusi")
               ? Padding(
@@ -103,6 +118,22 @@ class DetailResponseNotif extends StatelessWidget {
     );
   }
 
-  DetailResponseNotif(this.idProduct, this.nameProduct, this.description,
-      this.status, this.idUser, this.idResponder);
+  _reasonRejectProductView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextWidget(
+          txt: "Alasan Ditolak",
+          txtSize: 21,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, top: 4),
+          child: TextWidget(
+            txt: reasonReject,
+            txtSize: 11,
+          ),
+        ),
+      ],
+    );
+  }
 }

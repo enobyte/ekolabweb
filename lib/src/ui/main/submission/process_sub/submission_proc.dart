@@ -6,6 +6,7 @@ import 'package:ekolabweb/src/widget/labeled_radio.dart';
 import 'package:ekolabweb/src/widget/text_field_title.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'dart:html' as html;
 
 class SubmissionProcess extends StatefulWidget {
   final SubmissionModel data;
@@ -24,7 +25,8 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
   final _nameResponder = TextEditingController();
   final _addressResponder = TextEditingController();
   final _noteResponder = TextEditingController();
-  final _docResponder = TextEditingController();
+  final _reasonReject = TextEditingController();
+  String? _docResponder = "";
   var category = ["diskusi", "diterima", "ditolak"];
   String _isRadioSelected = "";
 
@@ -36,7 +38,7 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
         widget.data.data![widget.idxSub]["user"]["address"];
     _noteResponder.text =
         widget.data.data![widget.idxSub]["data"]["submission"]["note"];
-    _docResponder.text =
+    _docResponder =
         widget.data.data![widget.idxSub]["data"]["submission"]["doc"];
     bloc.submissionProc.listen((event) {
       showErrorMessage(context, "Proses Pengajuan", event.message);
@@ -88,14 +90,44 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    TextFieldTitleWidget(
-                      _docResponder,
-                      hint: "Dokumen Pendukung",
-                      readOnly: true,
-                      suffixIcon: IconButton(
-                          onPressed: () => {},
-                          icon: Icon(Icons.remove_red_eye_sharp)),
+                    TextWidget(
+                      txt: "Dokumen Pendukung",
+                      align: TextAlign.start,
                     ),
+                    _docResponder!.isNotEmpty
+                        ? Card(
+                            margin: EdgeInsets.symmetric(vertical: 12),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextWidget(
+                                    txt: "data.pdf",
+                                    color: Colors.black54,
+                                    align: TextAlign.start,
+                                  ),
+                                  IconButton(
+                                      onPressed: () => html.window
+                                          .open(_docResponder!, "_blank"),
+                                      icon: Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Colors.black54,
+                                      ))
+                                ],
+                              ),
+                            ),
+                          )
+                        : TextWidget(txt: "Kosong"),
+                    // TextFieldTitleWidget(
+                    //   _docResponder,
+                    //   hint: "Dokumen Pendukung",
+                    //   readOnly: true,
+                    //   suffixIcon: IconButton(
+                    //       onPressed: () => {},
+                    //       icon: Icon(Icons.remove_red_eye_sharp)),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.only(top: 21, bottom: 10),
                       child: TextWidget(
@@ -126,7 +158,8 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
                       },
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 18),
+                      padding: EdgeInsets.only(
+                          bottom: _isRadioSelected == "ditolak" ? 8 : 16),
                       child: LabeledRadio(
                         label: "Ditolak",
                         padding: const EdgeInsets.symmetric(horizontal: 0.0),
@@ -139,6 +172,13 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
                         },
                       ),
                     ),
+                    _isRadioSelected == "ditolak"
+                        ? Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: TextFieldTitleWidget(_reasonReject,
+                                hint: "Alasan Penolakan"),
+                          )
+                        : SizedBox(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -183,8 +223,12 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
   _submitProcess(String idProduct) {
     bloc.submissionProcess({
       "id_product": idProduct,
-      "id_user" : widget.idUserSub,
-      "data": {"status": _isRadioSelected, "id_user_sub": widget.idUserSub}
+      "id_user": widget.idUserSub,
+      "data": {
+        "status": _isRadioSelected,
+        "id_user_sub": widget.idUserSub,
+        "reason": _reasonReject.text
+      }
     });
   }
 }

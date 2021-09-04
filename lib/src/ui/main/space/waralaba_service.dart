@@ -120,7 +120,7 @@ class WaralabaServiceState extends State<WaralabaService> {
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(
                           _uploadDocController,
-                          hint: "Document",
+                          hint: "Dokumen",
                           readOnly: true,
                           prefixIcon: IconButton(
                               onPressed: () => _startFilePicker("doc"),

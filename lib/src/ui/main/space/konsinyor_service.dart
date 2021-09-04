@@ -114,7 +114,7 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
                       ),
                       TextFieldTitleWidget(
                         _uploadDocController,
-                        hint: "Document",
+                        hint: "Dokumen",
                         readOnly: true,
                         prefixIcon: IconButton(
                             onPressed: () => _startFilePicker("doc"),

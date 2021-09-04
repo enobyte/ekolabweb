@@ -2,6 +2,7 @@ import 'package:ekolabweb/src/bloc/user_bloc.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'dart:typed_data';
 import 'dart:html' as html;
@@ -105,22 +106,73 @@ class _RekapAdminState extends State<RekapAdmin> {
 
   createPDF(int kind, String alias) async {
     final data = await _getUserByKindBloc.fetchUserByKind({"kind": kind});
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) => pw.Column(
-          children: data.data!
-              .map((e) => pw.Row(children: [
-                    pw.Text(e?.data?["name"],
-                        style: pw.TextStyle(fontSize: 11)),
-                    pw.Text(e?.data?["email"],
-                        style: pw.TextStyle(fontSize: 11)),
-                    pw.Text(e?.data?["address"],
-                        style: pw.TextStyle(fontSize: 11)),
-                  ], mainAxisAlignment: pw.MainAxisAlignment.spaceBetween))
-              .toList(),
+    pdf.addPage(pw.Page(
+      build: (pw.Context context) => pw.Table.fromTextArray(
+        border: null,
+        headers: ["NAMA", "EMAIL", "ALAMAT", "NO.TELPON"],
+        data: List<List<dynamic>>.generate(
+            data.data!.length,
+            (index) => <dynamic>[
+                  data.data![index]!.data!["name"],
+                  data.data![index]!.data!["email"],
+                  data.data![index]!.data!["address"] ?? "-",
+                  data.data![index]!.data!["phone"] ?? "-",
+                ]),
+        headerStyle: pw.TextStyle(
+          color: PdfColors.white,
+          fontWeight: pw.FontWeight.bold,
         ),
+        headerDecoration: pw.BoxDecoration(
+          color: PdfColors.blue,
+        ),
+        rowDecoration: pw.BoxDecoration(
+          border: pw.Border(
+            bottom: pw.BorderSide(
+              color: PdfColors.blue,
+              width: .5,
+            ),
+          ),
+        ),
+        cellAlignment: pw.Alignment.centerRight,
+        cellAlignments: {0: pw.Alignment.centerLeft},
+        // pw.Column(
+        //   children: data.data!
+        //       .map((e) => pw.Row(children: [
+        //     pw.Text(e?.data?["name"],
+        //         style: pw.TextStyle(fontSize: 11)),
+        //     pw.Text(e?.data?["email"],
+        //         style: pw.TextStyle(fontSize: 11)),
+        //     pw.Text(e?.data?["address"],
+        //         style: pw.TextStyle(fontSize: 11)),
+        //     pw.Text(e?.data?["phone"],
+        //         style: pw.TextStyle(fontSize: 11)),
+        //   ], mainAxisAlignment: pw.MainAxisAlignment.spaceBetween))
+        //       .toList(),
+        // )
+        //     pw.Row(
+        //   children: [
+        //     pw.Text("NAMA"),
+        //     pw.Text("EMAIL"),
+        //     pw.Text("ALAMAT"),
+        //     pw.Text("NO.TELPON"),
+        //     pw.Column(
+        //       children: data.data!
+        //           .map((e) => pw.Row(children: [
+        //                 pw.Text(e?.data?["name"],
+        //                     style: pw.TextStyle(fontSize: 11)),
+        //                 pw.Text(e?.data?["email"],
+        //                     style: pw.TextStyle(fontSize: 11)),
+        //                 pw.Text(e?.data?["address"],
+        //                     style: pw.TextStyle(fontSize: 11)),
+        //                 pw.Text(e?.data?["phone"],
+        //                     style: pw.TextStyle(fontSize: 11)),
+        //               ], mainAxisAlignment: pw.MainAxisAlignment.spaceBetween))
+        //           .toList(),
+        //     )
+        //   ],
+        // ),
       ),
-    );
+    ));
     await savePDF(alias);
   }
 }
