@@ -3,7 +3,6 @@
   "short_name": "ekolabweb",
   "start_url": "/splash",
   "display": "standalone",
-  "scope": "/",
   "background_color": "#0175C2",
   "theme_color": "#0175C2",
   "description": "A new Flutter project.",
