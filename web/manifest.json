@@ -2,7 +2,7 @@
   "name": "ekolabweb",
   "short_name": "ekolabweb",
   "start_url": "/splash",
-  "display": "browser",
+  "display": "standalone",
   "scope": "/",
   "background_color": "#0175C2",
   "theme_color": "#0175C2",
