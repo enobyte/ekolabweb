@@ -35,6 +35,8 @@ dependencies:
   intl: ^0.17.0
   pdf: ^3.4.2
   responsive_table: ^0.1.1+8
+  jwt_decode: ^0.3.1
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   build_runner: ^1.10.7
@@ -55,26 +57,26 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/icons/
-    - assets/images/
-    - assets/fonts/
+    - web/assets/icons/
+    - web/assets/images/
+    - web/assets/fonts/
 
   fonts:
     - family: Regular
       fonts:
-        - asset: assets/fonts/ubuntu-regular.ttf
+        - asset: web/assets/fonts/ubuntu-regular.ttf
     - family: Light
       fonts:
-        - asset: assets/fonts/ubuntu-light.ttf
+        - asset: web/assets/fonts/ubuntu-light.ttf
     - family: Italic
       fonts:
-        - asset: assets/fonts/ubuntu-italic.ttf
+        - asset: web/assets/fonts/ubuntu-italic.ttf
     - family: Bold-Italic
       fonts:
-        - asset: assets/fonts/ubuntu-bold-italic.ttf
+        - asset: web/assets/fonts/ubuntu-bold-italic.ttf
     - family: Bold
       fonts:
-        - asset: assets/fonts/ubuntu-bold.ttf
+        - asset: web/assets/fonts/ubuntu-bold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -61,8 +61,9 @@ class _LoginState extends State<Login> {
                     left: MediaQuery.of(context).size.width / 8,
                     right: MediaQuery.of(context).size.width / 8),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     TextWidget(
                       txt: "Login",
@@ -84,7 +85,7 @@ class _LoginState extends State<Login> {
                       hint: "password",
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: 25, bottom: 25),
+                      margin: const EdgeInsets.only(top: 25, bottom: 20),
                       child: ButtonWidget(
                         txt: TextWidget(txt: "Login"),
                         height: 40.0,
@@ -109,6 +110,12 @@ class _LoginState extends State<Login> {
                                       color: Colors.red,
                                     )))
                           ],
+                        )),
+                    TextButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, "/forgot_pass"),
+                        child: TextWidget(
+                          txt: "Lupa Password?",
                         ))
                   ],
                 ),

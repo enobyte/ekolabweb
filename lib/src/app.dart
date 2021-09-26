@@ -1,8 +1,13 @@
 import 'package:ekolabweb/src/ui/login.dart';
 import 'package:ekolabweb/src/ui/main/admin/main_admin.dart';
+import 'package:ekolabweb/src/ui/forgot_password.dart';
 import 'package:ekolabweb/src/ui/main/main_menu.dart';
+import 'package:ekolabweb/src/ui/new_password.dart';
+import 'package:ekolabweb/src/ui/not_found.dart';
+import 'package:ekolabweb/src/ui/preload_auth.dart';
 import 'package:ekolabweb/src/ui/register.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 
 import 'ui/splash_screen.dart';
 import 'utilities/string.dart';
@@ -17,8 +22,9 @@ class App extends StatelessWidget {
           fontFamily: 'Regular'),
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: SplashScreen(),
+        body: Container(),
       ),
+      initialRoute: '/splash',
       onGenerateRoute: _getRoute,
     );
   }
@@ -32,6 +38,16 @@ class App extends StatelessWidget {
       return _buildRoute(settings, Login());
     } else if (settings.name == '/register_menu') {
       return _buildRoute(settings, Register());
+    } else if (settings.name == '/forgot_pass') {
+      return _buildRoute(settings, ForgotPass());
+    } else if (settings.name!.contains('/new_password')) {
+      if (Jwt.isExpired(Uri.base.pathSegments.last)) {
+        return _buildRoute(settings, NotFound());
+      } else {
+        return _buildRoute(settings, NewPassword(Uri.base.pathSegments.last));
+      }
+    } else if (settings.name == '/splash') {
+      return _buildRoute(settings, SplashScreen());
     }
     return null;
   }

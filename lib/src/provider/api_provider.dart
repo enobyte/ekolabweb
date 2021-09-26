@@ -159,7 +159,8 @@ class ApiProvider {
 
   Future<ProductModel> getProductByName(Map<String, dynamic> body) async {
     try {
-      final response = await _dio.post("get_product_by_name", data: json.encode(body));
+      final response =
+          await _dio.post("get_product_by_name", data: json.encode(body));
       return ProductModel.fromJson(response.data);
     } catch (err, snap) {
       return ProductModel.withError(_handleError(err));
@@ -234,9 +235,11 @@ class ApiProvider {
     }
   }
 
-  Future<StandardMapListModels> getChatingList(Map<String, dynamic> body) async {
+  Future<StandardMapListModels> getChatingList(
+      Map<String, dynamic> body) async {
     try {
-      final response = await _dio.post("get_chating_list", data: json.encode(body));
+      final response =
+          await _dio.post("get_chating_list", data: json.encode(body));
       return StandardMapListModels.fromJson(response.data);
     } catch (err, snap) {
       return StandardMapListModels.withError(_handleError(err));
@@ -246,6 +249,26 @@ class ApiProvider {
   Future<StandardMapListModels> saveChating(Map<String, dynamic> body) async {
     try {
       final response = await _dio.post("save_chating", data: json.encode(body));
+      return StandardMapListModels.fromJson(response.data);
+    } catch (err, snap) {
+      return StandardMapListModels.withError(_handleError(err));
+    }
+  }
+
+  Future<StandardMapListModels> preForgotPass(Map<String, dynamic> body) async {
+    try {
+      final response =
+          await _dio.post("pre_forgot_pass", data: json.encode(body));
+      return StandardMapListModels.fromJson(response.data);
+    } catch (err, snap) {
+      return StandardMapListModels.withError(_handleError(err));
+    }
+  }
+
+  Future<StandardMapListModels> actionForgotPass(
+      Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("forgot_pass", data: json.encode(body));
       return StandardMapListModels.fromJson(response.data);
     } catch (err, snap) {
       return StandardMapListModels.withError(_handleError(err));

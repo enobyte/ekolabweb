@@ -62,4 +62,10 @@ class Repository {
 
   Future<StandardMapListModels> saveChating(Map<String, dynamic> body) =>
       apiProvider.saveChating(body);
+
+  Future<StandardMapListModels> preForgotPass(Map<String, dynamic> body) =>
+      apiProvider.preForgotPass(body);
+
+  Future<StandardMapListModels> actionForgotPass(Map<String, dynamic> body) =>
+      apiProvider.actionForgotPass(body);
 }

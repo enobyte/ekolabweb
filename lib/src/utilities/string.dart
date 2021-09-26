@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 final String icProvider = "icons/ic_provider.png";
+final String icForgotPass = "icons/ic_forgotpass.png";
 final String imgNoData = "images/nodata.png";
 final String myProduct = "images/myproduct.png";
 final String logo = "images/logo.png";

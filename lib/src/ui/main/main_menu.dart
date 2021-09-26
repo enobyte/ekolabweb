@@ -25,9 +25,9 @@ import 'home_service/network_list.dart';
 import 'home_service/service_product_list.dart';
 
 final List<String> imgList = [
-  'http://ekolab.id/file/thumb_1628684978_banner-web-hari-umkm-01_292303753.png',
-  'http://ekolab.id/file/thumb_1618383206_Banner-produk-lokal_512207700.jpeg',
-  'http://ekolab.id/file/thumb_1623131196_Hoax-455_462719651.jpeg',
+  'http://ekolab.id/file/thumb_1628684978_banner-web-hari-umkm-01_230555579.png',
+  'http://ekolab.id/file/thumb_1623930046_bantua-pemerintah-baner_829741534.jpeg',
+  'http://ekolab.id/file/thumb_1623131196_Hoax-455_705879973.jpeg',
 ];
 
 class MainMenu extends StatefulWidget {

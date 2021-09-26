@@ -67,12 +67,12 @@ class _RegisterState extends State<Register> {
                       padding: const EdgeInsets.only(bottom: 25, top: 40),
                       child: TextFieldWidget(
                         _nameController,
-                        hint: "name",
+                        hint: "Nama",
                       ),
                     ),
                     TextFieldWidget(
                       _emailController,
-                      hint: "email",
+                      hint: "Email",
                       keyboardType: TextInputType.emailAddress,
                     ),
                     Padding(
@@ -80,7 +80,7 @@ class _RegisterState extends State<Register> {
                       child: TextFieldWidget(
                         _passwordController,
                         obscureText: true,
-                        hint: "password",
+                        hint: "Password",
                       ),
                     ),
                     Row(
@@ -200,7 +200,7 @@ class _RegisterState extends State<Register> {
                         height: 40.0,
                         width: MediaQuery.of(context).size.width,
                         btnColor: Colors.redAccent,
-                        onClick: () => _actionRegister(),
+                        onClick: () => _verifyRegister(),
                         borderRedius: 4,
                       ),
                     ),
@@ -228,16 +228,32 @@ class _RegisterState extends State<Register> {
     ));
   }
 
+  _verifyRegister() {
+    if (_nameController.text.isEmpty) {
+      showErrorMessage(
+          context, "Register", "Mohon masukkan nama terlebih dahulu");
+    } else if (_emailController.text.isEmpty) {
+      showErrorMessage(
+          context, "Register", "Mohon masukkan email terlebih dahulu");
+    } else if (!isEmail(_emailController.text.trim())) {
+      showErrorMessage(
+          context, "Register", "Mohon masukkan email dengan benar");
+    } else if (_isRadioSelected.isEmpty) {
+      showErrorMessage(context, "Register", "Mohon pilih tipe user anda");
+    } else {
+      _actionRegister();
+    }
+  }
+
   _actionRegister() {
     _bloc.fetchRegister({
       "kind": int.parse(_isRadioSelected),
       "data": {
-        "email": _emailController.text,
+        "email": _emailController.text.trim().toLowerCase(),
         "name": _nameController.text,
         "active": true,
         "password": _passwordController.text,
-        "image":
-            "https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80"
+        "image": "http://ekolab.id/file/user_061199040.png"
       }
     });
   }

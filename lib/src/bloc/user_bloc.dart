@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ekolabweb/src/model/standard_maplist_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/provider/repository.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
@@ -51,6 +52,17 @@ class UserBloc {
           SharedPreferencesHelper.user, json.encode(model.toJson()));
     }
     _updateUser.sink.add(model);
+  }
+
+  Future<StandardMapListModels> preForgotPass(Map<String, dynamic> body) async {
+    StandardMapListModels model = await _repository.preForgotPass(body);
+    return model;
+  }
+
+  Future<StandardMapListModels> actionForgotPass(
+      Map<String, dynamic> body) async {
+    StandardMapListModels model = await _repository.actionForgotPass(body);
+    return model;
   }
 
   dispose() {

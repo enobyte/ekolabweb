@@ -36,8 +36,8 @@ class _ProductServiceState extends State<ProductService> {
   RangeValues _priceRangeValues = RangeValues(100, 1000);
   int minPrice = 0;
   int maxPrice = 0;
-  String? _productCategory = "";
-  String? _priceCategory = "";
+  String? _productCategory;
+  String? _priceCategory;
   PickedFile? _image;
   final picker = ImagePicker();
   Uint8List? uploadedImage;
@@ -182,7 +182,7 @@ class _ProductServiceState extends State<ProductService> {
                   chooseValue: _productCategory,
                 ),
               ),
-              _productCategory!.equalIgnoreCase("lainnya")
+              _productCategory?.equalIgnoreCase("lainnya") ?? false
                   ? Padding(
                       padding: const EdgeInsets.only(top: 21),
                       child: TextFieldTitleWidget(
