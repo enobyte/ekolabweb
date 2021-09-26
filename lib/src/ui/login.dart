@@ -31,9 +31,11 @@ class _LoginState extends State<Login> {
     bloc.doLogin.listen((event) {
       if (event.status ?? false) {
         if (event.data!.kind != 5) {
-          routeToWidget(context, MainMenu());
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("/main_menu", (route) => false);
         } else {
-          routeToWidget(context, MainAdmin());
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil("/main_admin", (route) => false);
         }
       } else {
         showErrorMessage(context, "Login", event.message);
