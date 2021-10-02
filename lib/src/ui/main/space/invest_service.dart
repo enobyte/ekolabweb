@@ -95,7 +95,7 @@ class _InvestServiceState extends State<InvestService> {
                         DropDownTitle(
                           onChange: (value) =>
                               setState(() => _productCategory = value!),
-                          hint: "Jenis Kerjasama",
+                          hint: "Jenis Kerjasama *",
                           data: [
                             "Modal",
                             "Barang",
@@ -108,13 +108,13 @@ class _InvestServiceState extends State<InvestService> {
                           padding: const EdgeInsets.only(top: 21, bottom: 21),
                           child: TextFieldTitleWidget(
                             _descriptionController,
-                            hint: "Deskripsi",
+                            title: "Deskripsi *",
                             readOnly: widget.isUser ? false : true,
                           ),
                         ),
                         TextFieldTitleWidget(
                           _locationController,
-                          hint: "Lokasi Ditawarkan",
+                          title: "Lokasi Ditawarkan *",
                           readOnly: widget.isUser ? false : true,
                         ),
                       ],
@@ -130,14 +130,14 @@ class _InvestServiceState extends State<InvestService> {
                     children: [
                       TextFieldTitleWidget(
                         _termController,
-                        hint: "Persyaratan",
+                        title: "Persyaratan *",
                         readOnly: widget.isUser ? false : true,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(
                           _profitSharingController,
-                          hint: "Sistem Bagi Hasil",
+                          title: "Sistem Bagi Hasil *",
                           readOnly: widget.isUser ? false : true,
                         ),
                       ),
@@ -148,7 +148,7 @@ class _InvestServiceState extends State<InvestService> {
                           children: [
                             Row(
                               children: [
-                                TextWidget(txt: "Dokumen"),
+                                TextWidget(txt: "Dokumen *"),
                                 IconButton(
                                     onPressed: () => widget.isUser
                                         ? _startFilePicker()
@@ -257,7 +257,28 @@ class _InvestServiceState extends State<InvestService> {
       fileDoc = await uploadFile.bloc.fetchPostGeneralFile(reqFileDoc);
     }
 
-    _attemptSave(fileDoc?.data?["url"]);
+    _verifySubmit(fileDoc?.data?["url"]);
+  }
+
+  _verifySubmit(String? docUrl) {
+    if (_productCategory?.isEmpty ?? true) {
+      showErrorMessage(
+          context, "Investasi", "Jenis Kerjasama tidak boleh kosong");
+    } else if (_descriptionController.text.isEmpty) {
+      showErrorMessage(context, "Investasi", "Deskripsi tidak boleh kosong");
+    } else if (_termController.text.isEmpty) {
+      showErrorMessage(context, "Investasi", "Persyaratan tidak boleh kosong");
+    } else if (_locationController.text.isEmpty) {
+      showErrorMessage(
+          context, "Investasi", "Lokasi Ditawarkan tidak boleh kosong");
+    } else if (_profitSharingController.text.isEmpty) {
+      showErrorMessage(
+          context, "Investasi", "Sistem Bagi Hasil tidak boleh kosong");
+    } else if (docUrl == null) {
+      showErrorMessage(context, "Investasi", "Dokumen tidak boleh kosong");
+    } else {
+      _attemptSave(docUrl);
+    }
   }
 
   _attemptSave(String? docUrl) async {

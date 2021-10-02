@@ -10,6 +10,7 @@ import 'package:ekolabweb/src/widget/drop_down_title.dart';
 import 'package:ekolabweb/src/widget/text_field_title.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 
@@ -28,12 +29,12 @@ class ProductService extends StatefulWidget {
 
 class _ProductServiceState extends State<ProductService> {
   final _nameProductController = TextEditingController();
+  final _priceController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _costController = TextEditingController();
   final _notedController = TextEditingController();
   final _othersController = TextEditingController();
 
-  RangeValues _priceRangeValues = RangeValues(100, 1000);
   int minPrice = 0;
   int maxPrice = 0;
   String? _productCategory;
@@ -53,6 +54,7 @@ class _ProductServiceState extends State<ProductService> {
       _costController.text = widget.productModel!["data"]["price"];
       _notedController.text = widget.productModel!["data"]["note"];
       _priceCategory = widget.productModel!["data"]["category_price"];
+      _priceController.text = widget.productModel!["data"]["price"];
       _productCategory = widget.productModel!["data"]["category"];
     }
     bloc.createProduct.listen((event) {
@@ -91,69 +93,35 @@ class _ProductServiceState extends State<ProductService> {
               Padding(
                 padding: const EdgeInsets.only(top: 21, bottom: 21),
                 child: TextFieldTitleWidget(_nameProductController,
-                    hint: "Nama Produk atau Jasa",
+                    title: "Nama Produk atau Jasa *",
                     readOnly: widget.isUser ? false : true),
               ),
               TextFieldTitleWidget(_descriptionController,
-                  hint: "Deskripsi", readOnly: widget.isUser ? false : true),
+                  title: "Deskripsi *", readOnly: widget.isUser ? false : true),
               Padding(
                 padding: const EdgeInsets.only(top: 21, bottom: 21),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Flexible(
-                      flex: 2,
-                      child: TextFieldTitleWidget(
-                        _costController,
-                        hint: "Harga",
-                        readOnly: true,
-                      ),
+                      flex: 5,
+                      child: TextFieldTitleWidget(_priceController,
+                          title: "Harga *",
+                          textInputFormat:
+                              FilteringTextInputFormatter.digitsOnly,
+                          readOnly: widget.isUser ? false : true),
+                    ),
+                    SizedBox(
+                      width: 21,
                     ),
                     Flexible(
-                      flex: 6,
-                      child: AbsorbPointer(
-                        absorbing: widget.isUser ? false : true,
-                        child: Container(
-                          padding: EdgeInsets.only(bottom: 8),
-                          child: SliderTheme(
-                            data: SliderThemeData(
-                              thumbColor: Colors.green.shade900,
-                              activeTrackColor: Colors.red.shade900,
-                              inactiveTrackColor: Colors.grey,
-                            ),
-                            child: RangeSlider(
-                              values: _priceRangeValues,
-                              min: 100,
-                              max: 1000,
-                              divisions: 100,
-                              labels: RangeLabels(
-                                '${_priceRangeValues.start.round().toString()} k',
-                                '${_priceRangeValues.end.round().toString()} k',
-                              ),
-                              onChanged: (RangeValues values) {
-                                setState(() {
-                                  print(
-                                      'price ${_priceRangeValues.start.round()}, ${_priceRangeValues.end.round()}');
-                                  _priceRangeValues = values;
-                                  minPrice = values.start.round();
-                                  maxPrice = values.end.round();
-                                  _costController.text =
-                                      '${_priceRangeValues.start.round()}k s/d ${_priceRangeValues.end.round()}k';
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 2,
+                      flex: 5,
                       child: AbsorbPointer(
                         absorbing: widget.isUser ? false : true,
                         child: DropDownTitle(
                           onChange: (value) =>
                               setState(() => _priceCategory = value),
-                          hint: "Kategori Harga",
+                          hint: "Kategori Harga *",
                           data: ["SATUAN", "LUSINAN", "LAINNYA"],
                           chooseValue: _priceCategory,
                         ),
@@ -169,7 +137,7 @@ class _ProductServiceState extends State<ProductService> {
                     _productCategory = value;
                     _othersController.clear();
                   }),
-                  hint: "Kategori Produk",
+                  hint: "Kategori Produk *",
                   data: [
                     "Kesehatan",
                     "Pendidikan",
@@ -187,7 +155,7 @@ class _ProductServiceState extends State<ProductService> {
                       padding: const EdgeInsets.only(top: 21),
                       child: TextFieldTitleWidget(
                         _othersController,
-                        hint: "Kategori Lainnya",
+                        title: "Kategori Lainnya *",
                         readOnly: widget.isUser ? false : true,
                       ),
                     )
@@ -195,14 +163,15 @@ class _ProductServiceState extends State<ProductService> {
               Padding(
                 padding: const EdgeInsets.only(top: 21, bottom: 21),
                 child: TextFieldTitleWidget(_notedController,
-                    hint: "Keterangan", readOnly: widget.isUser ? false : true),
+                    title: "Keterangan *",
+                    readOnly: widget.isUser ? false : true),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
-                    child: TextWidget(txt: "Foto"),
+                    child: TextWidget(txt: "Foto *"),
                   ),
                   SizedBox(
                     height: 100,
@@ -329,10 +298,41 @@ class _ProductServiceState extends State<ProductService> {
       });
       file = await uploadFile.bloc.fetchPostGeneralFile(reqFile);
       if (file.data != null) {
-        _attemptSave(file.data!["url"]);
+        _verifySendData(file.data!["url"]);
       }
     } else {
-      _attemptSave(null);
+      _verifySendData(null);
+    }
+  }
+
+  _verifySendData(String? imageUrl) {
+    if (_nameProductController.text.isEmpty) {
+      showErrorMessage(
+          context, "Produk dan Jasa", "Nama Produk tidak boleh kosong");
+    } else if (_descriptionController.text.isEmpty) {
+      showErrorMessage(
+          context, "Produk dan Jasa", "Deskripsi tidak boleh kosong");
+    } else if (_priceController.text.isEmpty) {
+      showErrorMessage(context, "Produk dan Jasa", "Harga tidak boleh kosong");
+    } else if (_priceCategory?.isEmpty ?? true) {
+      showErrorMessage(
+          context, "Produk dan Jasa", "Kategori harga tidak boleh kosong");
+    } else if (_othersController.text.isNotEmpty) {
+      if (_othersController.text.isEmpty) {
+        showErrorMessage(
+            context, "Produk dan Jasa", "Kategori lainnya tidak boleh kosong");
+      } else if (_productCategory?.isEmpty ?? true) {
+        showErrorMessage(
+            context, "Produk dan Jasa", "Kategori produk tidak boleh kosong");
+      }
+    } else if (_notedController.text.isEmpty) {
+      showErrorMessage(
+          context, "Produk dan Jasa", "Keterangan tidak boleh kosong");
+    } else if (imageUrl == null &&
+        widget.productModel!["data"]["image"].toString().isEmpty) {
+      showErrorMessage(context, "Produk dan Jasa", "Foto tidak boleh kosong");
+    } else {
+      _attemptSave(imageUrl);
     }
   }
 
@@ -343,8 +343,7 @@ class _ProductServiceState extends State<ProductService> {
       "data": {
         "name": _nameProductController.text,
         "description": _descriptionController.text,
-        "price":
-            '${_priceRangeValues.start.round()}-${_priceRangeValues.end.round()}',
+        "price": _priceController.text,
         "category": _othersController.text.isNotEmpty
             ? _othersController.text
             : _productCategory,

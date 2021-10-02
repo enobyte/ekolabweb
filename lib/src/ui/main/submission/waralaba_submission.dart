@@ -75,18 +75,18 @@ class _WaralabaSub extends State<WaralabaSub> {
                   children: [
                     TextFieldTitleWidget(
                       _descriptionController,
-                      hint: "Deskripsi Waralaba",
+                      title: "Deskripsi Waralaba",
                       readOnly: true,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 21, bottom: 21),
                       child: TextFieldTitleWidget(
                         _termController,
-                        hint: "Persyaratan",
+                        title: "Persyaratan",
                         readOnly: true,
                       ),
                     ),
-                    TextFieldTitleWidget(_noteController, hint: "Keterangan"),
+                    TextFieldTitleWidget(_noteController, title: "Keterangan"),
                   ],
                 ),
               ),
@@ -97,7 +97,7 @@ class _WaralabaSub extends State<WaralabaSub> {
               child: Column(
                 children: [
                   TextFieldTitleWidget(_dateController,
-                      hint: "Tanggal Pelaksanaan",
+                      title: "Tanggal Pelaksanaan",
                       readOnly: true,
                       prefixIcon: IconButton(
                           onPressed: () => _selectDate(context),
@@ -106,7 +106,7 @@ class _WaralabaSub extends State<WaralabaSub> {
                     padding: const EdgeInsets.only(top: 21, bottom: 55),
                     child: TextFieldTitleWidget(
                       _uploadDocController,
-                      hint: "Dokumen Pendukung",
+                      title: "Dokumen Pendukung",
                       readOnly: true,
                       prefixIcon: IconButton(
                           onPressed: () => _startFilePicker("doc"),

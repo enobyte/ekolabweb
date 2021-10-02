@@ -98,7 +98,7 @@ class _NetWorkOrganizationServiceState
                         DropDownTitle(
                           onChange: (value) =>
                               setState(() => _productCategory = value!),
-                          hint: "Kategori",
+                          hint: "Kategori *",
                           data: [
                             "PELATIHAN",
                             "URUSAH IJIN",
@@ -112,13 +112,13 @@ class _NetWorkOrganizationServiceState
                           padding: const EdgeInsets.only(top: 21, bottom: 21),
                           child: TextFieldTitleWidget(
                             _descriptionController,
-                            hint: "Deskripsi",
+                            title: "Deskripsi *",
                             readOnly: widget.isUser ? false : true,
                           ),
                         ),
                         TextFieldTitleWidget(
                           _termController,
-                          hint: "Syarat",
+                          title: "Persyaratan *",
                           readOnly: widget.isUser ? false : true,
                         ),
                       ],
@@ -134,13 +134,13 @@ class _NetWorkOrganizationServiceState
                     children: [
                       TextFieldTitleWidget(
                         _locationController,
-                        hint: "Lokasi",
+                        title: "Lokasi *",
                         readOnly: widget.isUser ? false : true,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(_dateController,
-                            hint: "Tanggal Pelaksanaan",
+                            title: "Tanggal Pelaksanaan *",
                             readOnly: true,
                             prefixIcon: IconButton(
                                 onPressed: () =>
@@ -154,7 +154,7 @@ class _NetWorkOrganizationServiceState
                           children: [
                             Row(
                               children: [
-                                TextWidget(txt: "Dokumen"),
+                                TextWidget(txt: "Dokumen *"),
                                 IconButton(
                                     onPressed: () => widget.isUser
                                         ? _startFilePicker()
@@ -263,7 +263,26 @@ class _NetWorkOrganizationServiceState
       fileDoc = await uploadFile.bloc.fetchPostGeneralFile(reqFileDoc);
     }
 
-    _attemptSave(fileDoc?.data?["url"]);
+    _verifySubmit(fileDoc?.data?["url"]);
+  }
+
+  _verifySubmit(String? docUrl) {
+    if (_productCategory?.isEmpty ?? true) {
+      showErrorMessage(context, "Jejaring", "Kategori tidak boleh kosong");
+    } else if (_descriptionController.text.isEmpty) {
+      showErrorMessage(context, "Jejaring", "Deskripsi tidak boleh kosong");
+    } else if (_termController.text.isEmpty) {
+      showErrorMessage(context, "Jejaring", "Persyaratan tidak boleh kosong");
+    } else if (_locationController.text.isEmpty) {
+      showErrorMessage(context, "Jejaring", "Lokasi tidak boleh kosong");
+    } else if (_dateController.text.isEmpty) {
+      showErrorMessage(
+          context, "Jejaring", "Tanggal Pelaksanaan tidak boleh kosong");
+    } else if (docUrl == null) {
+      showErrorMessage(context, "Jejaring", "Dokumen tidak boleh kosong");
+    } else {
+      _attemptSave(docUrl);
+    }
   }
 
   _attemptSave(String? docUrl) async {

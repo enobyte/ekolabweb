@@ -96,22 +96,22 @@ class WaralabaServiceState extends State<WaralabaService> {
                     children: [
                       TextFieldTitleWidget(
                         _nameController,
-                        hint: "Nama Produk atau Jasa",
+                        title: "Nama Produk atau Jasa *",
                         readOnly: widget.isUser ? false : true,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(_descriptionController,
-                            hint: "Deskripsi",
+                            title: "Deskripsi *",
                             readOnly: widget.isUser ? false : true),
                       ),
                       TextFieldTitleWidget(_locationController,
-                          hint: "Lokasi ditawarkan",
+                          title: "Lokasi ditawarkan *",
                           readOnly: widget.isUser ? false : true),
                       Padding(
                         padding: const EdgeInsets.only(top: 21),
                         child: TextFieldTitleWidget(_termController,
-                            hint: "Persyaratan",
+                            title: "Persyaratan *",
                             readOnly: widget.isUser ? false : true),
                       ),
                     ],
@@ -129,7 +129,7 @@ class WaralabaServiceState extends State<WaralabaService> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(bottom: 16),
-                            child: TextWidget(txt: "Foto"),
+                            child: TextWidget(txt: "Foto *"),
                           ),
                           SizedBox(
                             height: 100,
@@ -205,7 +205,7 @@ class WaralabaServiceState extends State<WaralabaService> {
                           children: [
                             Row(
                               children: [
-                                TextWidget(txt: "Dokumen"),
+                                TextWidget(txt: "Dokumen *"),
                                 IconButton(
                                     onPressed: () => widget.isUser
                                         ? _startFilePicker("doc")
@@ -260,7 +260,7 @@ class WaralabaServiceState extends State<WaralabaService> {
                         child: Row(
                           children: [
                             TextWidget(
-                              txt: "Harga Investasi:",
+                              txt: "Harga Investasi * :",
                             ),
                             IconButton(
                                 onPressed: () {
@@ -470,7 +470,29 @@ class WaralabaServiceState extends State<WaralabaService> {
       });
       fileDoc = await uploadFile.bloc.fetchPostGeneralFile(reqFileDoc);
     }
-    _attemptSave(file?.data!["url"], fileDoc?.data!["url"]);
+    _verifySubmit(file?.data!["url"], fileDoc?.data!["url"]);
+  }
+
+  _verifySubmit(String? imageUrl, String? docUrl) {
+    if (_nameController.text.isEmpty) {
+      showErrorMessage(context, "Waralaba", "Nama Produk tidak boleh kosong");
+    } else if (_descriptionController.text.isEmpty) {
+      showErrorMessage(context, "Waralaba", "Deskripsi tidak boleh kosong");
+    } else if (_locationController.text.isEmpty) {
+      showErrorMessage(
+          context, "Waralaba", "Lokasi ditawarkan tidak boleh kosong");
+    } else if (_termController.text.isEmpty) {
+      showErrorMessage(context, "Waralaba", "Persyaratan tidak boleh kosong");
+    } else if (listInvestPrice.isEmpty) {
+      showErrorMessage(
+          context, "Waralaba", "Harga Investasi tidak boleh kosong");
+    } else if (imageUrl == null) {
+      showErrorMessage(context, "Waralaba", "Foto tidak boleh kosong");
+    } else if (docUrl == null) {
+      showErrorMessage(context, "Waralaba", "Dokumen tidak boleh kosong");
+    } else {
+      _attemptSave(imageUrl, docUrl);
+    }
   }
 
   _attemptSave(String? imageUrl, String? docUrl) async {

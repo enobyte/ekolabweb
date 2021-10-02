@@ -64,20 +64,20 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
                   children: [
                     TextFieldTitleWidget(
                       _nameResponder,
-                      hint: "Nama Perespon",
+                      title: "Nama Perespon",
                       readOnly: true,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 21),
                       child: TextFieldTitleWidget(
                         _addressResponder,
-                        hint: "Alamat Perespon",
+                        title: "Alamat Perespon",
                         readOnly: true,
                       ),
                     ),
                     TextFieldTitleWidget(
                       _noteResponder,
-                      hint: "Keterangan Perespon",
+                      title: "Keterangan Perespon",
                       readOnly: true,
                     ),
                   ],
@@ -176,7 +176,7 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
                         ? Padding(
                             padding: const EdgeInsets.only(bottom: 16),
                             child: TextFieldTitleWidget(_reasonReject,
-                                hint: "Alasan Penolakan"),
+                                title: "Alasan Penolakan"),
                           )
                         : SizedBox(),
                     Row(

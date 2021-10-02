@@ -61,9 +61,12 @@ class _ListProductState extends State<ListProduct> {
         ),
       ),
       floatingActionButton: widget.isUser && kindUser != 0
-          ? FloatingActionButton(
+          ? FloatingActionButton.extended(
               onPressed: () => _navigationUser(),
-              child: Icon(Icons.add),
+              label: TextWidget(
+                txt: "Tambah Produk",
+              ),
+              icon: Icon(Icons.add),
               backgroundColor: colorBase,
             )
           : SizedBox(),

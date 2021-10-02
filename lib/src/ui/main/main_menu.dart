@@ -83,23 +83,40 @@ class _MainMenuState extends State<MainMenu> {
               borderRedius: 20,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [TextWidget(txt: name), TextWidget(txt: email)],
-                  ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextWidget(
+                      txt: name,
+                      txtSize: 12,
+                    ),
+                    TextWidget(
+                      txt: email,
+                      txtSize: 12,
+                    ),
+                    Container(
+                      child: TextWidget(
+                        txt: dataKind(kindUser),
+                        txtSize: 10,
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.green),
+                    )
+                  ],
                 ),
-                InkWell(
-                  child: ImageCircle(true, image, 50),
-                  onTap: () => routeToWidget(context, Profile()),
-                ),
-              ],
-            ),
+              ),
+              InkWell(
+                child: ImageCircle(true, image, 50),
+                onTap: () => routeToWidget(context, Profile()),
+              ),
+            ],
           ),
           PopupMenuButton<String>(
             itemBuilder: (context) {
@@ -118,8 +135,7 @@ class _MainMenuState extends State<MainMenu> {
                   routeToWidget(context, ListProduct(true, "null"));
                   break;
                 case "Pencarian":
-                  showSearch(
-                      context: context, delegate: SearchMain(idUser));
+                  showSearch(context: context, delegate: SearchMain(idUser));
                   break;
                 case "Keluar":
                   _doLogout(context);
@@ -147,19 +163,6 @@ class _MainMenuState extends State<MainMenu> {
                     setState(() {});
                   }),
             ),
-            // Align(
-            //   alignment: AlignmentDirectional.centerEnd,
-            //   child: IconButton(
-            //       padding: EdgeInsets.only(top: 10, right: 10),
-            //       onPressed: () => {
-            //             showSearch(
-            //                 context: context, delegate: SearchMain(idUser))
-            //           },
-            //       icon: Icon(
-            //         Icons.search,
-            //         color: Colors.black87,
-            //       )),
-            // ),
             StreamBuilder<UserMultipleModel>(
                 stream: bloc.doGetAllUser,
                 builder: (context, snapshot) {

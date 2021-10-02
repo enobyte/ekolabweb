@@ -78,7 +78,7 @@ class _LicenceServiceState extends State<LicenceService> {
       appBar: AppBar(
         backgroundColor: colorBase,
         title: TextWidget(
-          txt: "Perijinan",
+          txt: "Perizinan",
         ),
       ),
       body: SingleChildScrollView(
@@ -96,7 +96,7 @@ class _LicenceServiceState extends State<LicenceService> {
                         DropDownTitle(
                           onChange: (value) =>
                               setState(() => _productCategory = value!),
-                          hint: "Jenis Legalitas",
+                          hint: "Jenis Legalitas *",
                           data: [
                             "CV",
                             "PT",
@@ -111,12 +111,12 @@ class _LicenceServiceState extends State<LicenceService> {
                           padding: const EdgeInsets.only(top: 21, bottom: 21),
                           child: TextFieldTitleWidget(
                             _descriptionController,
-                            hint: "Deskripsi",
+                            title: "Deskripsi *",
                             readOnly: widget.isUser ? false : true,
                           ),
                         ),
                         TextFieldTitleWidget(_locationController,
-                            hint: "Lokasi Ditawarkan",
+                            title: "Lokasi Ditawarkan *",
                             readOnly: widget.isUser ? false : true),
                       ],
                     ),
@@ -130,12 +130,12 @@ class _LicenceServiceState extends State<LicenceService> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFieldTitleWidget(_termController,
-                          hint: "Persyaratan",
+                          title: "Persyaratan  *",
                           readOnly: widget.isUser ? false : true),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(_profitSharingController,
-                            hint: "Sistem Bagi Hasil",
+                            title: "Sistem Bagi Hasil *",
                             readOnly: widget.isUser ? false : true),
                       ),
                       Padding(
@@ -145,7 +145,7 @@ class _LicenceServiceState extends State<LicenceService> {
                           children: [
                             Row(
                               children: [
-                                TextWidget(txt: "Dokumen"),
+                                TextWidget(txt: "Dokumen *"),
                                 IconButton(
                                     onPressed: () => widget.isUser
                                         ? _startFilePicker()
@@ -254,7 +254,27 @@ class _LicenceServiceState extends State<LicenceService> {
       fileDoc = await uploadFile.bloc.fetchPostGeneralFile(reqFileDoc);
     }
 
-    _attemptSave(fileDoc?.data?["url"]);
+    _verifySubmit(fileDoc?.data?["url"]);
+  }
+
+  _verifySubmit(String? docUrl) {
+    if (_productCategory?.isEmpty ?? true) {
+      showErrorMessage(
+          context, "Perizinan", "Jenis Legalitas tidak boleh kosong");
+    } else if (_descriptionController.text.isEmpty) {
+      showErrorMessage(context, "Perizinan", "Deskripsi tidak boleh kosong");
+    } else if (_termController.text.isEmpty) {
+      showErrorMessage(context, "Perizinan", "Persyaratan tidak boleh kosong");
+    } else if (_locationController.text.isEmpty) {
+      showErrorMessage(context, "Perizinan", "Lokasi tidak boleh kosong");
+    } else if (_profitSharingController.text.isEmpty) {
+      showErrorMessage(
+          context, "Perizinan", "Sistem bagi hasil tidak boleh kosong");
+    } else if (docUrl == null) {
+      showErrorMessage(context, "Perizinan", "Dokumen tidak boleh kosong");
+    } else {
+      _attemptSave(docUrl);
+    }
   }
 
   _attemptSave(String? docUrl) async {

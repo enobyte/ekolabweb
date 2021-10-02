@@ -74,17 +74,17 @@ class _KerjaSamaSubmissionState extends State<KerjaSamaSubmission> {
                 children: [
                   TextFieldTitleWidget(
                     _descriptionController,
-                    hint: "Deskripsi Konsinyasi",
+                    title: "Deskripsi Konsinyasi",
                     readOnly: true,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 21, bottom: 21),
                     child: TextFieldTitleWidget(
                       _termController,
-                      hint: "Persyaratan",
+                      title: "Persyaratan",
                     ),
                   ),
-                  TextFieldTitleWidget(_noteController, hint: "Keterangan"),
+                  TextFieldTitleWidget(_noteController, title: "Keterangan"),
                 ],
               ),
             )),
@@ -94,7 +94,7 @@ class _KerjaSamaSubmissionState extends State<KerjaSamaSubmission> {
               child: Column(
                 children: [
                   TextFieldTitleWidget(_dateController,
-                      hint: "Tanggal Pelaksanaan",
+                      title: "Tanggal Pelaksanaan",
                       readOnly: true,
                       prefixIcon: IconButton(
                           onPressed: () => _selectDate(context),
@@ -103,7 +103,7 @@ class _KerjaSamaSubmissionState extends State<KerjaSamaSubmission> {
                     padding: const EdgeInsets.only(top: 21, bottom: 55),
                     child: TextFieldTitleWidget(
                       _uploadDocController,
-                      hint: "Dokumen Pendukung",
+                      title: "Dokumen Pendukung",
                       readOnly: true,
                       prefixIcon: IconButton(
                           onPressed: () => _startFilePicker("doc"),

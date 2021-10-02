@@ -61,7 +61,7 @@ class _PerijinanSubmission extends State<PerijinanSubmission> {
     return Scaffold(
       appBar: AppBar(
         title: TextWidget(
-          txt: "Pengajuan Perijinan",
+          txt: "Pengajuan Perizinan",
         ),
       ),
       body: SingleChildScrollView(
@@ -75,18 +75,18 @@ class _PerijinanSubmission extends State<PerijinanSubmission> {
                   children: [
                     TextFieldTitleWidget(
                       _descriptionController,
-                      hint: "Deskripsi Perijinan",
+                      title: "Deskripsi Perizinan",
                       readOnly: true,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 21, bottom: 21),
                       child: TextFieldTitleWidget(
                         _termController,
-                        hint: "Persyaratan",
+                        title: "Persyaratan",
                         readOnly: true,
                       ),
                     ),
-                    TextFieldTitleWidget(_noteController, hint: "Keterangan"),
+                    TextFieldTitleWidget(_noteController, title: "Keterangan"),
                   ],
                 ),
               ),
@@ -97,7 +97,7 @@ class _PerijinanSubmission extends State<PerijinanSubmission> {
               child: Column(
                 children: [
                   TextFieldTitleWidget(_dateController,
-                      hint: "Tanggal Pelaksanaan",
+                      title: "Tanggal Pelaksanaan",
                       readOnly: true,
                       prefixIcon: IconButton(
                           onPressed: () => _selectDate(context),
@@ -106,7 +106,7 @@ class _PerijinanSubmission extends State<PerijinanSubmission> {
                     padding: const EdgeInsets.only(top: 21, bottom: 55),
                     child: TextFieldTitleWidget(
                       _uploadDocController,
-                      hint: "Dokumen Pendukung",
+                      title: "Dokumen Pendukung",
                       readOnly: true,
                       prefixIcon: IconButton(
                           onPressed: () => _startFilePicker("doc"),

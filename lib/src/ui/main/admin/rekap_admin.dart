@@ -22,7 +22,7 @@ class _RekapAdminState extends State<RekapAdmin> {
     {"kind": 3, "name": "Rekap UKM/UMK", "alias": "ukm"},
     {"kind": 1, "name": "Rekap Waralaba", "alias": "waralaba"},
     {"kind": 2, "name": "Rekap Konsinyasi", "alias": "konsinyasi"},
-    {"kind": 6, "name": "Rekap Perijinan", "alias": "perijinan"},
+    {"kind": 6, "name": "Rekap Perizinan", "alias": "perijinan"},
     {"kind": 7, "name": "Rekap Jejaring", "alias": "jejaring"},
     {"kind": 4, "name": "Rekap Investor", "alias": "investor"},
   ];

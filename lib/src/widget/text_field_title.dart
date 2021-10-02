@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFieldTitleWidget extends StatelessWidget {
-  final String hint;
+  final String title;
   final Color textColor;
   final Color colorHint;
   final TextEditingController controller;
@@ -16,10 +16,11 @@ class TextFieldTitleWidget extends StatelessWidget {
   final Color fillColor;
   final bool readOnly;
   final TextInputFormatter? textInputFormat;
+  final String hint;
 
   TextFieldTitleWidget(this.controller,
       {Key? key,
-      this.hint = "Type Text Here...",
+      this.title = "Type Text Here...",
       this.colorHint = Colors.grey,
       this.borderColor = Colors.black12,
       this.borderRadius = 12.0,
@@ -30,7 +31,8 @@ class TextFieldTitleWidget extends StatelessWidget {
       this.keyboardType,
       this.fillColor = Colors.white70,
       this.textInputFormat,
-      this.prefixIcon})
+      this.prefixIcon,
+      this.hint = ""})
       : super(key: key);
 
   @override
@@ -40,7 +42,7 @@ class TextFieldTitleWidget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 16),
-          child: TextWidget(txt: hint),
+          child: TextWidget(txt: title),
         ),
         TextFormField(
           style: TextStyle(color: textColor),
@@ -58,6 +60,7 @@ class TextFieldTitleWidget extends StatelessWidget {
             border: InputBorder.none,
             hintStyle: TextStyle(color: colorHint),
             filled: true,
+            hintText: hint,
             fillColor: fillColor,
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,

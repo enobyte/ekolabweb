@@ -95,20 +95,20 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
                     children: [
                       TextFieldTitleWidget(
                         _nameController,
-                        hint: "Nama Produk",
+                        title: "Nama Produk *",
                         readOnly: widget.isUser ? false : true,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(
                           _descriptionController,
-                          hint: "Deskripsi",
+                          title: "Deskripsi *",
                           readOnly: widget.isUser ? false : true,
                         ),
                       ),
                       TextFieldTitleWidget(
                         _priceController,
-                        hint: "Harga",
+                        title: "Harga *",
                         readOnly: widget.isUser ? false : true,
                       ),
                     ],
@@ -123,7 +123,7 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
                     children: [
                       TextFieldTitleWidget(
                         _startendController,
-                        hint: "Lama Konsinyasi",
+                        title: "Lama Konsinyasi *",
                         readOnly: widget.isUser ? false : true,
                       ),
                       Padding(
@@ -133,7 +133,7 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(bottom: 16),
-                              child: TextWidget(txt: "Foto"),
+                              child: TextWidget(txt: "Foto *"),
                             ),
                             SizedBox(
                               height: 100,
@@ -211,7 +211,7 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
                           children: [
                             Row(
                               children: [
-                                TextWidget(txt: "Dokumen"),
+                                TextWidget(txt: "Dokumen *"),
                                 IconButton(
                                     onPressed: () => widget.isUser
                                         ? _startFilePicker("doc")
@@ -315,7 +315,7 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
       final reqFile = FormData.fromMap({
         "image": MultipartFile.fromBytes(uploadedImage!.toList(),
             filename:
-            '${DateTime.now().millisecondsSinceEpoch}.' + extensionImage!)
+                '${DateTime.now().millisecondsSinceEpoch}.' + extensionImage!)
       });
       file = await uploadFile.bloc.fetchPostGeneralFile(reqFile);
     }
@@ -324,11 +324,33 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
       final reqFileDoc = FormData.fromMap({
         "image": MultipartFile.fromBytes(uploadedDoc!.toList(),
             filename:
-            '${DateTime.now().millisecondsSinceEpoch}.' + extensionDoc!)
+                '${DateTime.now().millisecondsSinceEpoch}.' + extensionDoc!)
       });
       fileDoc = await uploadFile.bloc.fetchPostGeneralFile(reqFileDoc);
     }
-    _attemptSave(file?.data!["url"], fileDoc?.data!["url"]);
+    _verifySubmit(file?.data!["url"], fileDoc?.data!["url"]);
+  }
+
+  _verifySubmit(String? imageUrl, String? docUrl) {
+    if (_nameController.text.isEmpty) {
+      showErrorMessage(
+          context, "Konsinyasi", "Nama Produk tidak boleh kosong");
+    } else if (_descriptionController.text.isEmpty) {
+      showErrorMessage(
+          context, "Konsinyasi", "Deskripsi tidak boleh kosong");
+    } else if (_priceController.text.isEmpty) {
+      showErrorMessage(context, "Produk dan Jasa", "Harga tidak boleh kosong");
+    } else if (_startendController.text.isEmpty) {
+      showErrorMessage(
+          context, "Konsinyasi", "Lama Konsinyasi tidak boleh kosong");
+    } else if (imageUrl == null) {
+      showErrorMessage(context, "Konsinyasi", "Foto tidak boleh kosong");
+    } else if (docUrl == null) {
+      showErrorMessage(
+          context, "Konsinyasi", "Dokumen tidak boleh kosong");
+    } else {
+      _attemptSave(imageUrl, docUrl);
+    }
   }
 
   _attemptSave(String? imageUrl, String? docUrl) async {

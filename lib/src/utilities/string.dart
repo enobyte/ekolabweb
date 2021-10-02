@@ -28,7 +28,7 @@ String dataKind(int kind) {
       value = "Admin IWAPI";
       break;
     case 6:
-      value = "Perijinan";
+      value = "Perizinan";
       break;
     case 7:
       value = "Jejaring Organisasi";

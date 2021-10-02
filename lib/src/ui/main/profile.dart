@@ -81,28 +81,28 @@ class _ProfileState extends State<Profile> {
                   child: Column(
                     children: [
                       TextFieldTitleWidget(_nameController,
-                          hint: "Nama Lengkap"),
+                          title: "Nama Lengkap"),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(
                           _addressController,
-                          hint: "Alamat",
+                          title: "Alamat",
                         ),
                       ),
                       TextFieldTitleWidget(
                         _cityController,
-                        hint: "Kota",
+                        title: "Kota",
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(
                           _addrCompanyController,
-                          hint: "Alamat usaha",
+                          title: "Alamat usaha",
                         ),
                       ),
                       TextFieldTitleWidget(
                         _phoneController,
-                        hint: "No. Handphone",
+                        title: "No. Handphone",
                         textInputFormat: FilteringTextInputFormatter.digitsOnly,
                         keyboardType: TextInputType.number,
                       ),
@@ -166,7 +166,8 @@ class _ProfileState extends State<Profile> {
                       ),
                       TextFieldTitleWidget(
                         _nameLawDepartment,
-                        hint: "Nama Badan Hukum",
+                        title: "Nama Badan Hukum",
+                        hint: "CV, Inteligi",
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 55),
@@ -175,7 +176,7 @@ class _ProfileState extends State<Profile> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(bottom: 16),
-                              child: TextWidget(txt: "Foto"),
+                              child: TextWidget(txt: "Logo usaha"),
                             ),
                             SizedBox(
                               height: 100,
@@ -226,7 +227,7 @@ class _ProfileState extends State<Profile> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 16),
                               child: ButtonWidget(
-                                txt: TextWidget(txt: "Simpan"),
+                                txt: TextWidget(txt: "Update"),
                                 height: 40.0,
                                 width: 0,
                                 btnColor: Colors.blue,
