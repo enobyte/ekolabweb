@@ -120,6 +120,7 @@ class WaralabaServiceState extends State<WaralabaService> {
       body: ProgressDialog(
         inAsyncCall: _isLoading,
         child: SingleChildScrollView(
+          padding: EdgeInsets.only(bottom: 40),
           child: Container(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,

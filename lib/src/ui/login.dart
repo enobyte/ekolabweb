@@ -1,6 +1,7 @@
 import 'package:ekolabweb/src/bloc/user_bloc.dart';
 import 'package:ekolabweb/src/ui/main/admin/main_admin.dart';
 import 'package:ekolabweb/src/ui/main/main_menu.dart';
+import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/text_field.dart';
@@ -51,7 +52,9 @@ class _LoginState extends State<Login> {
         Flexible(
             flex: 4,
             child: Container(
+              height: double.infinity,
               color: Colors.red,
+              child: Image.asset(logo),
             )),
         Flexible(
             flex: 6,
