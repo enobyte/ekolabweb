@@ -13,7 +13,8 @@ class ApiProvider {
   var _dioFile = Dio();
 
   ApiProvider() {
-    _dio.options.baseUrl = "http://ekolab.id:8080/api/";
+    //_dio.options.baseUrl = "http://ekolab.id:8080/api/";
+    _dio.options.baseUrl = "http://localhost:8080/api/";
     _dio.options.connectTimeout = 5000; //5s
     _dio.options.receiveTimeout = 3000;
 
@@ -171,6 +172,15 @@ class ApiProvider {
     try {
       final response =
           await _dio.post("create_product", data: json.encode(body));
+      return ProductModel.fromJson(response.data);
+    } catch (err, snap) {
+      return ProductModel.withError(_handleError(err));
+    }
+  }
+
+  Future<ProductModel> delProduct(Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("del_product", data: json.encode(body));
       return ProductModel.fromJson(response.data);
     } catch (err, snap) {
       return ProductModel.withError(_handleError(err));

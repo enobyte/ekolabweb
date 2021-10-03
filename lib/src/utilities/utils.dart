@@ -79,7 +79,8 @@ String formatDefaultDate(String value, String format) {
 }
 
 Future<String> randomString(int length) async {
-  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+  const chars =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
   Random rnd = new Random(new DateTime.now().millisecondsSinceEpoch);
   String result = "";
   for (var i = 0; i < length; i++) {
@@ -93,4 +94,12 @@ bool isEmail(String em) {
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regExp = new RegExp(p);
   return regExp.hasMatch(em);
+}
+
+showMessage(BuildContext context, Widget child) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return child;
+      });
 }

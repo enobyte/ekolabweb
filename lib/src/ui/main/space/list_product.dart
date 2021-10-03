@@ -100,7 +100,7 @@ class _ListProductState extends State<ListProduct> {
                                           Radius.circular(5.0)),
                                       child: Image.network(
                                         e["data"]["image"] != null
-                                            ? e["data"]["image"]
+                                            ? (e["data"]["image"] as List)[0]
                                             : "http://ekolab.id/file/myproduct_398872551.png",
                                         fit: BoxFit.cover,
                                         height: 300,

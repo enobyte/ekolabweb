@@ -39,6 +39,9 @@ class Repository {
   Future<ProductModel> createProduct(Map<String, dynamic> body) =>
       apiProvider.createProduct(body);
 
+  Future<ProductModel> delProduct(Map<String, dynamic> body) =>
+      apiProvider.delProduct(body);
+
   Future<ProductModel> submissionProduct(Map<String, dynamic> body) =>
       apiProvider.submissionProduct(body);
 

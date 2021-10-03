@@ -56,11 +56,12 @@ class _MainMenuState extends State<MainMenu> {
       backgroundColor: Colors.white,
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(32.0),
-        child: FloatingActionButton(
+        child: FloatingActionButton.extended(
           onPressed: () => idUser.isNotEmpty
               ? routeToWidget(context, NotificationSubmission(idUser, kindUser))
               : Container(),
-          child: Icon(Icons.notification_important_rounded),
+          icon: Icon(Icons.notification_important_rounded),
+          label: TextWidget(txt: "Notifikasi",),
           backgroundColor: Colors.blue[700],
         ),
       ),

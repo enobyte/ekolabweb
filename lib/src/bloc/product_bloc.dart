@@ -9,6 +9,7 @@ class ProductBloc {
   final _getProduct = BehaviorSubject<ProductModel>();
   final _getByNameProduct = PublishSubject<ProductModel>();
   final _createProduct = PublishSubject<ProductModel>();
+  final _delProduct = PublishSubject<ProductModel>();
   final _submissionProduct = PublishSubject<ProductModel>();
   final _submissionProc = PublishSubject<ProductModel>();
   final _getSubmissionProduct = BehaviorSubject<SubmissionModel>();
@@ -20,6 +21,8 @@ class ProductBloc {
   Stream<ProductModel> get getProductByName => _getByNameProduct.stream;
 
   Stream<ProductModel> get createProduct => _createProduct.stream;
+
+  Stream<ProductModel> get delProduct => _delProduct.stream;
 
   Stream<ProductModel> get submissionProduct => _submissionProduct.stream;
 
@@ -54,6 +57,16 @@ class ProductBloc {
     }
   }
 
+  deleteProduct(Map<String, dynamic> body) async {
+    ProductModel model = await _repository.delProduct(body);
+    if (model.status!) {
+      getProductList(body);
+      _delProduct.sink.add(model);
+    } else {
+      _delProduct.sink.addError(model.message!);
+    }
+  }
+
   submissionRequest(Map<String, dynamic> body) async {
     ProductModel model = await _repository.submissionProduct(body);
     _submissionProduct.sink.add(model);
@@ -82,6 +95,7 @@ class ProductBloc {
   dispose() {
     _getProduct.close();
     _createProduct.close();
+    _delProduct.close();
     _submissionProduct.close();
     _getSubmissionProduct.close();
     _submissionProc.close();

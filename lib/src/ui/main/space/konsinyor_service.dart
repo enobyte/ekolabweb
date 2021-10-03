@@ -61,6 +61,14 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
     }, onError: (msg) {
       showErrorMessage(context, "Product", msg);
     });
+
+    bloc.delProduct.listen((event) {
+      if (event.status!) {
+        Navigator.of(context).pop();
+      }
+    }, onError: (msg) {
+      showErrorMessage(context, "Product", msg);
+    });
   }
 
   @override
@@ -83,6 +91,16 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
           txt: "Konsinyasi",
         ),
       ),
+      bottomSheet: widget.isUser && _idProduct.isNotEmpty
+          ? ButtonWidget(
+              txt: TextWidget(txt: "Hapus"),
+              height: 40.0,
+              width: MediaQuery.of(context).size.width,
+              btnColor: Colors.redAccent,
+              onClick: () => _verifyDel(),
+              borderRedius: 4,
+            )
+          : SizedBox(),
       body: SingleChildScrollView(
         child: Container(
           child: Row(
@@ -333,11 +351,9 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
 
   _verifySubmit(String? imageUrl, String? docUrl) {
     if (_nameController.text.isEmpty) {
-      showErrorMessage(
-          context, "Konsinyasi", "Nama Produk tidak boleh kosong");
+      showErrorMessage(context, "Konsinyasi", "Nama Produk tidak boleh kosong");
     } else if (_descriptionController.text.isEmpty) {
-      showErrorMessage(
-          context, "Konsinyasi", "Deskripsi tidak boleh kosong");
+      showErrorMessage(context, "Konsinyasi", "Deskripsi tidak boleh kosong");
     } else if (_priceController.text.isEmpty) {
       showErrorMessage(context, "Produk dan Jasa", "Harga tidak boleh kosong");
     } else if (_startendController.text.isEmpty) {
@@ -346,8 +362,7 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
     } else if (imageUrl == null) {
       showErrorMessage(context, "Konsinyasi", "Foto tidak boleh kosong");
     } else if (docUrl == null) {
-      showErrorMessage(
-          context, "Konsinyasi", "Dokumen tidak boleh kosong");
+      showErrorMessage(context, "Konsinyasi", "Dokumen tidak boleh kosong");
     } else {
       _attemptSave(imageUrl, docUrl);
     }
@@ -403,5 +418,57 @@ class _KonsinyorServiceState extends State<KonsinyorService> {
         reader.readAsArrayBuffer(file);
       }
     });
+  }
+
+  _verifyDel() {
+    showMessage(
+        context,
+        AlertDialog(
+          content: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: TextWidget(
+                      txt: "Apakah anda yakin ingin menghapus produk ini?"),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ButtonWidget(
+                      txt: TextWidget(txt: "iya"),
+                      height: 30.0,
+                      width: 60,
+                      btnColor: Colors.redAccent,
+                      onClick: () {
+                        _attemptDel();
+                        Navigator.of(context).pop();
+                      },
+                      borderRedius: 4,
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    ButtonWidget(
+                      txt: TextWidget(txt: "tidak"),
+                      height: 30.0,
+                      width: 60,
+                      btnColor: Colors.redAccent,
+                      onClick: () => Navigator.of(context).pop(),
+                      borderRedius: 4,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ));
+  }
+
+  _attemptDel() {
+    final req = {"id": _idProduct};
+    bloc.deleteProduct(req);
   }
 }

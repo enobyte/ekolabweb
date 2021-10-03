@@ -63,6 +63,14 @@ class _NetWorkOrganizationServiceState
     }, onError: (msg) {
       showErrorMessage(context, "Product", msg);
     });
+
+    bloc.delProduct.listen((event) {
+      if (event.status!) {
+        Navigator.of(context).pop();
+      }
+    }, onError: (msg) {
+      showErrorMessage(context, "Product", msg);
+    });
   }
 
   @override
@@ -83,6 +91,16 @@ class _NetWorkOrganizationServiceState
           txt: "Jejaring Organisasi",
         ),
       ),
+      bottomSheet: widget.isUser && _idProduct.isNotEmpty
+          ? ButtonWidget(
+              txt: TextWidget(txt: "Hapus"),
+              height: 40.0,
+              width: MediaQuery.of(context).size.width,
+              btnColor: Colors.redAccent,
+              onClick: () => _verifyDel(),
+              borderRedius: 4,
+            )
+          : SizedBox(),
       body: SingleChildScrollView(
         child: Container(
           child: Row(
@@ -342,5 +360,57 @@ class _NetWorkOrganizationServiceState
         selectedDate = picked;
         _dateController.text = DateFormat("dd MMMM yyyy").format(picked);
       });
+  }
+
+  _verifyDel() {
+    showMessage(
+        context,
+        AlertDialog(
+          content: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: TextWidget(
+                      txt: "Apakah anda yakin ingin menghapus produk ini?"),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ButtonWidget(
+                      txt: TextWidget(txt: "iya"),
+                      height: 30.0,
+                      width: 60,
+                      btnColor: Colors.redAccent,
+                      onClick: () {
+                        _attemptDel();
+                        Navigator.of(context).pop();
+                      },
+                      borderRedius: 4,
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    ButtonWidget(
+                      txt: TextWidget(txt: "tidak"),
+                      height: 30.0,
+                      width: 60,
+                      btnColor: Colors.redAccent,
+                      onClick: () => Navigator.of(context).pop(),
+                      borderRedius: 4,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ));
+  }
+
+  _attemptDel() {
+    final req = {"id": _idProduct};
+    bloc.deleteProduct(req);
   }
 }
