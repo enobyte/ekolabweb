@@ -42,6 +42,17 @@ class _ProductServiceState extends State<ProductService> {
     "Olahraga",
     "ATK",
     "Otomotif",
+    "Bisnis",
+    "Kuliner",
+    "Fashion",
+    "Bisnis",
+    "Perlengkapan anak",
+    "Peralatan rumah tangga",
+    "Asesoris pribadi",
+    "Perlengkapan sekolah",
+    "Permainan",
+    "Kerajinan",
+    "Buku & Majalah",
     "Lainnya"
   ];
   final _catPrice = ["SATUAN", "LUSINAN", "LAINNYA"];

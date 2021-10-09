@@ -42,7 +42,9 @@ class _RegisterState extends State<Register> {
         Flexible(
             flex: 4,
             child: Container(
+              height: double.infinity,
               color: Colors.red,
+              child: Image.asset(logo),
             )),
         Flexible(
             flex: 6,

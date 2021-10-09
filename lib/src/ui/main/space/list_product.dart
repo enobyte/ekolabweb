@@ -122,10 +122,11 @@ class _ListProductState extends State<ListProduct> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          TextWidget(
-                                            txt: "🤝 0",
-                                            txtSize: 16,
-                                          ),
+                                          // TextWidget(
+                                          //   txt: "🤝 0",
+                                          //   txtSize: 16,
+                                          // ),
+                                          SizedBox(),
                                           widget.isUser
                                               ? ButtonWidget(
                                                   txt:

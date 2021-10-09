@@ -22,6 +22,10 @@ class SearchMain extends SearchDelegate {
   }
 
   @override
+  // TODO: implement searchFieldLabel
+  String? get searchFieldLabel => 'Pencarian Produk';
+
+  @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.arrow_back),
