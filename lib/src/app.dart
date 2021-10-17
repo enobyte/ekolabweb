@@ -4,6 +4,7 @@ import 'package:ekolabweb/src/ui/forgot_password.dart';
 import 'package:ekolabweb/src/ui/main/main_menu.dart';
 import 'package:ekolabweb/src/ui/new_password.dart';
 import 'package:ekolabweb/src/ui/not_found.dart';
+import 'package:ekolabweb/src/ui/pre_login_reg.dart';
 import 'package:ekolabweb/src/ui/preload_auth.dart';
 import 'package:ekolabweb/src/ui/register.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,8 @@ class App extends StatelessWidget {
       }
     } else if (settings.name == '/splash') {
       return _buildRoute(settings, SplashScreen());
+    } else if (settings.name == "/prelogin") {
+      return _buildRoute(settings, PreLoginRegister());
     }
     return null;
   }

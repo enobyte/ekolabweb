@@ -40,42 +40,22 @@ class _KonsinyasiListState extends State<KonsinyasiList>
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 64),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-              padding: const EdgeInsets.only(left: 120),
-              child: RichText(
-                  text: TextSpan(
-                text: "🤝 Konsinyor",
-                style: TextStyle(fontSize: 21),
-                children: [
-                  WidgetSpan(
-                      child: TextWidget(
-                        txt: "  Lihat Semua",
-                        color: Colors.red,
-                      ),
-                      alignment: PlaceholderAlignment.middle)
-                ],
-              ))),
-          StreamBuilder<UserMultipleModel>(
-              stream: bloc.doGetAllUser,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<UserDataModel?> listData = snapshot.data!.data!
-                      .where((element) => element!.kind == 2)
-                      .toList();
-                  return ScrollSnapList(
-                      listData.map((e) => e!.toJson()).toList(),
-                      (id) => routeToWidget(context, ListProduct(false, id)));
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              }),
-        ],
-      ),
+      child: StreamBuilder<UserMultipleModel>(
+          stream: bloc.doGetAllUser,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<UserDataModel?> listData = snapshot.data!.data!
+                  .where((element) => element!.kind == 2)
+                  .toList();
+              return ScrollSnapList(
+                  listData.map((e) => e!.toJson()).toList(),
+                  (id) => routeToWidget(context, ListProduct(false, id)));
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
     );
   }
 }

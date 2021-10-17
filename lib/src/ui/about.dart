@@ -1,3 +1,4 @@
+import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -19,10 +20,7 @@ class AboutState extends State<About> {
       ),
       body: Container(
         padding: EdgeInsets.all(12),
-        child: TextWidget(
-          txt:
-              "Situs e-kolab bertujuan untuk memfasilitasi Waralaba, Konsinyasi, Kerja sama, Jejaring Organisasi dan penawaran legalitas UMKM",
-        ),
+        child: TextWidget(txt: about),
       ),
     );
   }

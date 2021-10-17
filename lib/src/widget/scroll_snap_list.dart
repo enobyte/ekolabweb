@@ -38,17 +38,14 @@ class _ScrollSnapListState extends State<ScrollSnapList>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 350.0,
-      child: ListView.builder(
-        //physics: NeverScrollableScrollPhysics(),
-        itemCount: widget.listData.length,
-        padding: EdgeInsets.only(right: 120, left: 120),
-        shrinkWrap: true,
-        controller: scrollController,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, position) {
-          return Padding(
+    return GridView.builder(
+      itemCount: widget.listData.length,
+      padding: EdgeInsets.only(right: 120, left: 120),
+      controller: scrollController,
+      itemBuilder: (context, position) {
+        return GestureDetector(
+          onTap: () => widget.id(widget.listData[position]["id"]),
+          child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
               elevation: 4,
@@ -57,22 +54,21 @@ class _ScrollSnapListState extends State<ScrollSnapList>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0)),
-                      child: Image.network(
-                        widget.listData[position]["data"]["image"],
-                        fit: BoxFit.fitHeight,
-                        height: 250,
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Padding(
+                    Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(8.0),
+                              bottomLeft: Radius.circular(8.0)),
+                          child: Image.network(
+                            widget.listData[position]["data"]["image"],
+                            fit: BoxFit.fill,
+                            height: 100,
+                            width: 100,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8.0, vertical: 8.0),
                             child: TextWidget(
@@ -82,28 +78,54 @@ class _ScrollSnapListState extends State<ScrollSnapList>
                               align: TextAlign.justify,
                             ),
                           ),
-                          Align(
-                            child: ButtonWidget(
-                              txt: TextWidget(txt: "Detail"),
-                              height: 32.0,
-                              width: MediaQuery.of(context).size.width,
-                              btnColor: colorBase!,
-                              onClick: () => widget.id(widget.listData[position]["id"]),
-                              borderRedius: 4,
-                            ),
-                          ),
-                        ],
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 16, bottom: 4, left: 4, right: 4),
+                      child: TextWidget(
+                          txt: widget.listData[position]["data"]["email"],
+                          align: TextAlign.start),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextWidget(
+                          txt: widget.listData[position]["data"]["phone"] ??
+                              "",
+                          align: TextAlign.start),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextWidget(
+                        txt: widget.listData[position]["data"]
+                                ["address_corp"] ??
+                            "",
+                        align: TextAlign.start,
                       ),
                     ),
+                    // Align(
+                    //   child: ButtonWidget(
+                    //     txt: TextWidget(txt: "Detail"),
+                    //     height: 32.0,
+                    //     width: MediaQuery.of(context).size.width,
+                    //     btnColor: colorBase!,
+                    //     onClick: () => widget
+                    //         .id(widget.listData[position]["id"]),
+                    //     borderRedius: 4,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
+      gridDelegate:
+          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
     );
   }
 }

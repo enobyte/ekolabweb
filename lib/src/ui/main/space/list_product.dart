@@ -59,17 +59,42 @@ class _ListProductState extends State<ListProduct> {
         title: TextWidget(
           txt: "List Product",
         ),
+        actions: [
+          widget.isUser && kindUser != 0
+              ? Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  padding: const EdgeInsets.all(8),
+                  child: GestureDetector(
+                    onTap: () => _navigationUser(),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Colors.green),
+                      child: Row(
+                        children: [
+                          Icon(Icons.add),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8, right: 8, bottom: 8),
+                            child: TextWidget(txt: "Tambah Produk"),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ) //IconButton(onPressed: () => {}, icon: Icon(Icons.add))
+              : SizedBox()
+        ],
       ),
-      floatingActionButton: widget.isUser && kindUser != 0
-          ? FloatingActionButton.extended(
-              onPressed: () => _navigationUser(),
-              label: TextWidget(
-                txt: "Tambah Produk",
-              ),
-              icon: Icon(Icons.add),
-              backgroundColor: colorBase,
-            )
-          : SizedBox(),
+      // floatingActionButton: widget.isUser && kindUser != 0
+      //     ? FloatingActionButton.extended(
+      //         onPressed: () => _navigationUser(),
+      //         label: TextWidget(
+      //           txt: "Tambah Produk",
+      //         ),
+      //         icon: Icon(Icons.add),
+      //         backgroundColor: colorBase,
+      //       )
+      //     : SizedBox(),
       body: StreamBuilder<ProductModel>(
           stream: bloc.getProduct,
           builder: (context, snapshot) {

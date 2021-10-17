@@ -44,12 +44,15 @@ class _MainMenuState extends State<MainMenu> {
   String name = "";
   String image = "";
   String idUser = "";
+  String bussCategory = "";
   int kindUser = 0;
   bool _isLoading = true;
+  late Widget _child;
 
   @override
   void initState() {
     super.initState();
+    _child = ListProduct(true, "null");
     _getData();
   }
 
@@ -157,168 +160,247 @@ class _MainMenuState extends State<MainMenu> {
             //     onPressed: () => _paddingPopup(), icon: Icon(Icons.keyboard_arrow_down)),
           ],
         ),
-        body: LayoutBuilder(
-          builder: (context, constraint) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                    minWidth: constraint.maxWidth,
-                    minHeight: constraint.maxHeight),
-                child: IntrinsicHeight(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      CarouselSlider(
-                        items: imgList
-                            .map((item) => Container(
-                                  child: Container(
-                                    margin: EdgeInsets.all(5.0),
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        child: Stack(
-                                          children: <Widget>[
-                                            Image.network(item,
-                                                fit: BoxFit.fill,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    1.5),
-                                            Positioned(
-                                              bottom: 0.0,
-                                              left: 0.0,
-                                              right: 0.0,
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Color.fromARGB(
-                                                          200, 0, 0, 0),
-                                                      Color.fromARGB(0, 0, 0, 0)
-                                                    ],
-                                                    begin:
-                                                        Alignment.bottomCenter,
-                                                    end: Alignment.topCenter,
-                                                  ),
-                                                ),
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 10.0,
-                                                    horizontal: 20.0),
-                                                child: Text(
-                                                  '',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                ))
-                            .toList(),
-                        options: CarouselOptions(
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            aspectRatio: 4,
-                            onPageChanged: (index, reason) {
-                              setState(() {});
-                            }),
-                      ),
-                      StreamBuilder<UserMultipleModel>(
-                          stream: bloc.doGetAllUser,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              _isLoading = false;
-                              return Expanded(
-                                child: Column(
-                                  children: [
-                                    snapshot.data!.data!.any(
-                                            (element) => element!.kind == 3)
-                                        ? ServiceProductList()
-                                        : SizedBox(),
-                                    snapshot.data!.data!.any(
-                                            (element) => element!.kind == 1)
-                                        ? WaralabaList()
-                                        : SizedBox(),
-                                    snapshot.data!.data!.any(
-                                            (element) => element!.kind == 2)
-                                        ? KonsinyasiList()
-                                        : SizedBox(),
-                                    snapshot.data!.data!.any(
-                                            (element) => element!.kind == 4)
-                                        ? KerjasamaList()
-                                        : SizedBox(),
-                                    snapshot.data!.data!.any(
-                                            (element) => element!.kind == 6)
-                                        ? LicenceList()
-                                        : SizedBox(),
-                                    snapshot.data!.data!.any(
-                                            (element) => element!.kind == 7)
-                                        ? NetworkList()
-                                        : SizedBox(),
-                                  ],
-                                ),
-                              );
-                            } else {
-                              return Center(
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height /
-                                          4),
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                            }
-                          }),
-                      _isLoading
-                          ? SizedBox()
-                          : Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              color: Colors.grey.shade50,
-                              height: 50,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      text: "Profil",
-                                      style: TextStyle(color: colorBase),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () =>
-                                            routeToWidget(context, Profile()),
-                                      children: [
-                                        WidgetSpan(
-                                            child: TextWidget(
-                                          txt: " | ",
-                                        )),
-                                        WidgetSpan(
-                                            child: InkWell(
-                                          child: TextWidget(
-                                            color: colorBase,
-                                            txt: "Tentang",
-                                          ),
-                                          onTap: () =>
-                                              routeToWidget(context, About()),
-                                        ))
-                                      ],
-                                    ),
-                                  ),
-                                  TextWidget(txt: "Copyrigh 2021 © Ekolab"),
-                                ],
-                              ),
-                            )
-                    ],
+        body: Row(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 5,
+              color: colorBase,
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
+                        color: Colors.white),
+                    margin: const EdgeInsets.only(bottom: 24),
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 12),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: ImageCircle(true, image, 50),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextWidget(txt: dataKind(kindUser)),
+                            TextWidget(
+                              txt: name,
+                              fontFamily: 'Bold',
+                            ),
+                            TextWidget(txt: bussCategory),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () => _onClickMenu(0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Colors.white),
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8),
+                      child: TextWidget(
+                        txt: "Produk Saya",
+                        fontFamily: 'Bold',
+                        txtSize: 24,
+                        align: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => _onClickMenu(1),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Colors.white),
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8),
+                      child: TextWidget(
+                        txt: "🎭 UKM/UMK",
+                        fontFamily: 'Bold',
+                        txtSize: 24,
+                        align: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => _onClickMenu(2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Colors.white),
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8),
+                      child: TextWidget(
+                        txt: "🛍 Pewaralaba",
+                        fontFamily: 'Bold',
+                        txtSize: 24,
+                        align: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => _onClickMenu(3),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Colors.white),
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8),
+                      child: TextWidget(
+                        txt: "🤝 Konsinyor",
+                        fontFamily: 'Bold',
+                        txtSize: 24,
+                        align: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => _onClickMenu(4),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Colors.white),
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8),
+                      child: TextWidget(
+                        txt: "‍💻 Kerjasama",
+                        fontFamily: 'Bold',
+                        txtSize: 24,
+                        align: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => _onClickMenu(5),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Colors.white),
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8),
+                      child: TextWidget(
+                        txt: "‍📉 Perizinan",
+                        fontFamily: 'Bold',
+                        txtSize: 24,
+                        align: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => _onClickMenu(6),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: Colors.white),
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8),
+                      child: TextWidget(
+                        txt: "🌍 ‍‍Jejaring",
+                        fontFamily: 'Bold',
+                        txtSize: 24,
+                        align: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            );
-          },
+            ),
+            Expanded(child: _child)
+            // StreamBuilder<UserMultipleModel>(
+            //     stream: bloc.doGetAllUser,
+            //     builder: (context, snapshot) {
+            //       if (snapshot.hasData) {
+            //         _isLoading = false;
+            //         return Expanded(
+            //           child: Column(
+            //             children: [
+            //               snapshot.data!.data!
+            //                       .any((element) => element!.kind == 3)
+            //                   ? ServiceProductList()
+            //                   : SizedBox(),
+            //               snapshot.data!.data!
+            //                       .any((element) => element!.kind == 1)
+            //                   ? WaralabaList()
+            //                   : SizedBox(),
+            //               snapshot.data!.data!
+            //                       .any((element) => element!.kind == 2)
+            //                   ? KonsinyasiList()
+            //                   : SizedBox(),
+            //               snapshot.data!.data!
+            //                       .any((element) => element!.kind == 4)
+            //                   ? KerjasamaList()
+            //                   : SizedBox(),
+            //               snapshot.data!.data!
+            //                       .any((element) => element!.kind == 6)
+            //                   ? LicenceList()
+            //                   : SizedBox(),
+            //               snapshot.data!.data!
+            //                       .any((element) => element!.kind == 7)
+            //                   ? NetworkList()
+            //                   : SizedBox(),
+            //             ],
+            //           ),
+            //         );
+            //       } else {
+            //         return Center(
+            //           child: Padding(
+            //             padding: EdgeInsets.only(
+            //                 top: MediaQuery.of(context).size.height / 4),
+            //             child: CircularProgressIndicator(),
+            //           ),
+            //         );
+            //       }
+            //     }),
+          ],
         ));
+  }
+
+  _onClickMenu(int idx) {
+    switch (idx) {
+      case 0:
+        _child = ListProduct(true, "null");
+        break;
+      case 1:
+        _child = ServiceProductList();
+        break;
+      case 2:
+        _child = WaralabaList();
+        break;
+      case 3:
+        _child = KonsinyasiList();
+        break;
+      case 4:
+        _child = KerjasamaList();
+        break;
+      case 5:
+        _child = LicenceList();
+        break;
+      case 6:
+        _child = NetworkList();
+        break;
+    }
+    setState(() {});
   }
 
   _doLogout(context) {
@@ -333,6 +415,7 @@ class _MainMenuState extends State<MainMenu> {
     setState(() {
       email = userData.data!.data!["email"];
       name = userData.data!.data!["name"];
+      bussCategory = userData.data!.data?["buss_category"] ?? "";
       image = userData.data!.data!["image"];
       idUser = userData.data!.id!;
       kindUser = userData.data!.kind!;

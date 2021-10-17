@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     } else {
       Navigator.of(context).pushNamedAndRemoveUntil(
-          "/login_menu", (route) => false);
+          "/prelogin", (route) => false);
     }
   }
 
