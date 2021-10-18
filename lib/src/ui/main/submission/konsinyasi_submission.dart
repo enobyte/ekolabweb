@@ -177,6 +177,7 @@ class _KonsinyasiSubmissionState extends State<KonsinyasiSubmission> {
             uploadedDoc = reader.result as Uint8List;
             final mime = lookupMimeType('', headerBytes: uploadedDoc);
             extensionDoc = mime?.split("/")[1];
+            _uploadDocController.text = file.name;
           });
         });
 

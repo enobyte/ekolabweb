@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 
 final String icProvider = "icons/ic_provider.png";
 final String icForgotPass = "icons/ic_forgotpass.png";
+final String icInvestor = "icons/ic_investor.png";
+final String icJejaring = "icons/ic_jejaring.png";
+final String icKerjasama = "icons/ic_kerjasama.png";
+final String icKonsinyor = "icons/ic_konsinyor.png";
+final String icPersetujuan = "icons/ic_persetujuan.png";
+final String icPewaralaba = "icons/ic_pewaralaba.png";
+final String icUkm = "icons/ic_ukm.png";
 final String imgNoData = "images/nodata.png";
 final String myProduct = "images/myproduct.png";
 final String logo = "images/logo.png";

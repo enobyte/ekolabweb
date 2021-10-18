@@ -16,6 +16,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final _nameController = TextEditingController();
+  final _iumkController = TextEditingController();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   var category = ["1", "2", "3", "4", "5", "6", "7"];
@@ -66,12 +67,21 @@ class _RegisterState extends State<Register> {
                       color: Colors.red,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 25, top: 40),
+                      padding: const EdgeInsets.only(bottom: 25, top: 25),
                       child: TextFieldWidget(
                         _nameController,
                         hint: "Nama",
                       ),
                     ),
+                    _isRadioSelected == "3"
+                        ? Padding(
+                            padding: const EdgeInsets.only(bottom: 25),
+                            child: TextFieldWidget(
+                              _iumkController,
+                              hint: "No. IUMK",
+                            ),
+                          )
+                        : SizedBox(),
                     TextFieldWidget(
                       _emailController,
                       hint: "Email",
@@ -253,6 +263,7 @@ class _RegisterState extends State<Register> {
       "data": {
         "email": _emailController.text.trim().toLowerCase(),
         "name": _nameController.text,
+        "iumn": _iumkController.text,
         "active": true,
         "password": _passwordController.text,
         "image": "http://ekolab.id/file/user_061199040.png"

@@ -1,6 +1,7 @@
 import 'package:ekolabweb/src/bloc/user_bloc.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/ui/main/space/list_product.dart';
+import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/scroll_snap_list.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
@@ -16,9 +17,14 @@ class WaralabaList extends StatefulWidget {
 class _WaralabaListState extends State<WaralabaList> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 64),
-      child: StreamBuilder<UserMultipleModel>(
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: colorBase,
+          title: TextWidget(
+            txt: "PEWARALABA",
+          ),
+        ),
+      body: StreamBuilder<UserMultipleModel>(
           stream: bloc.doGetAllUser,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -27,13 +33,13 @@ class _WaralabaListState extends State<WaralabaList> {
                   .toList();
               return ScrollSnapList(
                   listData.map((e) => e!.toJson()).toList(),
-                  (id) => routeToWidget(context, ListProduct(false, id)));
+                      (id) => routeToWidget(context, ListProduct(false, id)));
             } else {
               return Center(
                 child: CircularProgressIndicator(),
               );
             }
-          }),
+          })
     );
   }
 }

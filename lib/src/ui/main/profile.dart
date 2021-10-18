@@ -32,6 +32,7 @@ class _ProfileState extends State<Profile> {
   final _nameLawDepartment = TextEditingController();
   final _phoneController = TextEditingController();
   final _uploadPhotoController = TextEditingController();
+  String _corpCategory = "";
   String _businessCategory = "";
   String _isRadioSelected = "";
 
@@ -124,7 +125,31 @@ class _ProfileState extends State<Profile> {
                         chooseValue: _businessCategory,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 50, bottom: 40),
+                        padding: const EdgeInsets.only(top: 21, bottom: 21),
+                        child: DropDownTitle(
+                          onChange: (value) =>
+                              setState(() => _corpCategory = value!),
+                          hint: "Bidang Usaha",
+                          data: [
+                            "Kuliner",
+                            "Fashion",
+                            "Peralatan sekolah/kantor",
+                            "Kerajinan tangan",
+                            "Buah-buahan",
+                            "Tanaman hias",
+                            "Jasa service/perbaikan",
+                            "Peralatan elektronik",
+                            "Event organizer",
+                            "Salon/rias",
+                            "Catering",
+                            "Group kesenian",
+                            "Bidang lainnya",
+                          ],
+                          chooseValue: _corpCategory,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 21, bottom: 40),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -272,6 +297,7 @@ class _ProfileState extends State<Profile> {
       _addrCompanyController.text = userData.data!.data!["address_corp"];
       _phoneController.text = userData.data!.data!["phone"];
       _businessCategory = userData.data!.data!["buss_category"];
+      _corpCategory = userData.data!.data!["corp_category"];
       _isRadioSelected = userData.data!.data!["under_law"];
       _nameLawDepartment.text = userData.data!.data!["name_law"];
     });
@@ -308,7 +334,8 @@ class _ProfileState extends State<Profile> {
         "phone": _phoneController.text,
         "buss_category": _businessCategory,
         "under_law": _isRadioSelected,
-        "name_law": _nameLawDepartment.text
+        "name_law": _nameLawDepartment.text,
+        "corp_category": _corpCategory
       }
     };
     user.bloc.updateProfile(newData);

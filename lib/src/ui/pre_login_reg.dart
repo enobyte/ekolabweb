@@ -82,54 +82,105 @@ class PreLoginRegister extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: Column(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextWidget(txt: "Pewaralaba", fontFamily: 'Bold',),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: TextWidget(txt: descPerawalaba, align: TextAlign.start),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(bottom: 16, right: 16),
-                                child: Divider(
-                                  height: 2,
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextWidget(
+                                      txt: "Pewaralaba",
+                                      fontFamily: 'Bold',
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 6),
+                                      child: TextWidget(
+                                          txt: descPerawalaba,
+                                          align: TextAlign.start),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 16, right: 16),
+                                      child: Divider(
+                                        height: 2,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
+                              ),
+                              Image.asset(
+                                icPewaralaba,
+                                height: 50,
+                              ),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextWidget(txt: "Konsinyor", fontFamily: 'Bold',),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: TextWidget(txt: descKonsiyor, align: TextAlign.start),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(bottom: 16, right: 16),
-                                child: Divider(
-                                  height: 2,
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextWidget(
+                                      txt: "Konsinyor",
+                                      fontFamily: 'Bold',
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 6),
+                                      child: TextWidget(
+                                          txt: descKonsiyor,
+                                          align: TextAlign.start),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 16, right: 16),
+                                      child: Divider(
+                                        height: 2,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
+                              ),
+                              Image.asset(
+                                icKonsinyor,
+                                height: 50,
+                              ),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextWidget(txt: "UKM/UMK", fontFamily: 'Bold',),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: TextWidget(txt: descUKM, align: TextAlign.start),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16, right: 16),
-                                child: Divider(
-                                  height: 2,
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextWidget(
+                                      txt: "UKM/UMK",
+                                      fontFamily: 'Bold',
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 6),
+                                      child: TextWidget(
+                                          txt: descUKM, align: TextAlign.start),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 16, right: 16),
+                                      child: Divider(
+                                        height: 2,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
+                              ),
+                              Image.asset(
+                                icUkm,
+                                height: 50,
+                              ),
                             ],
                           )
                         ],
@@ -137,57 +188,112 @@ class PreLoginRegister extends StatelessWidget {
                     ),
                     flex: 5,
                   ),
+                  SizedBox(
+                    width: 50,
+                  ),
                   Expanded(
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: Column(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextWidget(txt: "Investor", fontFamily: 'Bold',),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: TextWidget(txt: descInvestor, align: TextAlign.start),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: Divider(
-                                  height: 2,
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextWidget(
+                                      txt: "Investor",
+                                      fontFamily: 'Bold',
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 6),
+                                      child: TextWidget(
+                                          txt: descInvestor,
+                                          align: TextAlign.start),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 16),
+                                      child: Divider(
+                                        height: 2,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
+                              ),
+                              Image.asset(
+                                icInvestor,
+                                height: 50,
+                              ),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextWidget(txt: "Jejaring Organisasi", fontFamily: 'Bold',),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: TextWidget(txt: descJejaring, align: TextAlign.start),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: Divider(
-                                  height: 2,
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextWidget(
+                                      txt: "Jejaring Organisasi",
+                                      fontFamily: 'Bold',
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 6),
+                                      child: TextWidget(
+                                          txt: descJejaring,
+                                          align: TextAlign.start),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 16),
+                                      child: Divider(
+                                        height: 2,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
+                              ),
+                              Image.asset(
+                                icJejaring,
+                                height: 50,
+                              ),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              TextWidget(txt: "Perizinan", fontFamily: 'Bold',),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6),
-                                child: TextWidget(txt: descPerizinan, align: TextAlign.start,),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: Divider(
-                                  height: 2,
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    TextWidget(
+                                      txt: "Perizinan",
+                                      fontFamily: 'Bold',
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 6),
+                                      child: TextWidget(
+                                        txt: descPerizinan,
+                                        align: TextAlign.start,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 16),
+                                      child: Divider(
+                                        height: 2,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
+                              ),
+                              Image.asset(
+                                icPersetujuan,
+                                height: 50,
+                              ),
                             ],
                           )
                         ],

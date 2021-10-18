@@ -180,6 +180,7 @@ class _PerijinanSubmission extends State<PerijinanSubmission> {
             uploadedDoc = reader.result as Uint8List;
             final mime = lookupMimeType('', headerBytes: uploadedDoc);
             extensionDoc = mime?.split("/")[1];
+            _uploadDocController.text = file.name;
           });
         });
 

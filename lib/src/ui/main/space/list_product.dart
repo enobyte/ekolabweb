@@ -64,8 +64,11 @@ class _ListProductState extends State<ListProduct> {
               ? Container(
                   margin: const EdgeInsets.only(right: 8),
                   padding: const EdgeInsets.all(8),
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () => _navigationUser(),
+                    onHover: (value) {
+                      setState(() {});
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -106,10 +109,13 @@ class _ListProductState extends State<ListProduct> {
                       .asMap()
                       .map((i, e) => MapEntry(
                           i,
-                          GestureDetector(
+                          InkWell(
                             onTap: () => !widget.isUser
                                 ? _navDetailProduct(i, false, e["kind"])
                                 : null,
+                            onHover: (value) {
+                              setState(() {});
+                            },
                             child: Container(
                               width: 300,
                               child: Card(

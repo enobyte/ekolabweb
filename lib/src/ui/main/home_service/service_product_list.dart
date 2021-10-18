@@ -1,6 +1,7 @@
 import 'package:ekolabweb/src/bloc/user_bloc.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/ui/main/space/list_product.dart';
+import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/scroll_snap_list.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
@@ -37,20 +38,28 @@ class _ServiceProductListState extends State<ServiceProductList>
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<UserMultipleModel>(
-        stream: bloc.doGetAllUser,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<UserDataModel?> listData = snapshot.data!.data!
-                .where((element) => element!.kind == 3)
-                .toList();
-            return ScrollSnapList(
-                listData.map((e) => e!.toJson()).toList(), (id) => routeToWidget(context, ListProduct(false, id)));
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: colorBase,
+        title: TextWidget(
+          txt: "UKM/UMK",
+        ),
+      ),
+      body: StreamBuilder<UserMultipleModel>(
+          stream: bloc.doGetAllUser,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<UserDataModel?> listData = snapshot.data!.data!
+                  .where((element) => element!.kind == 3)
+                  .toList();
+              return ScrollSnapList(listData.map((e) => e!.toJson()).toList(),
+                  (id) => routeToWidget(context, ListProduct(false, id)));
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
+    );
   }
 }
