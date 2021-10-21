@@ -35,11 +35,11 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
     super.initState();
     _nameResponder.text = widget.data.data![widget.idxSub]["user"]["name"];
     _addressResponder.text =
-        widget.data.data![widget.idxSub]["user"]["address"];
+        widget.data.data![widget.idxSub]["user"]?["address"] ?? "";
     _noteResponder.text =
-        widget.data.data![widget.idxSub]["data"]["submission"]["note"];
+        widget.data.data![widget.idxSub]["data"]["submission"]?["note"] ?? "";
     _docResponder =
-        widget.data.data![widget.idxSub]["data"]["submission"]["doc"];
+        widget.data.data![widget.idxSub]["data"]["submission"]?["doc"] ?? "";
     bloc.submissionProc.listen((event) {
       showErrorMessage(context, "Proses Pengajuan", event.message);
     });

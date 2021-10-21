@@ -49405,15 +49405,23 @@ q.d.sa8(0,J.j(J.j(r[s.d],"user"),"name"))
 s=q.a
 r=s.c.d
 r.toString
-q.e.sa8(0,J.j(J.j(r[s.d],"user"),"address"))
+s=J.j(r[s.d],"user")
+s=s==null?null:J.j(s,"address")
+if(s==null)s=""
+q.e.sa8(0,s)
 s=q.a
 r=s.c.d
 r.toString
-q.f.sa8(0,J.j(J.j(J.j(r[s.d],"data"),p),"note"))
+s=J.j(J.j(r[s.d],"data"),p)
+s=s==null?null:J.j(s,"note")
+if(s==null)s=""
+q.f.sa8(0,s)
 s=q.a
 r=s.c.d
 r.toString
-q.x=J.j(J.j(J.j(r[s.d],"data"),p),"doc")
+s=J.j(J.j(r[s.d],"data"),p)
+s=s==null?null:J.j(s,"doc")
+q.x=s==null?"":s
 $.co().r.fS(new R.auE(q))},
 E:function(a,b){var s=this,r=null,q=E.cN(r,r,r,r,r,r,O.I(C.j,r,r,r,"Proses Pengajuan",r)),p=t.p,o=T.bq(M.a6(r,T.an(H.a([K.b5(s.d,"",r,r,!0,r,"Nama Perespon"),new T.Q(C.ad,K.b5(s.e,"",r,r,!0,r,"Alamat Perespon"),r),K.b5(s.f,"",r,r,!0,r,"Keterangan Perespon")],p),C.o,C.k,C.i),C.h,r,r,r,r,r,r,new V.N(16,16,16,16),r,r,r),1),n=O.I(C.B,r,r,r,"Dokumen Pendukung",r),m=s.x.length!==0?V.f4(new T.Q(C.z,T.au(H.a([O.I(C.B,C.U,r,r,"data.pdf",r),B.c8(C.A,r,!0,L.bl(C.dV,C.U,r),24,new R.auy(s),C.z,r)],p),C.o,C.ah,C.i),r),r,new V.N(0,12,0,12),r):O.I(C.j,r,r,r,"Kosong",r),l=O.I(C.B,r,r,r,"Status Proses",r),k=s.y,j=k[0],i=s.z,h=k[1],g=i==="ditolak",f=g?8:16
 k=k[2]
@@ -49425,9 +49433,7 @@ s.toString
 B.aW(s,"Proses Pengajuan",a.b)},
 $S:14}
 R.auy.prototype={
-$0:function(){var s=window,r=this.a.x
-r.toString
-return C.au.qs(s,r,"_blank")},
+$0:function(){return C.au.qs(window,this.a.x,"_blank")},
 $C:"$0",
 $R:0,
 $S:0}
