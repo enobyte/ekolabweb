@@ -40,7 +40,7 @@ class _ScrollSnapListState extends State<ScrollSnapList>
   @override
   Widget build(BuildContext context) {
     return ResponsiveGridList(
-        desiredItemWidth: MediaQuery.of(context).size.width / 4,
+        desiredItemWidth: 250,//MediaQuery.of(context).size.width / 3,
         minSpacing: 10,
         children: widget.listData.map((i) {
           return InkWell(
