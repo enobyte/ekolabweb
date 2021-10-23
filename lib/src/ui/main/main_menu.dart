@@ -48,19 +48,270 @@ class _MainMenuState extends State<MainMenu> {
   int kindUser = 0;
   bool _isLoading = true;
   late Widget _child;
+  GlobalKey<ScaffoldState> _key = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _child = ListProduct(true, "null");
+    //_child = ListProduct(true, "null");
     _getData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _child = ServiceProductList(() => _handleDrawer());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _key,
         backgroundColor: Colors.white,
-        drawer: Drawer(),
+        drawer: Drawer(
+          child: ListView(padding: EdgeInsets.zero, children: [
+            DrawerHeader(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: const EdgeInsets.only(bottom: 24),
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: ImageCircle(true, image, 80),
+                    ),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextWidget(txt: dataKind(kindUser), txtSize: 18),
+                          TextWidget(
+                            txt: name,
+                            fontFamily: 'Bold',
+                            txtSize: 18,
+                          ),
+                          TextWidget(txt: bussCategory, txtSize: 18),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            // InkWell(
+            //   onTap: () => _onClickMenu(0),
+            //   onHover: (value) {
+            //     setState(() {});
+            //   },
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.all(Radius.circular(4)),
+            //         color: Colors.white),
+            //     margin: const EdgeInsets.symmetric(vertical: 12),
+            //     width: double.infinity,
+            //     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            //     child: TextWidget(
+            //       txt: "Produk Saya",
+            //       fontFamily: 'Bold',
+            //       txtSize: 24,
+            //       align: TextAlign.start,
+            //     ),
+            //   ),
+            // ),
+            InkWell(
+              onTap: () {
+                _onClickMenu(1);
+                _handleCloseDrawer();
+              },
+              onHover: (value) {
+                setState(() {});
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      icUkm,
+                      height: 25,
+                    ),
+                    SizedBox(width: 6),
+                    TextWidget(
+                      txt: "UKM/UMK",
+                      fontFamily: 'Regular',
+                      txtSize: 24,
+                      align: TextAlign.start,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                _onClickMenu(2);
+                _handleCloseDrawer();
+              },
+              onHover: (value) {
+                setState(() {});
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      icPewaralaba,
+                      height: 25,
+                    ),
+                    SizedBox(width: 6),
+                    TextWidget(
+                      txt: "Pewaralaba",
+                      fontFamily: 'Regular',
+                      txtSize: 24,
+                      align: TextAlign.start,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                _onClickMenu(3);
+                _handleCloseDrawer();
+              },
+              onHover: (value) {
+                setState(() {});
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      icKonsinyor,
+                      height: 25,
+                    ),
+                    SizedBox(width: 6),
+                    TextWidget(
+                      txt: "Konsinyor",
+                      fontFamily: 'Regular',
+                      txtSize: 24,
+                      align: TextAlign.start,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                _onClickMenu(4);
+                _handleCloseDrawer();
+              },
+              onHover: (value) {
+                setState(() {});
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      icKerjasama,
+                      height: 25,
+                    ),
+                    SizedBox(width: 6),
+                    TextWidget(
+                      txt: "Kerjasama",
+                      fontFamily: 'Regular',
+                      txtSize: 24,
+                      align: TextAlign.start,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                _onClickMenu(5);
+                _handleCloseDrawer();
+              },
+              onHover: (value) {
+                setState(() {});
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      icPersetujuan,
+                      height: 25,
+                    ),
+                    SizedBox(width: 6),
+                    TextWidget(
+                      txt: "Perizinan",
+                      fontFamily: 'Regular',
+                      txtSize: 24,
+                      align: TextAlign.start,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                _onClickMenu(6);
+                _handleCloseDrawer();
+              },
+              onHover: (value) {
+                setState(() {});
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      icJejaring,
+                      height: 25,
+                    ),
+                    SizedBox(width: 6),
+                    TextWidget(
+                      txt: "‍‍Jejaring",
+                      fontFamily: 'Regular',
+                      txtSize: 24,
+                      align: TextAlign.start,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ]),
+        ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 40),
           child: FloatingActionButton.extended(
@@ -162,254 +413,7 @@ class _MainMenuState extends State<MainMenu> {
             //     onPressed: () => _paddingPopup(), icon: Icon(Icons.keyboard_arrow_down)),
           ],
         ),
-        body: Row(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width / 5,
-              color: colorBase,
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: ListView(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
-                            color: Colors.white),
-                        margin: const EdgeInsets.only(bottom: 24),
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 12),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ImageCircle(true, image, 50),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextWidget(txt: dataKind(kindUser)),
-                                TextWidget(
-                                  txt: name,
-                                  fontFamily: 'Bold',
-                                ),
-                                TextWidget(txt: bussCategory),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => _onClickMenu(0),
-                        onHover: (value) {
-                          setState(() {});
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(4)),
-                              color: Colors.white),
-                          margin: const EdgeInsets.symmetric(vertical: 12),
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 8),
-                          child: TextWidget(
-                            txt: "Produk Saya",
-                            fontFamily: 'Bold',
-                            txtSize: 24,
-                            align: TextAlign.start,
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => _onClickMenu(1),
-                        onHover: (value) {
-                          setState(() {});
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(4)),
-                              color: Colors.white),
-                          margin: const EdgeInsets.symmetric(vertical: 12),
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 8),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                icUkm,
-                                height: 25,
-                              ),
-                              SizedBox(width: 6),
-                              TextWidget(
-                                txt: "UKM/UMK",
-                                fontFamily: 'Regular',
-                                txtSize: 24,
-                                align: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => _onClickMenu(2),
-                        onHover: (value) {
-                          setState(() {});
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(4)),
-                              color: Colors.white),
-                          margin: const EdgeInsets.symmetric(vertical: 12),
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 8),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                icPewaralaba,
-                                height: 25,
-                              ),
-                              SizedBox(width: 6),
-                              TextWidget(
-                                txt: "Pewaralaba",
-                                fontFamily: 'Regular',
-                                txtSize: 24,
-                                align: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => _onClickMenu(3),
-                        onHover: (value) {
-                          setState(() {});
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(4)),
-                              color: Colors.white),
-                          margin: const EdgeInsets.symmetric(vertical: 12),
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 8),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                icKonsinyor,
-                                height: 25,
-                              ),
-                              SizedBox(width: 6),
-                              TextWidget(
-                                txt: "Konsinyor",
-                                fontFamily: 'Regular',
-                                txtSize: 24,
-                                align: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => _onClickMenu(4),
-                        onHover: (value) {
-                          setState(() {});
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(4)),
-                              color: Colors.white),
-                          margin: const EdgeInsets.symmetric(vertical: 12),
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 8),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                icKerjasama,
-                                height: 25,
-                              ),
-                              SizedBox(width: 6),
-                              TextWidget(
-                                txt: "Kerjasama",
-                                fontFamily: 'Regular',
-                                txtSize: 24,
-                                align: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => _onClickMenu(5),
-                        onHover: (value) {
-                          setState(() {});
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(4)),
-                              color: Colors.white),
-                          margin: const EdgeInsets.symmetric(vertical: 12),
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 8),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                icPersetujuan,
-                                height: 25,
-                              ),
-                              SizedBox(width: 6),
-                              TextWidget(
-                                txt: "Perizinan",
-                                fontFamily: 'Regular',
-                                txtSize: 24,
-                                align: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => _onClickMenu(6),
-                        onHover: (value) {
-                          setState(() {});
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(4)),
-                              color: Colors.white),
-                          margin: const EdgeInsets.symmetric(vertical: 12),
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 8),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                icJejaring,
-                                height: 25,
-                              ),
-                              SizedBox(width: 6),
-                              TextWidget(
-                                txt: "‍‍Jejaring",
-                                fontFamily: 'Regular',
-                                txtSize: 24,
-                                align: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Expanded(child: _child)
-          ],
-        ));
+        body: _child);
   }
 
   _onClickMenu(int idx) {
@@ -418,22 +422,22 @@ class _MainMenuState extends State<MainMenu> {
         _child = ListProduct(true, "null");
         break;
       case 1:
-        _child = ServiceProductList();
+        _child = ServiceProductList(() => _handleDrawer());
         break;
       case 2:
-        _child = WaralabaList();
+        _child = WaralabaList(() => _handleDrawer());
         break;
       case 3:
-        _child = KonsinyasiList();
+        _child = KonsinyasiList(() => _handleDrawer());
         break;
       case 4:
-        _child = KerjasamaList();
+        _child = KerjasamaList(() => _handleDrawer());
         break;
       case 5:
-        _child = LicenceList();
+        _child = LicenceList(() => _handleDrawer());
         break;
       case 6:
-        _child = NetworkList();
+        _child = NetworkList(() => _handleDrawer());
         break;
     }
     setState(() {});
@@ -457,5 +461,14 @@ class _MainMenuState extends State<MainMenu> {
       kindUser = userData.data!.kind!;
     });
     bloc.fetchAllUser({"id": idUser});
+  }
+
+  _handleDrawer() {
+    _key.currentState!.openDrawer();
+    setState(() {});
+  }
+
+  _handleCloseDrawer() {
+    Navigator.of(context).pop();
   }
 }

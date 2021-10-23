@@ -8,10 +8,14 @@ import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class LicenceList extends StatefulWidget {
+  final Function onClickMenu;
+
   @override
   State<StatefulWidget> createState() {
     return _LicenceListState();
   }
+
+  LicenceList(this.onClickMenu);
 }
 
 class _LicenceListState extends State<LicenceList>
@@ -40,10 +44,17 @@ class _LicenceListState extends State<LicenceList>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         backgroundColor: colorBase,
         title: TextWidget(
           txt: "PERIZINAN",
         ),
+        leading: IconButton(
+            onPressed: () => widget.onClickMenu(),
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+            )),
       ),
       body: StreamBuilder<UserMultipleModel>(
           stream: bloc.doGetAllUser,
@@ -52,8 +63,8 @@ class _LicenceListState extends State<LicenceList>
               List<UserDataModel?> listData = snapshot.data!.data!
                   .where((element) => element!.kind == 6)
                   .toList();
-              return ScrollSnapList(
-                  listData.map((e) => e!.toJson()).toList(), (id) => routeToWidget(context, ListProduct(false, id)));
+              return ScrollSnapList(listData.map((e) => e!.toJson()).toList(),
+                  (id) => routeToWidget(context, ListProduct(false, id)));
             } else {
               return Center(
                 child: CircularProgressIndicator(),

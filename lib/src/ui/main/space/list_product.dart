@@ -56,6 +56,7 @@ class _ListProductState extends State<ListProduct> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: colorBase,
+        elevation: 0.0,
         title: TextWidget(
           txt: "List Product",
         ),
@@ -77,7 +78,8 @@ class _ListProductState extends State<ListProduct> {
                         children: [
                           Icon(Icons.add),
                           Padding(
-                            padding: const EdgeInsets.only(top: 8, right: 8, bottom: 8),
+                            padding: const EdgeInsets.only(
+                                top: 8, right: 8, bottom: 8),
                             child: TextWidget(txt: "Tambah Produk"),
                           )
                         ],
@@ -98,106 +100,113 @@ class _ListProductState extends State<ListProduct> {
       //         backgroundColor: colorBase,
       //       )
       //     : SizedBox(),
-      body: StreamBuilder<ProductModel>(
-          stream: bloc.getProduct,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data!.data!.isNotEmpty) {
-                _productModel = snapshot.data;
-                return Wrap(
-                  children: snapshot.data!.data!
-                      .asMap()
-                      .map((i, e) => MapEntry(
-                          i,
-                          InkWell(
-                            onTap: () => !widget.isUser
-                                ? _navDetailProduct(i, false, e["kind"])
-                                : null,
-                            onHover: (value) {
-                              setState(() {});
-                            },
-                            child: Container(
-                              width: 300,
-                              child: Card(
-                                margin: EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0)),
-                                      child: Image.network(
-                                        e["data"]["image"] != null
-                                            ? (e["data"]["image"] as List)[0]
-                                            : "http://ekolab.id/file/myproduct_398872551.png",
-                                        fit: BoxFit.cover,
-                                        height: 300,
-                                        width: 300,
-                                      ),
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          child: StreamBuilder<ProductModel>(
+              stream: bloc.getProduct,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data!.data!.isNotEmpty) {
+                    _productModel = snapshot.data;
+                    return Wrap(
+                      children: snapshot.data!.data!
+                          .asMap()
+                          .map((i, e) => MapEntry(
+                              i,
+                              InkWell(
+                                onTap: () => !widget.isUser
+                                    ? _navDetailProduct(i, false, e["kind"])
+                                    : null,
+                                onHover: (value) {
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  width: 300,
+                                  child: Card(
+                                    margin: EdgeInsets.all(16.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5.0)),
+                                          child: Image.network(
+                                            e["data"]["image"] != null
+                                                ? (e["data"]["image"]
+                                                    as List)[0]
+                                                : "http://ekolab.id/file/myproduct_398872551.png",
+                                            fit: BoxFit.cover,
+                                            height: 300,
+                                            width: 300,
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.all(4.0),
+                                          child: TextWidget(
+                                            txt: e["data"]["name"],
+                                            maxLine: 2,
+                                            txtSize: 18,
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.bottomRight,
+                                          padding: EdgeInsets.all(4.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              // TextWidget(
+                                              //   txt: "🤝 0",
+                                              //   txtSize: 16,
+                                              // ),
+                                              SizedBox(),
+                                              widget.isUser
+                                                  ? ButtonWidget(
+                                                      txt: TextWidget(
+                                                          txt: "Detail"),
+                                                      height: 40.0,
+                                                      width: 100,
+                                                      btnColor: colorBase!,
+                                                      onClick: () =>
+                                                          _navDetailProduct(
+                                                              i, true, 0),
+                                                      borderRedius: 4,
+                                                    )
+                                                  : ButtonWidget(
+                                                      txt: TextWidget(
+                                                          txt: "Ajukan"),
+                                                      height: 40.0,
+                                                      width: 100,
+                                                      btnColor: colorBase!,
+                                                      onClick: () =>
+                                                          _actionSubmission(e),
+                                                      borderRedius: 4,
+                                                    ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.all(4.0),
-                                      child: TextWidget(
-                                        txt: e["data"]["name"],
-                                        maxLine: 2,
-                                        txtSize: 18,
-                                      ),
-                                    ),
-                                    Container(
-                                      alignment: Alignment.bottomRight,
-                                      padding: EdgeInsets.all(4.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          // TextWidget(
-                                          //   txt: "🤝 0",
-                                          //   txtSize: 16,
-                                          // ),
-                                          SizedBox(),
-                                          widget.isUser
-                                              ? ButtonWidget(
-                                                  txt:
-                                                      TextWidget(txt: "Detail"),
-                                                  height: 40.0,
-                                                  width: 100,
-                                                  btnColor: colorBase!,
-                                                  onClick: () =>
-                                                      _navDetailProduct(
-                                                          i, true, 0),
-                                                  borderRedius: 4,
-                                                )
-                                              : ButtonWidget(
-                                                  txt:
-                                                      TextWidget(txt: "Ajukan"),
-                                                  height: 40.0,
-                                                  width: 100,
-                                                  btnColor: colorBase!,
-                                                  onClick: () =>
-                                                      _actionSubmission(e),
-                                                  borderRedius: 4,
-                                                ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          )))
-                      .values
-                      .toList(),
-                );
-              } else {
-                return Center(child: Image.asset(imgNoData));
-              }
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          }),
+                              )))
+                          .values
+                          .toList(),
+                    );
+                  } else {
+                    return Center(child: Image.asset(imgNoData));
+                  }
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              }),
+        ),
+      ),
     );
   }
 

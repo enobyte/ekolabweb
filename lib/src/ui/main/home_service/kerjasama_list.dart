@@ -8,10 +8,13 @@ import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class KerjasamaList extends StatefulWidget {
+  final Function onClickMenu;
   @override
   State<StatefulWidget> createState() {
     return _KerjasamaListState();
   }
+
+  KerjasamaList(this.onClickMenu);
 }
 
 class _KerjasamaListState extends State<KerjasamaList>
@@ -40,10 +43,17 @@ class _KerjasamaListState extends State<KerjasamaList>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         backgroundColor: colorBase,
         title: TextWidget(
           txt: "KERJASAMA",
         ),
+        leading: IconButton(
+            onPressed: () => widget.onClickMenu(),
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+            )),
       ),
       body: StreamBuilder<UserMultipleModel>(
           stream: bloc.doGetAllUser,

@@ -8,10 +8,14 @@ import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class ServiceProductList extends StatefulWidget {
+  final Function onClickMenu;
+
   @override
   State<StatefulWidget> createState() {
     return _ServiceProductListState();
   }
+
+  ServiceProductList(this.onClickMenu);
 }
 
 class _ServiceProductListState extends State<ServiceProductList>
@@ -40,6 +44,13 @@ class _ServiceProductListState extends State<ServiceProductList>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
+        leading: IconButton(
+            onPressed: () => widget.onClickMenu(),
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+            )),
         backgroundColor: colorBase,
         title: TextWidget(
           txt: "UKM/UMK",
