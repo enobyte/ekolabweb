@@ -19,6 +19,7 @@ class KerjaSamaSubmission extends StatefulWidget {
   final int kindUserSub;
   final String nameUserSub;
   final String existDesc;
+  final String addressUserSub;
 
   @override
   State<StatefulWidget> createState() {
@@ -26,7 +27,7 @@ class KerjaSamaSubmission extends StatefulWidget {
   }
 
   KerjaSamaSubmission(this.idProduct, this.idUserSub, this.kindUserSub,
-      this.nameUserSub, this.existDesc);
+      this.nameUserSub, this.existDesc, this.addressUserSub);
 }
 
 class _KerjaSamaSubmissionState extends State<KerjaSamaSubmission> {
@@ -214,6 +215,7 @@ class _KerjaSamaSubmissionState extends State<KerjaSamaSubmission> {
         "id_user_sub": widget.idUserSub,
         "kind": widget.kindUserSub,
         "name_user_sub": widget.nameUserSub,
+        "address_user_sub": widget.addressUserSub,
         "submission": {
           "note": _noteController.text,
           "term": _termController.text,

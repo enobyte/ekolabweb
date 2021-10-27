@@ -10,14 +10,15 @@ class UkmSubmission extends StatefulWidget {
   final String idUserSub;
   final int kindUserSub;
   final String nameUserSub;
+  final String addressUserSub;
 
   @override
   State<StatefulWidget> createState() {
     return UkmSubmissionState();
   }
 
-  UkmSubmission(
-      this.idProduct, this.idUserSub, this.kindUserSub, this.nameUserSub);
+  UkmSubmission(this.idProduct, this.idUserSub, this.kindUserSub,
+      this.nameUserSub, this.addressUserSub);
 }
 
 class UkmSubmissionState extends State<UkmSubmission> {
@@ -72,6 +73,7 @@ class UkmSubmissionState extends State<UkmSubmission> {
                           "id_user_sub": widget.idUserSub,
                           "kind": widget.kindUserSub,
                           "name_user_sub": widget.nameUserSub,
+                          "address_user_sub": widget.addressUserSub,
                           "submission": {"note": submissionComment.text}
                         },
                         "create_at": formatDefaultDate(

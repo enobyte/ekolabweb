@@ -19,6 +19,7 @@ class WaralabaSub extends StatefulWidget {
   final String nameUserSub;
   final String existDesc;
   final String existTerm;
+  final String addressUserSub;
 
   @override
   State<StatefulWidget> createState() {
@@ -26,7 +27,7 @@ class WaralabaSub extends StatefulWidget {
   }
 
   WaralabaSub(this.idProduct, this.idUserSub, this.kindUserSub,
-      this.nameUserSub, this.existDesc, this.existTerm);
+      this.nameUserSub, this.existDesc, this.existTerm, this.addressUserSub);
 }
 
 class _WaralabaSub extends State<WaralabaSub> {
@@ -73,10 +74,14 @@ class _WaralabaSub extends State<WaralabaSub> {
                 padding: EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    TextFieldTitleWidget(
-                      _descriptionController,
-                      title: "Deskripsi Waralaba",
-                      readOnly: true,
+                    Wrap(
+                      children: [
+                        TextFieldTitleWidget(
+                          _descriptionController,
+                          title: "Deskripsi Waralaba",
+                          readOnly: true,
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 21, bottom: 21),
@@ -217,6 +222,7 @@ class _WaralabaSub extends State<WaralabaSub> {
         "id_user_sub": widget.idUserSub,
         "kind": widget.kindUserSub,
         "name_user_sub": widget.nameUserSub,
+        "address_user_sub": widget.addressUserSub,
         "submission": {
           "note": _noteController.text,
           "term": _termController.text,

@@ -39,6 +39,7 @@ class _ListProductState extends State<ListProduct> {
   int kindUser = 0;
   String idUserLogin = "";
   String nameUserLogin = "";
+  String addressUserLogin = "";
   ProductModel? _productModel;
 
   @override
@@ -60,46 +61,50 @@ class _ListProductState extends State<ListProduct> {
         title: TextWidget(
           txt: "List Product",
         ),
-        actions: [
-          widget.isUser && kindUser != 0
-              ? Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  padding: const EdgeInsets.all(8),
-                  child: InkWell(
-                    onTap: () => _navigationUser(),
-                    onHover: (value) {
-                      setState(() {});
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          color: Colors.green),
-                      child: Row(
-                        children: [
-                          Icon(Icons.add),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8, right: 8, bottom: 8),
-                            child: TextWidget(txt: "Tambah Produk"),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ) //IconButton(onPressed: () => {}, icon: Icon(Icons.add))
-              : SizedBox()
-        ],
+        // actions: [
+        //   widget.isUser && kindUser != 0
+        //       ? Container(
+        //           margin: const EdgeInsets.only(right: 8),
+        //           padding: const EdgeInsets.all(8),
+        //           child: InkWell(
+        //             onTap: () => _navigationUser(),
+        //             onHover: (value) {
+        //               setState(() {});
+        //             },
+        //             child: Container(
+        //               decoration: BoxDecoration(
+        //                   borderRadius: BorderRadius.all(Radius.circular(4)),
+        //                   color: Colors.green),
+        //               child: Row(
+        //                 children: [
+        //                   Icon(Icons.add),
+        //                   Padding(
+        //                     padding: const EdgeInsets.only(
+        //                         top: 8, right: 8, bottom: 8),
+        //                     child: TextWidget(txt: "Tambah Produk"),
+        //                   )
+        //                 ],
+        //               ),
+        //             ),
+        //           ),
+        //         ) //IconButton(onPressed: () => {}, icon: Icon(Icons.add))
+        //       : SizedBox()
+        // ],
       ),
-      // floatingActionButton: widget.isUser && kindUser != 0
-      //     ? FloatingActionButton.extended(
-      //         onPressed: () => _navigationUser(),
-      //         label: TextWidget(
-      //           txt: "Tambah Produk",
-      //         ),
-      //         icon: Icon(Icons.add),
-      //         backgroundColor: colorBase,
-      //       )
-      //     : SizedBox(),
+      floatingActionButton: widget.isUser && kindUser != 0
+          ? Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 40),
+              child: FloatingActionButton.extended(
+                onPressed: () => _navigationUser(),
+                label: TextWidget(
+                  txt: "Tambah Produk",
+                ),
+                icon: Icon(Icons.add),
+                backgroundColor: colorBase,
+              ),
+            )
+          : SizedBox(),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -220,6 +225,7 @@ class _ListProductState extends State<ListProduct> {
       kindUser = userData.data!.kind!;
       idUserLogin = userData.data!.id!;
       nameUserLogin = userData.data!.data!["name"];
+      addressUserLogin = userData.data!.data!["address"];
     });
   }
 
@@ -290,24 +296,19 @@ class _ListProductState extends State<ListProduct> {
         routeToWidget(
             context,
             WaralabaSub(
-              data["id"],
-              idUserLogin,
-              kindUser,
-              nameUserLogin,
-              data["data"]["description"],
-              data["data"]["term"],
-            ));
+                data["id"],
+                idUserLogin,
+                kindUser,
+                nameUserLogin,
+                data["data"]["description"],
+                data["data"]["term"],
+                addressUserLogin));
         break;
       case 2:
         routeToWidget(
             context,
-            KonsinyasiSubmission(
-              data["id"],
-              idUserLogin,
-              kindUser,
-              nameUserLogin,
-              data["data"]["description"],
-            ));
+            KonsinyasiSubmission(data["id"], idUserLogin, kindUser,
+                nameUserLogin, data["data"]["description"], addressUserLogin));
         break;
       case 3:
         _showMessage(data["id"], data["kind"]);
@@ -315,37 +316,32 @@ class _ListProductState extends State<ListProduct> {
       case 4:
         routeToWidget(
             context,
-            KerjaSamaSubmission(
-              data["id"],
-              idUserLogin,
-              kindUser,
-              nameUserLogin,
-              data["data"]["description"],
-            ));
+            KerjaSamaSubmission(data["id"], idUserLogin, kindUser,
+                nameUserLogin, data["data"]["description"], addressUserLogin));
         break;
       case 6:
         routeToWidget(
             context,
             PerijinanSubmission(
-              data["id"],
-              idUserLogin,
-              kindUser,
-              nameUserLogin,
-              data["data"]["description"],
-              data["data"]["term"],
-            ));
+                data["id"],
+                idUserLogin,
+                kindUser,
+                nameUserLogin,
+                data["data"]["description"],
+                data["data"]["term"],
+                addressUserLogin));
         break;
       case 7:
         routeToWidget(
             context,
             JejaringSubmission(
-              data["id"],
-              idUserLogin,
-              kindUser,
-              nameUserLogin,
-              data["data"]["description"],
-              data["data"]["term"],
-            ));
+                data["id"],
+                idUserLogin,
+                kindUser,
+                nameUserLogin,
+                data["data"]["description"],
+                data["data"]["term"],
+                addressUserLogin));
         break;
     }
   }
@@ -354,7 +350,8 @@ class _ListProductState extends State<ListProduct> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return UkmSubmission(idProduct, idUserLogin, kindUser, nameUserLogin);
+          return UkmSubmission(idProduct, idUserLogin, kindUser, nameUserLogin,
+              addressUserLogin);
         });
   }
 }

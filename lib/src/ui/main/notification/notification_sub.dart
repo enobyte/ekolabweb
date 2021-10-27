@@ -130,6 +130,20 @@ class NotificationSubmissionState extends State<NotificationSubmission> {
                                   ),
                                   alignment: PlaceholderAlignment.middle)
                             ])),
+                        // SizedBox(
+                        //   height: 8,
+                        // ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.green),
+                          child: TextWidget(
+                            txt: snapshot.data!.data![index]["product"]["name"],
+                            color: Colors.white,
+                          ),
+                        ),
                         SizedBox(
                           height: 8,
                         ),

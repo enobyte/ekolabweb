@@ -48,10 +48,12 @@ class TextFieldTitleWidget extends StatelessWidget {
           style: TextStyle(color: textColor),
           controller: controller,
           autocorrect: true,
+          maxLines: null,
+          minLines: 1,
           readOnly: readOnly,
           enableSuggestions: false,
           obscureText: obscureText,
-          keyboardType: keyboardType ?? TextInputType.text,
+          keyboardType: keyboardType ?? TextInputType.multiline,
           inputFormatters: [
             textInputFormat ??
                 FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9 .]'))

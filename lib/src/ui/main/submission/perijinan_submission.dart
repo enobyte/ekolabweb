@@ -19,6 +19,7 @@ class PerijinanSubmission extends StatefulWidget {
   final String nameUserSub;
   final String existDesc;
   final String existTerm;
+  final String addressUserSub;
 
   @override
   State<StatefulWidget> createState() {
@@ -26,7 +27,7 @@ class PerijinanSubmission extends StatefulWidget {
   }
 
   PerijinanSubmission(this.idProduct, this.idUserSub, this.kindUserSub,
-      this.nameUserSub, this.existDesc, this.existTerm);
+      this.nameUserSub, this.existDesc, this.existTerm, this.addressUserSub);
 }
 
 class _PerijinanSubmission extends State<PerijinanSubmission> {
@@ -217,6 +218,7 @@ class _PerijinanSubmission extends State<PerijinanSubmission> {
         "id_user_sub": widget.idUserSub,
         "kind": widget.kindUserSub,
         "name_user_sub": widget.nameUserSub,
+        "address_user_sub": widget.addressUserSub,
         "submission": {
           "note": _noteController.text,
           "term": _termController.text,

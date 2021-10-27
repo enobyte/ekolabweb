@@ -19,6 +19,7 @@ class JejaringSubmission extends StatefulWidget {
   final String nameUserSub;
   final String existDesc;
   final String existTerm;
+  final String addressUserSub;
 
   @override
   State<StatefulWidget> createState() {
@@ -26,7 +27,7 @@ class JejaringSubmission extends StatefulWidget {
   }
 
   JejaringSubmission(this.idProduct, this.idUserSub, this.kindUserSub,
-      this.nameUserSub, this.existDesc, this.existTerm);
+      this.nameUserSub, this.existDesc, this.existTerm, this.addressUserSub);
 }
 
 class _JejaringSubmissionState extends State<JejaringSubmission> {
@@ -217,6 +218,7 @@ class _JejaringSubmissionState extends State<JejaringSubmission> {
         "id_user_sub": widget.idUserSub,
         "kind": widget.kindUserSub,
         "name_user_sub": widget.nameUserSub,
+        "address_user_sub": widget.addressUserSub,
         "submission": {
           "note": _noteController.text,
           "term": _termController.text,

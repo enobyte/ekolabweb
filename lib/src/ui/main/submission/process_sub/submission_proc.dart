@@ -33,9 +33,10 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
   @override
   void initState() {
     super.initState();
-    _nameResponder.text = widget.data.data![widget.idxSub]["user"]["name"];
+    _nameResponder.text =
+        widget.data.data![widget.idxSub]["data"]?["name_user_sub"] ?? "";
     _addressResponder.text =
-        widget.data.data![widget.idxSub]["user"]?["address"] ?? "";
+        widget.data.data![widget.idxSub]["data"]?["address_user_sub"] ?? "";
     _noteResponder.text =
         widget.data.data![widget.idxSub]["data"]["submission"]?["note"] ?? "";
     _docResponder =
