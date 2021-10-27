@@ -283,4 +283,14 @@ class ApiProvider {
       return StandardMapListModels.withError(_handleError(err));
     }
   }
+
+  Future<StandardMapListModels> actionChangePass(
+      Map<String, dynamic> body) async {
+    try {
+      final response = await _dio.post("change_pass", data: json.encode(body));
+      return StandardMapListModels.fromJson(response.data);
+    } catch (err, snap) {
+      return StandardMapListModels.withError(_handleError(err));
+    }
+  }
 }

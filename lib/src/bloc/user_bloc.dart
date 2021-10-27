@@ -65,6 +65,12 @@ class UserBloc {
     return model;
   }
 
+  Future<StandardMapListModels> actionChangePass(
+      Map<String, dynamic> body) async {
+    StandardMapListModels model = await _repository.actionChangePass(body);
+    return model;
+  }
+
   dispose() {
     _doRegister.close();
     _doGetAllUser.close();

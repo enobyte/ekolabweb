@@ -71,4 +71,7 @@ class Repository {
 
   Future<StandardMapListModels> actionForgotPass(Map<String, dynamic> body) =>
       apiProvider.actionForgotPass(body);
+
+  Future<StandardMapListModels> actionChangePass(Map<String, dynamic> body) =>
+      apiProvider.actionChangePass(body);
 }

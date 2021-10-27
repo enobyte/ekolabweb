@@ -45,7 +45,7 @@ class _ProfileState extends State<Profile> {
     super.initState();
     _getData();
     user.bloc.updateUser.listen((event) {
-      showErrorMessage(context, "Profile", event.message);
+      showErrorMessage(context, "Profil", event.message);
     });
   }
 
@@ -82,7 +82,7 @@ class _ProfileState extends State<Profile> {
                   child: Column(
                     children: [
                       TextFieldTitleWidget(_nameController,
-                          title: "Nama Lengkap"),
+                          title: "Nama pemilik usaha"),
                       Padding(
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(
@@ -98,7 +98,7 @@ class _ProfileState extends State<Profile> {
                         padding: const EdgeInsets.only(top: 21, bottom: 21),
                         child: TextFieldTitleWidget(
                           _addrCompanyController,
-                          title: "Alamat usaha",
+                          title: "Alamat usaha/Alamat kantor",
                         ),
                       ),
                       TextFieldTitleWidget(

@@ -12,6 +12,7 @@ import 'package:ekolabweb/src/ui/main/profile.dart';
 import 'package:ekolabweb/src/ui/main/search_main.dart';
 import 'package:ekolabweb/src/ui/main/space/list_product.dart';
 import 'package:ekolabweb/src/ui/main/notification/notification_sub.dart';
+import 'package:ekolabweb/src/ui/new_password.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
@@ -21,6 +22,7 @@ import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../change_password.dart';
 import 'home_service/kerjasama_list.dart';
 import 'home_service/konsinyasi_list.dart';
 import 'home_service/network_list.dart';
@@ -45,6 +47,7 @@ class _MainMenuState extends State<MainMenu> {
   String image = "";
   String idUser = "";
   String bussCategory = "";
+  String nameCorp = "";
   int kindUser = 0;
   bool _isLoading = true;
   late Widget _child;
@@ -90,9 +93,9 @@ class _MainMenuState extends State<MainMenu> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          TextWidget(txt: dataKind(kindUser), txtSize: 18),
+                          //TextWidget(txt: dataKind(kindUser), txtSize: 18),
                           TextWidget(
-                            txt: name,
+                            txt: nameCorp,
                             fontFamily: 'Bold',
                             txtSize: 18,
                           ),
@@ -338,7 +341,7 @@ class _MainMenuState extends State<MainMenu> {
                   const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 20.0),
               child: ButtonWidget(
                 txt: TextWidget(
-                  txt: "Komunikasi",
+                  txt: "Chat",
                 ),
                 height: 0,
                 width: 100,
@@ -385,7 +388,7 @@ class _MainMenuState extends State<MainMenu> {
             ),
             PopupMenuButton<String>(
               itemBuilder: (context) {
-                return ["Produk Saya", "Pencarian", "Keluar"]
+                return ["Profil", "Produk Saya", "Ganti Password", "Pencarian", "Keluar"]
                     .map((e) => PopupMenuItem<String>(
                           value: e,
                           child: TextWidget(
@@ -396,8 +399,14 @@ class _MainMenuState extends State<MainMenu> {
               },
               onSelected: (value) {
                 switch (value) {
+                  case "Profil":
+                    routeToWidget(context, Profile());
+                    break;
                   case "Produk Saya":
                     routeToWidget(context, ListProduct(true, "null"));
+                    break;
+                  case "Ganti Password":
+                    routeToWidget(context, ChangePassword(idUser));
                     break;
                   case "Pencarian":
                     showSearch(context: context, delegate: SearchMain(idUser));
@@ -456,6 +465,7 @@ class _MainMenuState extends State<MainMenu> {
       email = userData.data!.data!["email"];
       name = userData.data!.data!["name"];
       bussCategory = userData.data!.data?["buss_category"] ?? "";
+      nameCorp = userData.data!.data?["name_law"] ?? "";
       image = userData.data!.data!["image"];
       idUser = userData.data!.id!;
       kindUser = userData.data!.kind!;

@@ -74,7 +74,7 @@ class _KerjaSamaSubmissionState extends State<KerjaSamaSubmission> {
                 children: [
                   TextFieldTitleWidget(
                     _descriptionController,
-                    title: "Deskripsi Konsinyasi",
+                    title: "Deskripsi Kerjasama",
                     readOnly: true,
                   ),
                   Padding(

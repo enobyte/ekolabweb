@@ -78,13 +78,13 @@ class _ScrollSnapListState extends State<ScrollSnapList>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextWidget(
-                                    txt: i["data"]["name"],
+                                    txt: i?["data"]?["name_law"] ?? "",
                                     txtSize: 16.0,
                                     maxLine: 2,
                                     align: TextAlign.left,
                                   ),
                                   TextWidget(
-                                    txt: i["data"]?["iumk"] ?? "",
+                                    txt: i["data"]?["name"] ?? "",
                                     txtSize: 12.0,
                                     maxLine: 2,
                                     fontFamily: 'Italic',

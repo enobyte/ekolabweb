@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
   final _userController = TextEditingController();
   final _passwordController = TextEditingController();
   final bloc = UserBloc();
+  bool _isHidePass = true;
 
   @override
   void dispose() {
@@ -86,8 +87,17 @@ class _LoginState extends State<Login> {
                     ),
                     TextFieldWidget(
                       _passwordController,
-                      obscureText: true,
+                      obscureText: _isHidePass ? true : false,
                       hint: "password",
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _isHidePass = !_isHidePass;
+                            });
+                          },
+                          icon: _isHidePass
+                              ? Icon(Icons.remove_red_eye_outlined)
+                              : Icon(Icons.remove_red_eye)),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 25, bottom: 20),
