@@ -226,7 +226,7 @@ class _JejaringSubmissionState extends State<JejaringSubmission> {
           "doc": docUrl
         },
         "create_at":
-            formatDefaultDate(DateTime.now().toString(), "yyyy-MM-DD hh:mm:ss")
+            formatDefaultDate(DateTime.now().toString(), "yyyy-MM-dd hh:mm:ss")
       }
     });
   }

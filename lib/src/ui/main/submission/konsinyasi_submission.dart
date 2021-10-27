@@ -223,7 +223,7 @@ class _KonsinyasiSubmissionState extends State<KonsinyasiSubmission> {
           "doc": docUrl
         },
         "create_at":
-        formatDefaultDate(DateTime.now().toString(), "yyyy-MM-DD hh:mm:ss")
+        formatDefaultDate(DateTime.now().toString(), "yyyy-MM-dd hh:mm:ss")
       }
     });
   }

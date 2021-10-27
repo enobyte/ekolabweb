@@ -23,7 +23,10 @@ class MainAdminState extends State<MainAdmin> {
   String name = "";
   String idUser = "";
 
-  final List<String> listMenu = ["REKAP", "LIST PENAWARAN"];
+  final List<ItemGrid> listMenu = [
+    ItemGrid("REKAP", Icons.pie_chart),
+    ItemGrid("LIST PENAWARAN", Icons.insert_chart)
+  ];
 
   @override
   void initState() {
@@ -86,18 +89,22 @@ class MainAdminState extends State<MainAdmin> {
         crossAxisCount: 3,
         children: listMenu
             .map((e) => GestureDetector(
-                  onTap: () => _onClick(e),
+                  onTap: () => _onClick(e.name),
                   child: Card(
                     margin:
                         EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(icProvider),
+                        Icon(
+                          e.icon,
+                          size: MediaQuery.of(context).size.width / 8,
+                          color: colorBase,
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: TextWidget(
-                            txt: e,
+                            txt: e.name,
                             txtSize: 14,
                           ),
                         ),
@@ -136,4 +143,11 @@ class MainAdminState extends State<MainAdmin> {
         break;
     }
   }
+}
+
+class ItemGrid {
+  String name;
+  IconData icon;
+
+  ItemGrid(this.name, this.icon);
 }

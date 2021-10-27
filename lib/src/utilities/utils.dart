@@ -78,6 +78,10 @@ String formatDefaultDate(String value, String format) {
   return DateFormat(format).format(datetime);
 }
 
+DateTime stringToDate(String date){
+  return DateTime.parse(date);
+}
+
 Future<String> randomString(int length) async {
   const chars =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";

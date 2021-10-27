@@ -74,10 +74,10 @@ class UkmSubmissionState extends State<UkmSubmission> {
                           "kind": widget.kindUserSub,
                           "name_user_sub": widget.nameUserSub,
                           "address_user_sub": widget.addressUserSub,
-                          "submission": {"note": submissionComment.text}
+                          "submission": {"note": submissionComment.text},
+                          "create_at": formatDefaultDate(
+                              DateTime.now().toString(), "yyyy-MM-dd hh:mm:ss")
                         },
-                        "create_at": formatDefaultDate(
-                            DateTime.now().toString(), "yyyy-MM-DD hh:mm:ss")
                       });
                       Navigator.of(context).pop();
                     },

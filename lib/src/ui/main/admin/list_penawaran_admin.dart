@@ -1,5 +1,6 @@
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:ekolabweb/src/model/submission_model.dart';
+import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_table/DatatableHeader.dart';
@@ -16,6 +17,7 @@ class _ListPenawaranAdminState extends State<ListPenawaranAdmin> {
   List<DatatableHeader> _header = [
     DatatableHeader(text: "No", value: "no", sortable: true),
     DatatableHeader(text: "Nama Produk", value: "name", sortable: true),
+    DatatableHeader(text: "Pengaju", value: "pengaju", sortable: true),
     DatatableHeader(text: "Tanggal Pengajuan", value: "date", sortable: true),
   ];
   List<Map<String, dynamic>> _source = [];
@@ -66,7 +68,8 @@ class _ListPenawaranAdminState extends State<ListPenawaranAdmin> {
                             _source.add({
                               "no": i++,
                               "name": v["product"]["name"],
-                              "date": DateTime.now()
+                              "pengaju": v["sub"]["name_user_sub"],
+                              "date": stringToDate(v["sub"]["create_at"]),
                             });
                           }
                           return ResponsiveDatatable(

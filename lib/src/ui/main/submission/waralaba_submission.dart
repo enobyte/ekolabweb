@@ -230,7 +230,7 @@ class _WaralabaSub extends State<WaralabaSub> {
           "doc": docUrl
         },
         "create_at":
-            formatDefaultDate(DateTime.now().toString(), "yyyy-MM-DD hh:mm:ss")
+            formatDefaultDate(DateTime.now().toString(), "yyyy-MM-dd hh:mm:ss")
       }
     });
   }
