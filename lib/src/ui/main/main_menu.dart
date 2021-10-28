@@ -345,7 +345,7 @@ class _MainMenuState extends State<MainMenu> {
                   fontFamily: 'Bold',
                 ),
                 height: 0,
-                width: 60,
+                width: 65,
                 btnColor: Colors.green,
                 onClick: () => routeToWidget(context, ListChatingForm(idUser)),
                 borderRedius: 15,

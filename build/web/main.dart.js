@@ -46554,7 +46554,7 @@ p=E.aFQ(C.aM.h(0,700),o,p,new S.aq1(m,b))
 o=U.dZ("images/logo.png",l,l)
 q=C.aM.h(0,700)
 r=O.I(C.i,l,l,l,"E-KOLAB",l)
-r=E.cO(H.a([new T.Q(C.v1,Y.b8(15,C.fM,0,l,new S.aq2(m,b),O.I(C.i,l,"Bold",l,"Chat",l),60),l),T.aA(H.a([new T.Q(C.ii,T.ao(H.a([O.I(C.i,l,l,l,m.e,12),O.I(C.i,l,l,l,m.d,12),M.a6(l,O.I(C.i,l,l,l,D.or(m.z),10),C.h,l,l,new S.c9(C.fM,l,l,K.h2(8),l,l,C.V),l,l,l,new V.M(4,2,4,2),l,l,l)],i),C.cQ,C.bW,C.j),l),R.e_(!1,!0,new B.tB(!0,m.f,50,l),l,!0,l,l,l,l,l,l,l,l,l,l,new S.aq3(b),l,l,l)],i),C.o,C.l,C.j),Z.aH0(l,L.aV(C.mc,l,l),l,new S.aq4(),new S.aq5(m,b),l,t.N)],i),q,l,!1,0,o,r)
+r=E.cO(H.a([new T.Q(C.v1,Y.b8(15,C.fM,0,l,new S.aq2(m,b),O.I(C.i,l,"Bold",l,"Chat",l),65),l),T.aA(H.a([new T.Q(C.ii,T.ao(H.a([O.I(C.i,l,l,l,m.e,12),O.I(C.i,l,l,l,m.d,12),M.a6(l,O.I(C.i,l,l,l,D.or(m.z),10),C.h,l,l,new S.c9(C.fM,l,l,K.h2(8),l,l,C.V),l,l,l,new V.M(4,2,4,2),l,l,l)],i),C.cQ,C.bW,C.j),l),R.e_(!1,!0,new B.tB(!0,m.f,50,l),l,!0,l,l,l,l,l,l,l,l,l,l,new S.aq3(b),l,l,l)],i),C.o,C.l,C.j),Z.aH0(l,L.aV(C.mc,l,l),l,new S.aq4(),new S.aq5(m,b),l,t.N)],i),q,l,!1,0,o,r)
 o=m.ch
 j=o===$?H.c(H.f("_child")):o
 return M.c0(r,C.r,j,l,new Z.Kg(n,l),new T.Q(C.lS,p,l),m.cx)},
