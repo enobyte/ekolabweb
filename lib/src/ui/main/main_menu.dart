@@ -338,16 +338,17 @@ class _MainMenuState extends State<MainMenu> {
           actions: [
             Padding(
               padding:
-                  const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 20.0),
+                  const EdgeInsets.only(top: 12.0, bottom: 12.0, right: 20.0),
               child: ButtonWidget(
                 txt: TextWidget(
                   txt: "Chat",
+                  fontFamily: 'Bold',
                 ),
                 height: 0,
-                width: 100,
+                width: 60,
                 btnColor: Colors.green,
                 onClick: () => routeToWidget(context, ListChatingForm(idUser)),
-                borderRedius: 20,
+                borderRedius: 15,
               ),
             ),
             Row(

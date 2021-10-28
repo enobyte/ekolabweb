@@ -38,6 +38,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         body: Row(
       children: [
         Flexible(
@@ -49,190 +50,167 @@ class _RegisterState extends State<Register> {
             )),
         Flexible(
             flex: 6,
-            child: Container(
-              alignment: AlignmentDirectional.center,
-              color: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width / 8,
-                    right: MediaQuery.of(context).size.width / 8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    TextWidget(
-                      txt: "Register",
-                      align: TextAlign.start,
-                      txtSize: 32,
-                      color: Colors.red,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 25, top: 25),
-                      child: TextFieldWidget(
-                        _nameController,
-                        hint: "Nama",
+            child: SingleChildScrollView(
+              child: Container(
+                alignment: AlignmentDirectional.center,
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width / 8,
+                      right: MediaQuery.of(context).size.width / 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextWidget(
+                        txt: "Register",
+                        align: TextAlign.start,
+                        txtSize: 32,
+                        color: Colors.red,
                       ),
-                    ),
-                    _isRadioSelected == "3"
-                        ? Padding(
-                            padding: const EdgeInsets.only(bottom: 25),
-                            child: TextFieldWidget(
-                              _iumkController,
-                              hint: "No. IUMK",
-                            ),
-                          )
-                        : SizedBox(),
-                    TextFieldWidget(
-                      _emailController,
-                      hint: "Email",
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 25, bottom: 15),
-                      child: TextFieldWidget(
-                        _passwordController,
-                        obscureText: true,
-                        hint: "Password",
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 25, top: 25),
+                        child: TextFieldWidget(
+                          _nameController,
+                          hint: "Nama",
+                        ),
                       ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 6.0),
-                            child: TextWidget(txt: "Daftar sebagai"),
-                          ),
+                      _isRadioSelected == "3"
+                          ? Padding(
+                              padding: const EdgeInsets.only(bottom: 25),
+                              child: TextFieldWidget(
+                                _iumkController,
+                                hint: "No. IUMK",
+                              ),
+                            )
+                          : SizedBox(),
+                      TextFieldWidget(
+                        _emailController,
+                        hint: "Email",
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25, bottom: 15),
+                        child: TextFieldWidget(
+                          _passwordController,
+                          obscureText: true,
+                          hint: "Password",
                         ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <LabeledRadio>[
-                              LabeledRadio(
-                                label: dataKind(int.parse(category[0])),
-                                padding: EdgeInsets.zero,
-                                value: category[0],
-                                groupValue: _isRadioSelected,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _isRadioSelected = newValue;
-                                  });
-                                },
-                              ),
-                              LabeledRadio(
-                                label: dataKind(int.parse(category[1])),
-                                padding: EdgeInsets.zero,
-                                value: category[1],
-                                groupValue: _isRadioSelected,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _isRadioSelected = newValue;
-                                  });
-                                },
-                              ),
-                              LabeledRadio(
-                                label: dataKind(int.parse(category[2])),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 0.0),
-                                value: category[2],
-                                groupValue: _isRadioSelected,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _isRadioSelected = newValue;
-                                  });
-                                },
-                              ),
-                              LabeledRadio(
-                                label: dataKind(int.parse(category[6])),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 0.0),
-                                value: category[6],
-                                groupValue: _isRadioSelected,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _isRadioSelected = newValue;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6.0, bottom: 4.0),
+                        child: TextWidget(
+                          txt: "Daftar sebagai :",
+                          fontFamily: 'Bold',
+                          align: TextAlign.start,
                         ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                      LabeledRadio(
+                        label: dataKind(int.parse(category[0])),
+                        padding: EdgeInsets.zero,
+                        value: category[0],
+                        groupValue: _isRadioSelected,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _isRadioSelected = newValue;
+                          });
+                        },
+                      ),
+                      LabeledRadio(
+                        label: dataKind(int.parse(category[1])),
+                        padding: EdgeInsets.zero,
+                        value: category[1],
+                        groupValue: _isRadioSelected,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _isRadioSelected = newValue;
+                          });
+                        },
+                      ),
+                      LabeledRadio(
+                        label: dataKind(int.parse(category[2])),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        value: category[2],
+                        groupValue: _isRadioSelected,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _isRadioSelected = newValue;
+                          });
+                        },
+                      ),
+                      LabeledRadio(
+                        label: dataKind(int.parse(category[6])),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        value: category[6],
+                        groupValue: _isRadioSelected,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _isRadioSelected = newValue;
+                          });
+                        },
+                      ),
+                      LabeledRadio(
+                        label: dataKind(int.parse(category[3])),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        value: category[3],
+                        groupValue: _isRadioSelected,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _isRadioSelected = newValue;
+                          });
+                        },
+                      ),
+                      LabeledRadio(
+                        label: dataKind(int.parse(category[4])),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        value: category[4],
+                        groupValue: _isRadioSelected,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _isRadioSelected = newValue;
+                          });
+                        },
+                      ),
+                      LabeledRadio(
+                        label: dataKind(int.parse(category[5])),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        value: category[5],
+                        groupValue: _isRadioSelected,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            _isRadioSelected = newValue;
+                          });
+                        },
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 25, bottom: 25),
+                        child: ButtonWidget(
+                          txt: TextWidget(txt: "Register"),
+                          height: 40.0,
+                          width: MediaQuery.of(context).size.width,
+                          btnColor: Colors.redAccent,
+                          onClick: () => _verifyRegister(),
+                          borderRedius: 4,
+                        ),
+                      ),
+                      RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: "Sudah punya akun?",
                             children: [
-                              LabeledRadio(
-                                label: dataKind(int.parse(category[3])),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 0.0),
-                                value: category[3],
-                                groupValue: _isRadioSelected,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _isRadioSelected = newValue;
-                                  });
-                                },
-                              ),
-                              LabeledRadio(
-                                label: dataKind(int.parse(category[4])),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 0.0),
-                                value: category[4],
-                                groupValue: _isRadioSelected,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _isRadioSelected = newValue;
-                                  });
-                                },
-                              ),
-                              LabeledRadio(
-                                label: dataKind(int.parse(category[5])),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 0.0),
-                                value: category[5],
-                                groupValue: _isRadioSelected,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    _isRadioSelected = newValue;
-                                  });
-                                },
-                              ),
+                              WidgetSpan(
+                                  alignment: PlaceholderAlignment.middle,
+                                  child: TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
+                                      child: TextWidget(
+                                        txt: "Login",
+                                        color: Colors.red,
+                                      )))
                             ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 25, bottom: 25),
-                      child: ButtonWidget(
-                        txt: TextWidget(txt: "Register"),
-                        height: 40.0,
-                        width: MediaQuery.of(context).size.width,
-                        btnColor: Colors.redAccent,
-                        onClick: () => _verifyRegister(),
-                        borderRedius: 4,
-                      ),
-                    ),
-                    RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: "Sudah punya akun?",
-                          children: [
-                            WidgetSpan(
-                                alignment: PlaceholderAlignment.middle,
-                                child: TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(),
-                                    child: TextWidget(
-                                      txt: "Login",
-                                      color: Colors.red,
-                                    )))
-                          ],
-                        ))
-                  ],
+                          ))
+                    ],
+                  ),
                 ),
               ),
             )),

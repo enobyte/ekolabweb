@@ -1,22 +1,22 @@
 {
   "name": "ekolabweb",
-  "short_name": "ekolabweb",
+  "short_name": "Ekolab",
   "start_url": "/splash",
   "display": "standalone",
   "background_color": "#0175C2",
   "theme_color": "#0175C2",
-  "description": "A new Flutter project.",
+  "description": "Ekolab.id",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [
     {
       "src": "icons/Icon-192.png",
-      "sizes": "192x192",
+      "sizes": "192x151",
       "type": "image/png"
     },
     {
       "src": "icons/Icon-512.png",
-      "sizes": "512x512",
+      "sizes": "512x403",
       "type": "image/png"
     }
   ]

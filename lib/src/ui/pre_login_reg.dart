@@ -46,8 +46,7 @@ class PreLoginRegister extends StatelessWidget {
               color: Colors.redAccent,
               height: MediaQuery.of(context).size.height / 5,
               width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Wrap(
                 children: [
                   Padding(
                     padding:
@@ -94,8 +93,8 @@ class PreLoginRegister extends StatelessWidget {
                                       fontFamily: 'Bold',
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.symmetric(vertical: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6),
                                       child: TextWidget(
                                           txt: descPerawalaba,
                                           align: TextAlign.start),
@@ -128,8 +127,8 @@ class PreLoginRegister extends StatelessWidget {
                                       fontFamily: 'Bold',
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.symmetric(vertical: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6),
                                       child: TextWidget(
                                           txt: descKonsiyor,
                                           align: TextAlign.start),
@@ -162,8 +161,8 @@ class PreLoginRegister extends StatelessWidget {
                                       fontFamily: 'Bold',
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.symmetric(vertical: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6),
                                       child: TextWidget(
                                           txt: descUKM, align: TextAlign.start),
                                     ),
@@ -208,14 +207,15 @@ class PreLoginRegister extends StatelessWidget {
                                       fontFamily: 'Bold',
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.symmetric(vertical: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6),
                                       child: TextWidget(
                                           txt: descInvestor,
                                           align: TextAlign.start),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 16),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 16),
                                       child: Divider(
                                         height: 2,
                                       ),
@@ -241,14 +241,15 @@ class PreLoginRegister extends StatelessWidget {
                                       fontFamily: 'Bold',
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.symmetric(vertical: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6),
                                       child: TextWidget(
                                           txt: descJejaring,
                                           align: TextAlign.start),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 16),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 16),
                                       child: Divider(
                                         height: 2,
                                       ),
@@ -274,15 +275,16 @@ class PreLoginRegister extends StatelessWidget {
                                       fontFamily: 'Bold',
                                     ),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.symmetric(vertical: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6),
                                       child: TextWidget(
                                         txt: descPerizinan,
                                         align: TextAlign.start,
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 16),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 16),
                                       child: Divider(
                                         height: 2,
                                       ),
