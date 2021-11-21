@@ -47,6 +47,7 @@ class PreLoginRegister extends StatelessWidget {
               width: double.infinity,
               padding: EdgeInsets.symmetric(vertical: 15),
               child: Wrap(
+                direction: Axis.vertical,
                 children: [
                   Padding(
                     padding:
