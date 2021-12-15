@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'package:universal_html/html.dart' as html;
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'package:ekolabweb/src/bloc/uploadfile_bloc.dart' as uploadFile;
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class LicenceService extends StatefulWidget {
   final String idUser;
@@ -105,7 +106,7 @@ class _LicenceServiceState extends State<LicenceService> {
               width: MediaQuery.of(context).size.width,
               btnColor: Colors.redAccent,
               onClick: () => _verifyDel(),
-              borderRedius: 4,
+              borderRedius: 4.0,
             )
           : SizedBox(),
       body: ProgressDialog(
@@ -213,9 +214,11 @@ class _LicenceServiceState extends State<LicenceService> {
                                                               TextAlign.start,
                                                         )
                                                       : GestureDetector(
-                                                          onTap: () =>
-                                                              window.open(
-                                                                  e, "_blank"),
+                                                          onTap: () => kIsWeb
+                                                              ? html.window
+                                                                  .open(e,
+                                                                      "_blank")
+                                                              : launchURL(e),
                                                           child: TextWidget(
                                                               txt: e
                                                                   .toString()
@@ -272,7 +275,7 @@ class _LicenceServiceState extends State<LicenceService> {
                                         btnColor: Colors.blue,
                                         onClick: () =>
                                             Navigator.of(context).pop(),
-                                        borderRedius: 8,
+                                        borderRedius: 8.0,
                                       ),
                                     ),
                                     SizedBox(
@@ -285,7 +288,7 @@ class _LicenceServiceState extends State<LicenceService> {
                                         width: 200,
                                         btnColor: Colors.blue,
                                         onClick: () => _verifySubmit(),
-                                        borderRedius: 8,
+                                        borderRedius: 8.0,
                                       ),
                                     ),
                                   ],
@@ -364,14 +367,14 @@ class _LicenceServiceState extends State<LicenceService> {
   }
 
   _startFilePicker() async {
-    FileUploadInputElement uploadInput = FileUploadInputElement();
+    html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
     uploadInput.click();
 
     uploadInput.onChange.listen((e) {
       final files = uploadInput.files;
       if (files!.length == 1) {
         final file = files[0];
-        FileReader reader = FileReader();
+        html.FileReader reader = html.FileReader();
 
         reader.onLoadEnd.listen((e) {
           setState(() {
@@ -419,7 +422,7 @@ class _LicenceServiceState extends State<LicenceService> {
                         _attemptDel();
                         Navigator.of(context).pop();
                       },
-                      borderRedius: 4,
+                      borderRedius: 4.0,
                     ),
                     SizedBox(
                       width: 4,
@@ -430,7 +433,7 @@ class _LicenceServiceState extends State<LicenceService> {
                       width: 60,
                       btnColor: Colors.redAccent,
                       onClick: () => Navigator.of(context).pop(),
-                      borderRedius: 4,
+                      borderRedius: 4.0,
                     ),
                   ],
                 )

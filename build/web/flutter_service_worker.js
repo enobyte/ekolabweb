@@ -4,9 +4,9 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "e4dbc59390f020753cde960100920ef2",
-"index.html": "bdc0ef2487cd5251ada025d80bd22f56",
-"/": "bdc0ef2487cd5251ada025d80bd22f56",
-"main.dart.js": "4469b4f086149fd4dd351843026c78dd",
+"index.html": "6575d3dbaf1d2ba625849762bcd3b5c3",
+"/": "6575d3dbaf1d2ba625849762bcd3b5c3",
+"main.dart.js": "90e7eb5382c07403d0e0910b568fc8e3",
 "AssetManifest.json": "d41d8cd98f00b204e9800998ecf8427e",
 "favicon.png": "8422ff61d0e84528c3ad767ef9271d37",
 "icons/Icon-192.png": "e709e2c19d015968217adecbe9d51d29",
@@ -32,8 +32,8 @@ const RESOURCES = {
 "assets/web/assets/fonts/ubuntu-bold-italic.ttf": "242df10047b6bae57bee2326cdabe1d2",
 "assets/web/assets/fonts/ubuntu-italic.ttf": "ce8018018a4db697f103a765b0e61469",
 "assets/web/assets/fonts/ubuntu-light.ttf": "8571edb1bb4662f1cdba0b80ea0a1632",
-"assets/AssetManifest.json": "15f18211cfbe4c24956068929b147f44",
-"assets/NOTICES": "76464cfd9b257b158c1c910d69eabf0d",
+"assets/AssetManifest.json": "ed58454ba846a5cc5d0ccb3406adbe3c",
+"assets/NOTICES": "7e17e85e8252339abf663653d456ff3a",
 "assets/FontManifest.json": "76050ae89f6bc376d0df31f3c359eb30",
 "assets/icons/ic_persetujuan.png": "0daf8b1c6769e4aa863590bffbd38f8c",
 "assets/icons/ic_pewaralaba.png": "68234deca3814aa5d4e1c916717b954b",
@@ -50,7 +50,24 @@ const RESOURCES = {
 "assets/fonts/ubuntu-bold-italic.ttf": "242df10047b6bae57bee2326cdabe1d2",
 "assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/fonts/ubuntu-italic.ttf": "ce8018018a4db697f103a765b0e61469",
-"assets/fonts/ubuntu-light.ttf": "8571edb1bb4662f1cdba0b80ea0a1632"
+"assets/fonts/ubuntu-light.ttf": "8571edb1bb4662f1cdba0b80ea0a1632",
+"assets/assets/images/nodata.png": "1f6c1581ce1781d6af76bb890539e2bd",
+"assets/assets/images/logo.png": "172181abf6ca5d325eaa626c779279c1",
+"assets/assets/images/myproduct.png": "7d362bd584fb6a406530c1e14034ff06",
+"assets/assets/icons/ic_persetujuan.png": "0daf8b1c6769e4aa863590bffbd38f8c",
+"assets/assets/icons/ic_pewaralaba.png": "68234deca3814aa5d4e1c916717b954b",
+"assets/assets/icons/ic_konsinyor.png": "16f6ac03cffd3f18fae5372abe1ee11c",
+"assets/assets/icons/ic_provider.png": "86c659f60d168cbf010dc0cddc643bc2",
+"assets/assets/icons/ic_forgotpass.png": "41517f0eb826ccf06f20cb94b0cfefba",
+"assets/assets/icons/ic_investor.png": "1e0af5eba1ba4d6e9ccb45f05f0fe0ac",
+"assets/assets/icons/ic_jejaring.png": "0f5c566698354d746c167aa392721489",
+"assets/assets/icons/ic_kerjasama.png": "5ea458f97cbf4b16c08e35c71d84ad30",
+"assets/assets/icons/ic_ukm.png": "8bb7efd50affaba2ff7861fd6f28fa73",
+"assets/assets/fonts/ubuntu-regular.ttf": "1c5965c2b1dcdea439b54c3ac60cee38",
+"assets/assets/fonts/ubuntu-bold.ttf": "e0008b580192405f144f2cb595100969",
+"assets/assets/fonts/ubuntu-bold-italic.ttf": "242df10047b6bae57bee2326cdabe1d2",
+"assets/assets/fonts/ubuntu-italic.ttf": "ce8018018a4db697f103a765b0e61469",
+"assets/assets/fonts/ubuntu-light.ttf": "8571edb1bb4662f1cdba0b80ea0a1632"
 };
 
 // The application shell files that are downloaded before a service worker can

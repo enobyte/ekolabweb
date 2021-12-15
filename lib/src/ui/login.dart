@@ -64,8 +64,8 @@ class _LoginState extends State<Login> {
               color: Colors.white,
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width / 8,
-                    right: MediaQuery.of(context).size.width / 8),
+                    left: MediaQuery.of(context).size.width / 10,
+                    right: MediaQuery.of(context).size.width / 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -107,13 +107,14 @@ class _LoginState extends State<Login> {
                         width: MediaQuery.of(context).size.width,
                         btnColor: Colors.redAccent,
                         onClick: () => _actionLogin(),
-                        borderRedius: 4,
+                        borderRedius: 4.0,
                       ),
                     ),
                     RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           text: "Belum punya akun? ",
+                          style: TextStyle(color: Colors.black),
                           children: [
                             WidgetSpan(
                                 alignment: PlaceholderAlignment.middle,

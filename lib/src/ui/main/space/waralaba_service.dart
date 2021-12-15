@@ -1,6 +1,5 @@
-import 'dart:html';
+import 'package:universal_html/html.dart' as html;
 import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:ekolabweb/src/bloc/uploadfile_bloc.dart' as uploadFile;
@@ -13,7 +12,7 @@ import 'package:ekolabweb/src/widget/text_field.dart';
 import 'package:ekolabweb/src/widget/text_field_title.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:mime/mime.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class WaralabaService extends StatefulWidget {
   final String idUser;
@@ -114,7 +113,7 @@ class WaralabaServiceState extends State<WaralabaService> {
               width: MediaQuery.of(context).size.width,
               btnColor: Colors.redAccent,
               onClick: () => _verifyDel(),
-              borderRedius: 4,
+              borderRedius: 4.0,
             )
           : SizedBox(),
       body: ProgressDialog(
@@ -282,9 +281,11 @@ class WaralabaServiceState extends State<WaralabaService> {
                                                               TextAlign.start,
                                                         )
                                                       : GestureDetector(
-                                                          onTap: () =>
-                                                              window.open(
-                                                                  e, "_blank"),
+                                                          onTap: () => kIsWeb
+                                                              ? html.window
+                                                                  .open(e,
+                                                                      "_blank")
+                                                              : launchURL(e),
                                                           child: TextWidget(
                                                               txt: e
                                                                   .toString()
@@ -422,11 +423,11 @@ class WaralabaServiceState extends State<WaralabaService> {
                                       txt: TextWidget(txt: "Batal"),
                                       height: 40.0,
                                       isFlatBtn: true,
-                                      width: 200,
+                                      width: 200.0,
                                       btnColor: Colors.blue,
                                       onClick: () =>
                                           Navigator.of(context).pop(),
-                                      borderRedius: 8,
+                                      borderRedius: 8.0,
                                     ),
                                   ),
                                   SizedBox(
@@ -436,10 +437,10 @@ class WaralabaServiceState extends State<WaralabaService> {
                                     child: ButtonWidget(
                                       txt: TextWidget(txt: "Simpan"),
                                       height: 40.0,
-                                      width: 200,
+                                      width: 200.0,
                                       btnColor: Colors.blue,
                                       onClick: () => _verifySubmit(),
-                                      borderRedius: 8,
+                                      borderRedius: 8.0,
                                     ),
                                   ),
                                 ],
@@ -501,7 +502,7 @@ class WaralabaServiceState extends State<WaralabaService> {
                 child: ButtonWidget(
                   txt: TextWidget(txt: "simpan"),
                   height: 40.0,
-                  width: 100,
+                  width: 100.0,
                   btnColor: Colors.redAccent,
                   onClick: () {
                     if (titleInvest.text.isNotEmpty &&
@@ -512,7 +513,7 @@ class WaralabaServiceState extends State<WaralabaService> {
                       Navigator.of(context).pop();
                     }
                   },
-                  borderRedius: 4,
+                  borderRedius: 4.0,
                 ),
               )
             ],
@@ -607,14 +608,14 @@ class WaralabaServiceState extends State<WaralabaService> {
   }
 
   _startFilePicker(String type) async {
-    FileUploadInputElement uploadInput = FileUploadInputElement();
+    html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
     uploadInput.click();
 
     uploadInput.onChange.listen((e) {
       final files = uploadInput.files;
       if (files!.length == 1) {
         final file = files[0];
-        FileReader reader = FileReader();
+        html.FileReader reader = html.FileReader();
 
         reader.onLoadEnd.listen((e) {
           setState(() {
@@ -662,13 +663,13 @@ class WaralabaServiceState extends State<WaralabaService> {
                     ButtonWidget(
                       txt: TextWidget(txt: "iya"),
                       height: 30.0,
-                      width: 60,
+                      width: 60.0,
                       btnColor: Colors.redAccent,
                       onClick: () {
                         _attemptDel();
                         Navigator.of(context).pop();
                       },
-                      borderRedius: 4,
+                      borderRedius: 4.0,
                     ),
                     SizedBox(
                       width: 4,
@@ -679,7 +680,7 @@ class WaralabaServiceState extends State<WaralabaService> {
                       width: 60,
                       btnColor: Colors.redAccent,
                       onClick: () => Navigator.of(context).pop(),
-                      borderRedius: 4,
+                      borderRedius: 4.0,
                     ),
                   ],
                 )

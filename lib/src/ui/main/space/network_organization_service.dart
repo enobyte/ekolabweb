@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'package:universal_html/html.dart' as html;
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:ekolabweb/src/bloc/uploadfile_bloc.dart' as uploadFile;
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:mime/mime.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class NetWorkOrganizationService extends StatefulWidget {
   final String idUser;
@@ -107,7 +107,7 @@ class _NetWorkOrganizationServiceState
               width: MediaQuery.of(context).size.width,
               btnColor: Colors.redAccent,
               onClick: () => _verifyDel(),
-              borderRedius: 4,
+              borderRedius: 4.0,
             )
           : SizedBox(),
       body: ProgressDialog(
@@ -223,9 +223,9 @@ class _NetWorkOrganizationServiceState
                                                               TextAlign.start,
                                                         )
                                                       : GestureDetector(
-                                                          onTap: () =>
-                                                              window.open(
-                                                                  e, "_blank"),
+                                                          onTap: () => kIsWeb ?
+                                                              html.window.open(
+                                                                  e, "_blank") : launchURL(e),
                                                           child: TextWidget(
                                                               txt: e
                                                                   .toString()
@@ -278,11 +278,11 @@ class _NetWorkOrganizationServiceState
                                         txt: TextWidget(txt: "Batal"),
                                         height: 40.0,
                                         isFlatBtn: true,
-                                        width: 200,
+                                        width: 200.0,
                                         btnColor: Colors.blue,
                                         onClick: () =>
                                             Navigator.of(context).pop(),
-                                        borderRedius: 8,
+                                        borderRedius: 8.0,
                                       ),
                                     ),
                                     SizedBox(
@@ -292,10 +292,10 @@ class _NetWorkOrganizationServiceState
                                       child: ButtonWidget(
                                         txt: TextWidget(txt: "Simpan"),
                                         height: 40.0,
-                                        width: 200,
+                                        width: 200.0,
                                         btnColor: Colors.blue,
                                         onClick: () => _verifySubmit(),
-                                        borderRedius: 8,
+                                        borderRedius: 8.0,
                                       ),
                                     ),
                                   ],
@@ -372,14 +372,14 @@ class _NetWorkOrganizationServiceState
   }
 
   _startFilePicker() async {
-    FileUploadInputElement uploadInput = FileUploadInputElement();
+    html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
     uploadInput.click();
 
     uploadInput.onChange.listen((e) {
       final files = uploadInput.files;
       if (files!.length == 1) {
         final file = files[0];
-        FileReader reader = FileReader();
+        html.FileReader reader = html.FileReader();
 
         reader.onLoadEnd.listen((e) {
           setState(() {
@@ -440,7 +440,7 @@ class _NetWorkOrganizationServiceState
                         _attemptDel();
                         Navigator.of(context).pop();
                       },
-                      borderRedius: 4,
+                      borderRedius: 4.0,
                     ),
                     SizedBox(
                       width: 4,
@@ -448,10 +448,10 @@ class _NetWorkOrganizationServiceState
                     ButtonWidget(
                       txt: TextWidget(txt: "tidak"),
                       height: 30.0,
-                      width: 60,
+                      width: 60.0,
                       btnColor: Colors.redAccent,
                       onClick: () => Navigator.of(context).pop(),
-                      borderRedius: 4,
+                      borderRedius: 4.0,
                     ),
                   ],
                 )

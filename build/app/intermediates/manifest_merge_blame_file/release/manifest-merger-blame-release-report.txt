@@ -1,0 +1,130 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.ekolabweb"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:4:5-67
+11-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:4:22-64
+12    <!-- <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" /> -->
+13    <!-- <queries> -->
+14    <!-- <intent> -->
+15    <!-- <action android:name="android.intent.action.VIEW" /> -->
+16    <!-- <data android:scheme="http" /> -->
+17    <!-- </intent> -->
+18    <!-- <intent> -->
+19    <!-- <action android:name="android.intent.action.DIAL" /> -->
+20    <!-- <data android:scheme="tel" /> -->
+21    <!-- </intent> -->
+22    <!-- <intent> -->
+23    <!-- <action android:name="android.intent.action.SEND" /> -->
+24    <!-- <data android:mimeType="*/*" /> -->
+25    <!-- </intent> -->
+26    <!-- </queries> -->
+27    <application
+27-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:21:5-56:19
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.1.0] /Users/eno/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/AndroidManifest.xml:24:18-86
+29        android:icon="@mipmap/ic_launcher"
+29-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:22:9-43
+30        android:label="ekolab" >
+30-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:23:9-31
+31        <activity
+31-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:24:9-50:20
+32            android:name="com.example.ekolabweb.MainActivity"
+32-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:25:13-41
+33            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+33-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:26:13-163
+34            android:hardwareAccelerated="true"
+34-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:27:13-47
+35            android:launchMode="singleTop"
+35-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:28:13-43
+36            android:theme="@style/LaunchTheme"
+36-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:29:13-47
+37            android:windowSoftInputMode="adjustResize" >
+37-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:30:13-55
+38
+39            <!--
+40                 Specifies an Android theme to apply to this Activity as soon as
+41                 the Android process has started. This theme is visible to the user
+42                 while the Flutter UI initializes. After that, this theme continues
+43                 to determine the Window background behind the Flutter UI.
+44            -->
+45            <meta-data
+45-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:35:13-37:57
+46                android:name="io.flutter.embedding.android.NormalTheme"
+46-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:36:17-72
+47                android:resource="@style/NormalTheme" />
+47-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:37:17-54
+48            <!--
+49                 Displays an Android View that continues showing the launch screen
+50                 Drawable until Flutter paints its first frame, then this splash
+51                 screen fades out. A splash screen is useful to avoid any visual
+52                 gap between the end of Android's launch screen and the painting of
+53                 Flutter's first frame.
+54            -->
+55            <meta-data
+55-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:43:13-45:66
+56                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+56-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:44:17-81
+57                android:resource="@drawable/launch_background" />
+57-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:45:17-63
+58
+59            <intent-filter>
+59-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:46:13-49:29
+60                <action android:name="android.intent.action.MAIN" />
+60-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:47:17-69
+60-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:47:25-66
+61
+62                <category android:name="android.intent.category.LAUNCHER" />
+62-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:48:17-77
+62-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:48:27-74
+63            </intent-filter>
+64        </activity>
+65        <!--
+66             Don't delete the meta-data below.
+67             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+68        -->
+69        <meta-data
+69-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:53:9-55:33
+70            android:name="flutterEmbedding"
+70-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:54:13-44
+71            android:value="2" />
+71-->/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/android/app/src/main/AndroidManifest.xml:55:13-30
+72
+73        <provider
+73-->[:image_picker] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:8:9-16:20
+74            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+74-->[:image_picker] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:9:13-82
+75            android:authorities="com.example.ekolabweb.flutter.image_provider"
+75-->[:image_picker] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:10:13-74
+76            android:exported="false"
+76-->[:image_picker] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:11:13-37
+77            android:grantUriPermissions="true" >
+77-->[:image_picker] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:12:13-47
+78            <meta-data
+78-->[:image_picker] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:13:13-15:75
+79                android:name="android.support.FILE_PROVIDER_PATHS"
+79-->[:image_picker] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:14:17-67
+80                android:resource="@xml/flutter_image_picker_file_paths" />
+80-->[:image_picker] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:15:17-72
+81        </provider>
+82
+83        <activity
+83-->[:url_launcher] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
+84            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+84-->[:url_launcher] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
+85            android:exported="false"
+85-->[:url_launcher] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
+86            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+86-->[:url_launcher] /Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
+87    </application>
+88
+89</manifest>

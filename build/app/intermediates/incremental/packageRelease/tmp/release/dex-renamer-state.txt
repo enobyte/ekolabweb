@@ -1,0 +1,4 @@
+#Sun Nov 21 20:18:14 WIB 2021
+base.0=/Users/eno/Eno/Project/SideJob/EKolab/ekolabweb/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

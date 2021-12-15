@@ -4,6 +4,9 @@ import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/ui/main/admin/list_penawaran_admin.dart';
 import 'package:ekolabweb/src/ui/main/admin/profile_admin.dart';
 import 'package:ekolabweb/src/ui/main/admin/rekap_admin.dart';
+import 'package:ekolabweb/src/ui/main/admin/rekap_kat_product.dart';
+import 'package:ekolabweb/src/ui/main/admin/rekap_penawaran.dart';
+import 'package:ekolabweb/src/ui/main/admin/rekap_response.dart';
 import 'package:ekolabweb/src/utilities/sharedpreferences.dart';
 import 'package:ekolabweb/src/utilities/string.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
@@ -24,7 +27,10 @@ class MainAdminState extends State<MainAdmin> {
   String idUser = "";
 
   final List<ItemGrid> listMenu = [
-    ItemGrid("REKAP", Icons.pie_chart),
+    ItemGrid("REKAP MEMBER", Icons.pie_chart),
+    ItemGrid("REKAP PENAWARAN", Icons.pie_chart),
+    ItemGrid("REKAP RESPON PENAWARAN", Icons.pie_chart),
+    ItemGrid("REKAP KATEGORI PRODUK", Icons.pie_chart),
     ItemGrid("LIST PENAWARAN", Icons.insert_chart)
   ];
 
@@ -135,8 +141,17 @@ class MainAdminState extends State<MainAdmin> {
 
   _onClick(String item) {
     switch (item) {
-      case "REKAP":
+      case "REKAP MEMBER":
         routeToWidget(context, RekapAdmin());
+        break;
+      case "REKAP PENAWARAN":
+        routeToWidget(context, RekapPenawaran());
+        break;
+      case "REKAP RESPON PENAWARAN":
+        routeToWidget(context, RekapResponse());
+        break;
+      case "REKAP KATEGORI PRODUK":
+        routeToWidget(context, RekapKategoriProduct());
         break;
       case "LIST PENAWARAN":
         routeToWidget(context, ListPenawaranAdmin());

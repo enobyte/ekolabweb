@@ -65,7 +65,7 @@ class _NewPasswordState extends State<NewPassword> {
                     width: MediaQuery.of(context).size.width,
                     btnColor: Colors.redAccent,
                     onClick: () => _actionNewPassword(),
-                    borderRedius: 4,
+                    borderRedius: 4.0,
                   ),
                 ],
               ),

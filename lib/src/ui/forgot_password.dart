@@ -50,7 +50,7 @@ class _ForgotPassState extends State<ForgotPass> {
                     width: MediaQuery.of(context).size.width,
                     btnColor: Colors.redAccent,
                     onClick: () => _actionPreforgotPass(),
-                    borderRedius: 4,
+                    borderRedius: 4.0,
                   ),
                 ],
               ),

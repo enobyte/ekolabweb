@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
+import 'package:ekolabweb/src/model/rekap_user_model.dart';
 import 'package:ekolabweb/src/model/standard_map_model.dart';
 import 'package:ekolabweb/src/model/standard_maplist_model.dart';
 import 'package:ekolabweb/src/model/submission_model.dart';
@@ -74,4 +75,13 @@ class Repository {
 
   Future<StandardMapListModels> actionChangePass(Map<String, dynamic> body) =>
       apiProvider.actionChangePass(body);
+
+  Future<RekapUserModel> getRekapPenawaran() =>
+      apiProvider.getRekapPenawaran();
+
+  Future<RekapUserModel> getRekapResponse() =>
+      apiProvider.getRekapResponse();
+
+  Future<RekapUserModel> getRekapKategoriProduct() =>
+      apiProvider.getKategoriProduct();
 }

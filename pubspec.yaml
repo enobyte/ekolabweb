@@ -37,6 +37,8 @@ dependencies:
   responsive_table: ^0.1.1+8
   jwt_decode: ^0.3.1
   url_strategy: ^0.2.0
+  universal_html: ^2.0.8
+  url_launcher: ^6.0.0
 
 dev_dependencies:
   build_runner: ^1.10.7
@@ -60,6 +62,9 @@ flutter:
     - web/assets/icons/
     - web/assets/images/
     - web/assets/fonts/
+    - assets/images/
+    - assets/icons/
+    - assets/fonts/
 
   fonts:
     - family: Regular

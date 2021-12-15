@@ -44,15 +44,15 @@ class DetailResponseNotif extends StatelessWidget {
                     txt: TextWidget(
                       txt: "Komunikasi",
                     ),
-                    height: 25,
-                    width: 0,
+                    height: 25.0,
+                    width: 0.0,
                     btnColor: Colors.green,
                     onClick: () {
                       Navigator.of(context).pop();
                       routeToWidget(
                           context, ChatingForm(idUser, idResponder, idProduct));
                     },
-                    borderRedius: 20,
+                    borderRedius: 20.0,
                   ),
                 )
               : SizedBox(),

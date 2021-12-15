@@ -190,7 +190,7 @@ class _RegisterState extends State<Register> {
                           width: MediaQuery.of(context).size.width,
                           btnColor: Colors.redAccent,
                           onClick: () => _verifyRegister(),
-                          borderRedius: 4,
+                          borderRedius: 4.0,
                         ),
                       ),
                       RichText(

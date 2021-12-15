@@ -1,6 +1,6 @@
-import 'dart:html';
+import 'package:universal_html/html.dart' as html;
 import 'dart:typed_data';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/utilities/utils.dart';
@@ -126,10 +126,10 @@ class _WaralabaSub extends State<WaralabaSub> {
                           txt: TextWidget(txt: "Batal"),
                           height: 40.0,
                           isFlatBtn: true,
-                          width: 200,
+                          width: 200.0,
                           btnColor: Colors.blue,
                           onClick: () => Navigator.of(context).pop(),
-                          borderRedius: 8,
+                          borderRedius: 8.0,
                         ),
                       ),
                       SizedBox(
@@ -139,11 +139,11 @@ class _WaralabaSub extends State<WaralabaSub> {
                         child: ButtonWidget(
                           txt: TextWidget(txt: "Ajukan"),
                           height: 40.0,
-                          width: 200,
+                          width: 200.0,
                           btnColor: Colors.blue,
                           onClick: () => _uploadImage(),
                           //_uploadImage(),
-                          borderRedius: 8,
+                          borderRedius: 8.0,
                         ),
                       ),
                     ],
@@ -171,14 +171,14 @@ class _WaralabaSub extends State<WaralabaSub> {
   }
 
   _startFilePicker(String type) async {
-    FileUploadInputElement uploadInput = FileUploadInputElement();
+    html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
     uploadInput.click();
 
     uploadInput.onChange.listen((e) {
       final files = uploadInput.files;
       if (files!.length == 1) {
         final file = files[0];
-        FileReader reader = FileReader();
+        html.FileReader reader = html.FileReader();
 
         reader.onLoadEnd.listen((e) {
           setState(() {
@@ -203,8 +203,8 @@ class _WaralabaSub extends State<WaralabaSub> {
   _uploadImage() async {
     FileModel? fileDoc;
 
-    final reqFileDoc = FormData.fromMap({
-      "image": MultipartFile.fromBytes(uploadedDoc!.toList(),
+    final reqFileDoc = dio.FormData.fromMap({
+      "image": dio.MultipartFile.fromBytes(uploadedDoc!.toList(),
           filename: '${DateTime.now().millisecondsSinceEpoch}.' + extensionDoc!)
     });
 

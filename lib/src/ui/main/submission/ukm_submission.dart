@@ -64,7 +64,7 @@ class UkmSubmissionState extends State<UkmSubmission> {
                   child: ButtonWidget(
                     txt: TextWidget(txt: "Kirim"),
                     height: 40.0,
-                    width: 100,
+                    width: 100.0,
                     btnColor: Colors.redAccent,
                     onClick: () {
                       bloc.submissionRequest({
@@ -81,7 +81,7 @@ class UkmSubmissionState extends State<UkmSubmission> {
                       });
                       Navigator.of(context).pop();
                     },
-                    borderRedius: 4,
+                    borderRedius: 4.0,
                   ),
                 )
               ],

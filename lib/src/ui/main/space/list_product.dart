@@ -4,8 +4,10 @@ import 'package:ekolabweb/src/bloc/product_bloc.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
 import 'package:ekolabweb/src/model/user_model.dart';
 import 'package:ekolabweb/src/ui/main/space/invest_service.dart';
+import 'package:ekolabweb/src/ui/main/space/konsinyor_service.dart';
 import 'package:ekolabweb/src/ui/main/space/licence_service.dart';
 import 'package:ekolabweb/src/ui/main/space/network_organization_service.dart';
+import 'package:ekolabweb/src/ui/main/space/product_service.dart';
 import 'package:ekolabweb/src/ui/main/space/waralaba_service.dart';
 import 'package:ekolabweb/src/ui/main/submission/jejaring_submission.dart';
 import 'package:ekolabweb/src/ui/main/submission/kerjasama_submission.dart';
@@ -19,9 +21,6 @@ import 'package:ekolabweb/src/utilities/utils.dart';
 import 'package:ekolabweb/src/widget/button_widget.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-
-import 'konsinyor_service.dart';
-import 'product_service.dart';
 
 class ListProduct extends StatefulWidget {
   final bool isUser;
@@ -175,22 +174,22 @@ class _ListProductState extends State<ListProduct> {
                                                       txt: TextWidget(
                                                           txt: "Detail"),
                                                       height: 40.0,
-                                                      width: 100,
+                                                      width: 100.0,
                                                       btnColor: colorBase!,
                                                       onClick: () =>
                                                           _navDetailProduct(
                                                               i, true, 0),
-                                                      borderRedius: 4,
+                                                      borderRedius: 4.0,
                                                     )
                                                   : ButtonWidget(
                                                       txt: TextWidget(
                                                           txt: "Ajukan"),
                                                       height: 40.0,
-                                                      width: 100,
+                                                      width: 100.0,
                                                       btnColor: colorBase!,
                                                       onClick: () =>
                                                           _actionSubmission(e),
-                                                      borderRedius: 4,
+                                                      borderRedius: 4.0,
                                                     ),
                                             ],
                                           ),

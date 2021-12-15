@@ -1,18 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
-final String icProvider = "icons/ic_provider.png";
-final String icForgotPass = "icons/ic_forgotpass.png";
-final String icInvestor = "icons/ic_investor.png";
-final String icJejaring = "icons/ic_jejaring.png";
-final String icKerjasama = "icons/ic_kerjasama.png";
-final String icKonsinyor = "icons/ic_konsinyor.png";
-final String icPersetujuan = "icons/ic_persetujuan.png";
-final String icPewaralaba = "icons/ic_pewaralaba.png";
-final String icUkm = "icons/ic_ukm.png";
-final String imgNoData = "images/nodata.png";
-final String myProduct = "images/myproduct.png";
-final String logo = "images/logo.png";
+final String icProvider =
+    kIsWeb ? "icons/ic_provider.png" : "assets/icons/ic_provider.png";
+final String icForgotPass =
+    kIsWeb ? "icons/ic_forgotpass.png" : "assets/icons/ic_forgotpass.png";
+final String icInvestor =
+    kIsWeb ? "icons/ic_investor.png" : "assets/icons/ic_investor.png";
+final String icJejaring =
+    kIsWeb ? "icons/ic_jejaring.png" : "assets/icons/ic_jejaring.png";
+final String icKerjasama =
+    kIsWeb ? "icons/ic_kerjasama.png" : "assets/icons/ic_kerjasama.png";
+final String icKonsinyor =
+    kIsWeb ? "icons/ic_konsinyor.png" : "assets/icons/ic_konsinyor.png";
+final String icPersetujuan =
+    kIsWeb ? "icons/ic_persetujuan.png" : "assets/icons/ic_persetujuan.png";
+final String icPewaralaba =
+    kIsWeb ? "icons/ic_pewaralaba.png" : "assets/icons/ic_pewaralaba.png";
+final String icUkm = kIsWeb ? "icons/ic_ukm.png" : "assets/icons/ic_ukm.png";
+final String imgNoData =
+    kIsWeb ? "images/nodata.png" : "assets/images/nodata.png";
+final String myProduct =
+    kIsWeb ? "images/myproduct.png" : "assets/images/myproduct.png";
+final String logo = kIsWeb ? "images/logo.png" : "assets/images/logo.png";
 final String about =
     "Situs e-kolab bertujuan untuk memfasilitasi Waralaba, Konsinyasi, Kerja sama, Jejaring Organisasi dan penawaran legalitas UMKM";
 final String descPerawalaba =

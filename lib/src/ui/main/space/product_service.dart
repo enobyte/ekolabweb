@@ -124,7 +124,7 @@ class _ProductServiceState extends State<ProductService> {
               width: MediaQuery.of(context).size.width,
               btnColor: Colors.redAccent,
               onClick: () => _verifyDel(),
-              borderRedius: 4,
+              borderRedius: 4.0,
             )
           : SizedBox(),
       body: ProgressDialog(
@@ -289,10 +289,10 @@ class _ProductServiceState extends State<ProductService> {
                                 txt: TextWidget(txt: "Batal"),
                                 height: 40.0,
                                 isFlatBtn: true,
-                                width: 200,
+                                width: 200.0,
                                 btnColor: Colors.blue,
                                 onClick: () => Navigator.of(context).pop(),
-                                borderRedius: 8,
+                                borderRedius: 8.0,
                               ),
                             ),
                             SizedBox(
@@ -302,10 +302,10 @@ class _ProductServiceState extends State<ProductService> {
                               child: ButtonWidget(
                                 txt: TextWidget(txt: "Simpan"),
                                 height: 40.0,
-                                width: 200,
+                                width: 200.0,
                                 btnColor: Colors.blue,
                                 onClick: () => _verifySendData(),
-                                borderRedius: 8,
+                                borderRedius: 8.0,
                               ),
                             ),
                           ],
@@ -417,13 +417,13 @@ class _ProductServiceState extends State<ProductService> {
                     ButtonWidget(
                       txt: TextWidget(txt: "iya"),
                       height: 30.0,
-                      width: 60,
+                      width: 60.0,
                       btnColor: Colors.redAccent,
                       onClick: () {
                         _attemptDel();
                         Navigator.of(context).pop();
                       },
-                      borderRedius: 4,
+                      borderRedius: 4.0,
                     ),
                     SizedBox(
                       width: 4,
@@ -431,10 +431,10 @@ class _ProductServiceState extends State<ProductService> {
                     ButtonWidget(
                       txt: TextWidget(txt: "tidak"),
                       height: 30.0,
-                      width: 60,
+                      width: 60.0,
                       btnColor: Colors.redAccent,
                       onClick: () => Navigator.of(context).pop(),
-                      borderRedius: 4,
+                      borderRedius: 4.0,
                     ),
                   ],
                 )

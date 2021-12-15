@@ -6,7 +6,8 @@ import 'package:ekolabweb/src/widget/labeled_radio.dart';
 import 'package:ekolabweb/src/widget/text_field_title.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+import 'package:universal_html/html.dart' as html;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class SubmissionProcess extends StatefulWidget {
   final SubmissionModel data;
@@ -110,8 +111,10 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
                                     align: TextAlign.start,
                                   ),
                                   IconButton(
-                                      onPressed: () => html.window
-                                          .open(_docResponder!, "_blank"),
+                                      onPressed: () => kIsWeb
+                                          ? html.window
+                                              .open(_docResponder!, "_blank")
+                                          : launchURL(_docResponder!),
                                       icon: Icon(
                                         Icons.arrow_forward_ios,
                                         color: Colors.black54,
@@ -188,10 +191,10 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
                             txt: TextWidget(txt: "Batal"),
                             height: 40.0,
                             isFlatBtn: true,
-                            width: 200,
+                            width: 200.0,
                             btnColor: Colors.blue,
                             onClick: () => Navigator.of(context).pop(),
-                            borderRedius: 8,
+                            borderRedius: 8.0,
                           ),
                         ),
                         SizedBox(
@@ -201,12 +204,12 @@ class _SubmissionProcessState extends State<SubmissionProcess> {
                           child: ButtonWidget(
                             txt: TextWidget(txt: "Proses"),
                             height: 40.0,
-                            width: 200,
+                            width: 200.0,
                             btnColor: Colors.blue,
                             onClick: () => _submitProcess(
                                 widget.data.data![widget.idxSub]["id_product"]),
                             //_uploadImage(),
-                            borderRedius: 8,
+                            borderRedius: 8.0,
                           ),
                         ),
                       ],

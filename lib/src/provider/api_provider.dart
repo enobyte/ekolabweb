@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ekolabweb/src/model/file_model.dart';
 import 'package:ekolabweb/src/model/product_model.dart';
+import 'package:ekolabweb/src/model/rekap_user_model.dart';
 import 'package:ekolabweb/src/model/standard_map_model.dart';
 import 'package:ekolabweb/src/model/standard_maplist_model.dart';
 import 'package:ekolabweb/src/model/submission_model.dart';
@@ -291,6 +292,33 @@ class ApiProvider {
       return StandardMapListModels.fromJson(response.data);
     } catch (err, snap) {
       return StandardMapListModels.withError(_handleError(err));
+    }
+  }
+
+  Future<RekapUserModel> getRekapPenawaran() async {
+    try {
+      final response = await _dio.post("get_rekap_penawaran");
+      return RekapUserModel.fromJson(response.data);
+    } catch (err, snap) {
+      return RekapUserModel.withError(_handleError(err));
+    }
+  }
+
+  Future<RekapUserModel> getRekapResponse() async {
+    try {
+      final response = await _dio.post("get_rekap_response");
+      return RekapUserModel.fromJson(response.data);
+    } catch (err, snap) {
+      return RekapUserModel.withError(_handleError(err));
+    }
+  }
+
+  Future<RekapUserModel> getKategoriProduct() async {
+    try {
+      final response = await _dio.post("get_rekap_kat_product");
+      return RekapUserModel.fromJson(response.data);
+    } catch (err, snap) {
+      return RekapUserModel.withError(_handleError(err));
     }
   }
 }

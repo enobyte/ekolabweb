@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'dart:typed_data';
-import 'dart:html' as html;
+import 'package:universal_html/html.dart' as html;
 
 class RekapAdmin extends StatefulWidget {
   @override
@@ -71,7 +71,7 @@ class _RekapAdminState extends State<RekapAdmin> {
                                     anchor.click();
                                     pdf = new pw.Document();
                                   },
-                                  borderRedius: 4,
+                                  borderRedius: 4.0,
                                 ),
                               ],
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

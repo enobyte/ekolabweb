@@ -30,10 +30,10 @@ class PreLoginRegister extends StatelessWidget {
             child: ButtonWidget(
               txt: TextWidget(txt: "Masuk/Daftar"),
               height: 10.0,
-              width: 130,
+              width: 130.0,
               btnColor: Colors.redAccent,
               onClick: () => routeToWidget(context, Login()),
-              borderRedius: 4,
+              borderRedius: 4.0,
             ),
           ),
         ],

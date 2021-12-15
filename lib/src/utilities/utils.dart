@@ -5,6 +5,7 @@ import 'package:ekolabweb/src/bloc/bloc-provider.dart';
 import 'package:ekolabweb/src/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<dynamic> routeToWidget(BuildContext context, Widget widget) {
   return Navigator.push(
@@ -78,7 +79,7 @@ String formatDefaultDate(String value, String format) {
   return DateFormat(format).format(datetime);
 }
 
-DateTime stringToDate(String date){
+DateTime stringToDate(String date) {
   return DateTime.parse(date);
 }
 
@@ -106,4 +107,13 @@ showMessage(BuildContext context, Widget child) {
       builder: (BuildContext context) {
         return child;
       });
+}
+
+launchURL(String url) async {
+  await launch(url);
+  // if (await canLaunch(url)) {
+  //   await launch(url);
+  // } else {
+  //   throw 'Could not launch $url';
+  // }
 }

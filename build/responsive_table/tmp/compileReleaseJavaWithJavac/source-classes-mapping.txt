@@ -1,0 +1,2 @@
+app/mylekha/plugins/responsive_table/BuildConfig.java
+ app.mylekha.plugins.responsive_table.BuildConfig
